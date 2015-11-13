@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/grayscale.css" rel="stylesheet" />
     <style type="text/css">
@@ -54,7 +54,7 @@
                                     <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="UserName" runat="server" style="background-color:black"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" runat="server" style="background-color:black" OnTextChanged="UserName_TextChanged"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                                 </td>
                             </tr>

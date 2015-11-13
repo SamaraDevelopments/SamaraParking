@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Activation Page</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/grayscale.css" rel="stylesheet" />
 </head>
