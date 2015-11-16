@@ -29,4 +29,3 @@ public class ParkingSpot
         set { spotType = value; }
     }
 }
-}
