@@ -30,19 +30,20 @@
             <ul class="nav navbar-nav">
               <li><a href="Home.aspx">Home</a></li>
               <li><a href="UserRegistrationPage.aspx">User Registration</a></li>
+              <li><a href="Reserves.aspx">Reserve</a></li>
               <li><a href="Login.aspx">Logout</a></li>
             </ul>
           </div>
       </nav>
             </div>
-    Welcome
-    <asp:LoginName ID="LoginName1" runat="server" Font-Bold = "true" style="background-color:black" />
+    <p>Welcome
+    <asp:LoginName ID="LoginName1" runat="server" Font-Bold = "true" ForeColor= "White"/>
     <br />
     <br />
     <asp:Label ID="lblLastLoginDate" runat="server" />
-    <asp:LoginStatus ID="LoginStatus1" runat="server" />
+        </p>
     </form>
-            <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
