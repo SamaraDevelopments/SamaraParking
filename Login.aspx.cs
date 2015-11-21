@@ -13,9 +13,10 @@ namespace SamaraParking
 {
     public partial class Login : System.Web.UI.Page
     {
-        protected void ValidateUser(object sender, EventArgs e)
+        protected User ValidateUser(object sender, EventArgs e)
         {
             int userId = 0;
+            User currentUser = new User();
             string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -42,9 +43,33 @@ namespace SamaraParking
                         break;
                     default:
                         FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
+                        //User is converted to object from database if found
+                        //o(command) is to reference object search
+                         string oString = "Select * from Users where Username=@Username";
+                         SqlCommand oCmd = new SqlCommand(oString, con);
+                         oCmd.Parameters.AddWithValue("@Username", Login1.UserName);           
+                         con.Open();
+                         using (SqlDataReader oReader = oCmd.ExecuteReader())
+                         {
+                              while (oReader.Read())
+                              {    
+                                  currentUser.Id = (int)oReader["Id"];
+                                  currentUser.Name = oReader["Name"].ToString();
+                                  currentUser.LastName = oReader["Lastname"].ToString();
+                                  currentUser.Username = oReader["Username"].ToString();
+                                  currentUser.Password = oReader["Password"].ToString();
+                                  currentUser.Email = oReader["Email"].ToString();
+                                  currentUser.Roletype = (int)oReader["Roletype"];
+                                  currentUser.Registry = (bool)oReader["Registry"];
+                              }
+
+                              con.Close();
+                         }               
+
                         break;
                 }
             }
+            return currentUser;
         }
 }
 }

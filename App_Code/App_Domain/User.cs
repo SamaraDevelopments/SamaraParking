@@ -11,50 +11,68 @@ public class User
 
     private int id;
     private string name;
-    private string lastname;
+    private string lastName;
+    private string username;
+    private string password;
+    private string email;
     private int roletype;
-    private bool registration;
+    private bool registry;
+    private DateTime createdDate;
+    private DateTime lastLogin;
     private List<Vehicle> listOfCars;
-
-    public User()
-    {
-
-
-    }
 
     public int Id
     {
         get { return id; }
         set { id = value; }
     }
-
     public string Name
     {
         get { return name; }
         set { name = value; }
     }
-    public string Lastname
+    public string LastName
     {
-        get { return lastname; }
-        set { lastname = value; }
+        get { return lastName; }
+        set { lastName = value; }
     }
-
+    public string Username
+    {
+        get { return username; }
+        set { username = value; }
+    }
+    public string Password
+    {
+        get { return password; }
+        set { password = value; }
+    }
+    public string Email
+    {
+        get { return email; }
+        set { email = value; }
+    }
     public int Roletype
     {
         get { return roletype; }
         set { roletype = value; }
     }
-
-    public bool Registration
+    public bool Registry
     {
-        get { return registration; }
-        set { registration = value; }
+        get { return registry; }
+        set { registry = value; }
+    }
+    
+    
+    
+    
+    public User()
+    {
+
     }
 
-    public List<Vehicle> ListOfCars
+    public List<Vehicle> AddVehicle(Vehicle vehicle)
     {
-        get { return listOfCars; }
-        set { listOfCars = value; }
+        ListOfCars.Add(vehicle);
+        return ListOfCars;
     }
-
 }
