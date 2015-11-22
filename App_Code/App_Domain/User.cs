@@ -11,8 +11,7 @@ public class User
 
     private int id;
     private string name;
-    private string lastName;
-    private string username;
+    private string lastname;
     private string password;
     private string email;
     private int roletype;
@@ -21,6 +20,10 @@ public class User
     private DateTime lastLogin;
     private List<Vehicle> listOfCars;
 
+    public User()
+    {
+
+    }
     public int Id
     {
         get { return id; }
@@ -31,15 +34,10 @@ public class User
         get { return name; }
         set { name = value; }
     }
-    public string LastName
+    public string Lastname
     {
-        get { return lastName; }
-        set { lastName = value; }
-    }
-    public string Username
-    {
-        get { return username; }
-        set { username = value; }
+        get { return lastname; }
+        set { lastname = value; }
     }
     public string Password
     {
@@ -62,17 +60,9 @@ public class User
         set { registry = value; }
     }
     
-    
-    
-    
-    public User()
-    {
-
-    }
-
     public List<Vehicle> AddVehicle(Vehicle vehicle)
     {
-        ListOfCars.Add(vehicle);
-        return ListOfCars;
+        listOfCars.Add(vehicle);
+        return listOfCars;
     }
 }

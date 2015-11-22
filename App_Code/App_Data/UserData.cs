@@ -10,6 +10,38 @@ using System.Web;
 /// </summary>
 public class UserData : BaseData
 {
+
+    public int ValidateUser(User userToValidate)
+    {
+        int verificationType = 0;
+
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            using (SqlCommand sqlCommand = new SqlCommand("Validate_User", connection))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@email", userToValidate.Email);
+                sqlCommand.Parameters.AddWithValue("@password", userToValidate.Password);
+                verificationType = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                ManageDatabaseConnection("Close");
+            }
+
+            
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+
+        return verificationType;
+    }
+
+
+
     public void Insert(User newUser)
     {
         //open database connection
@@ -27,7 +59,7 @@ public class UserData : BaseData
             sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newUser.Name;
             sqlCommand.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = newUser.Lastname;
             sqlCommand.Parameters.Add("@roletype", SqlDbType.Int).Value = newUser.Roletype;
-            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registration;
+            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registry;
             sqlCommand.ExecuteNonQuery();
             sqlCommand.Dispose();
             ManageDatabaseConnection("Close");
@@ -58,7 +90,7 @@ public class UserData : BaseData
             sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newUser.Name;
             sqlCommand.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = newUser.Lastname;
             sqlCommand.Parameters.Add("@roletype", SqlDbType.Int).Value = newUser.Roletype;
-            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registration;
+            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registry;
             sqlCommand.ExecuteNonQuery();
             sqlCommand.Dispose();
             ManageDatabaseConnection("Close");
@@ -96,6 +128,7 @@ public class UserData : BaseData
 
             throw sqlException;
         }
+
 
 
     }
