@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td align="right">
-                                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+                                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Correo Electronico:</asp:Label>
                             </td>
                             <td>
                                 <asp:TextBox ID="UserName" runat="server" Style="background-color: black"></asp:TextBox>
@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                             <td align="right">
-                                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+                                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Contraseña:</asp:Label>
                             </td>
                             <td>
                                 <asp:TextBox ID="Password" runat="server" TextMode="Password" Style="background-color: black"></asp:TextBox>
