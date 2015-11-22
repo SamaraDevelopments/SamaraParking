@@ -27,10 +27,10 @@ public class UserData : BaseData
                 sqlCommand.Parameters.AddWithValue("@email", userToValidate.Email);
                 sqlCommand.Parameters.AddWithValue("@password", userToValidate.Password);
                 verificationType = Convert.ToInt32(sqlCommand.ExecuteScalar());
-                ManageDatabaseConnection("Close");
+                
             }
+            ManageDatabaseConnection("Close");
 
-            
         }
         catch (SqlException sqlException)
         {
@@ -40,7 +40,48 @@ public class UserData : BaseData
         return verificationType;
     }
 
+    public User GetUser(User userToValidate)
+    {
+        User receivedUser = new User();
 
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            using (SqlCommand sqlCommand = new SqlCommand("Get_User", connection))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@email", userToValidate.Email);
+                
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        receivedUser.Id = (int)reader["Id"];
+                        receivedUser.Name = reader["Name"].ToString();
+                        receivedUser.Lastname = reader["Lastname"].ToString();
+                        receivedUser.Password = reader["Password"].ToString();
+                        receivedUser.Email = reader["Email"].ToString();
+                        receivedUser.Roletype = (int)reader["Roletype"];
+                        receivedUser.Registry = (bool)reader["Registry"];
+                    }
+                            
+                }
+
+            }
+
+            ManageDatabaseConnection("Close");
+
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+
+        return receivedUser;
+    }
 
     public void Insert(User newUser)
     {

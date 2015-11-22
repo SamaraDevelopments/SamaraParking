@@ -1,29 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
-namespace SamaraParking
+
+public partial class Form_login : System.Web.UI.Page
 {
-    public partial class Login : Page
+
+    protected void Page_Load(object sender, EventArgs e)
     {
        
-        protected void ValidateUser(object sender, EventArgs e)
-        {
-            LoginBusiness lb = new LoginBusiness();
-            User loginUser = new User();
-            loginUser.Email = Login1.UserName;
-            loginUser.Password = Login1.Password;
-
-            if (lb.ValidateUser(loginUser) == null)
-            {
-            FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
-            }
-            else
-            {
-                Login1.FailureText = lb.ValidateUser(loginUser);
-            }
-             
-        }
 
     }
+
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+       
+        LoginBusiness lb = new LoginBusiness();
+        User loginUser = new User();
+        loginUser.Email = TextBox1.Text;
+        loginUser.Password = TextBox2.Text;
+
+        if (lb.ValidateUser(loginUser) == null)
+        {
+            Session["USER"] = lb.GetUser(loginUser);
+            Response.Redirect("index.aspx");
+        }
+        else
+        {
+            Label4.Text = lb.ValidateUser(loginUser);
+
+        }
+    }
+
+    
 }

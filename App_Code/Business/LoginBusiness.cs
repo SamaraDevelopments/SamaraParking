@@ -7,6 +7,7 @@ using System.Web;
 public class LoginBusiness
 {
     UserData ud = new UserData();
+
     public LoginBusiness()
     { }
 
@@ -37,5 +38,11 @@ public class LoginBusiness
         return failureText;
     }
 
+    public User GetUser(User fromUser)
+    {
+        UserData ud = new UserData();
+
+        return ud.GetUser(fromUser);
+    }
 
 }
