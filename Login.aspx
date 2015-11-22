@@ -21,7 +21,6 @@
         table
         {
             border-color: #7d6b7d;
-
             margin-left: auto;
             margin-right: auto;
             background: #1a191a;

@@ -6,6 +6,7 @@ namespace SamaraParking
 {
     public partial class Login : Page
     {
+       
         protected void ValidateUser(object sender, EventArgs e)
         {
             LoginBusiness lb = new LoginBusiness();
@@ -23,5 +24,6 @@ namespace SamaraParking
             }
              
         }
+
     }
 }

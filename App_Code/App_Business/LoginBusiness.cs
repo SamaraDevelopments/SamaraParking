@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Summary description for LoginBusiness
-/// </summary>
+
 public class LoginBusiness
 {
     UserData ud = new UserData();
@@ -21,15 +19,15 @@ public class LoginBusiness
         switch (validationType)
         {
             case -1:
-                failureText = "Username is incorrect.";
+                failureText = "Correo incorrecto.";
                 break;
 
             case -2:
-                failureText = "Password is incorrect.";
+                failureText = "Contraseña incorrecta.";
                 break;
 
             case -3:
-                failureText = "Account has not been activated.";
+                failureText = "Tu cuenta no tiene marchamo.";
                 break;
 
             default:
