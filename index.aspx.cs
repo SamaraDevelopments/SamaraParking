@@ -10,9 +10,9 @@ public partial class Form_index : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["USER"] = null)
+        if (Session["USER"] == null)
         {
-            Response.Redirect(Login.aspx);
+            Response.Redirect(login.aspx);
         }
     }
 
