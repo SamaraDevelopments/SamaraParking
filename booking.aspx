@@ -23,10 +23,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <%
+            User loggedUser = (User)Session["USER"];
+
+        %>
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Latina Parking</a>
+                    <a class="navbar-brand" href="index.aspx">Latina Parking</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span>
@@ -35,91 +39,73 @@
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="booking.aspx">Reserva tu espacio</a> </li>
-                        <li><a href="/products">Agregar vehiculo</a> </li>
-                        <li><a href="/about-us">Salir</a> </li>
-                        <li><a href="/contact">Soporte</a> </li>
+                        <li><a href="addvehicle.aspx">Agregar vehiculo</a> </li>
+                        <% if (loggedUser.Roletype == 2)
+                            {
+                        %>
+                        <li><a href="userregistry.aspx">Agregar usuario</a> </li>
+                        <li><a href="addparkinglot.aspx">Agregar parqueo</a></li>
+                        <%} %>
+                        <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        <!-- ACA EL FORM -->
         <div class="container">
-            <!-- ACA EL FORM -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="registrationform">
                     <div class="form-horizontal">
                         <fieldset>
-                            <legend>Ingresar. <i class="fa fa-pencil pull-right"></i></legend>
+                            <legend>Reservar espacio <i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="Label1" runat="server" Text="Email" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelParking" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBox1" runat="server" placeholder="Email" CssClass="form-control"></asp:TextBox>
+                                    <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl">
+                                        <asp:ListItem>Aguja</asp:ListItem>
+                                        <asp:ListItem>Banderas....</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="container">
+                                <asp:Label ID="LabelInitialTime" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:TextBox ID="TextBoxInitialTime" runat="server" placeholder="Hora inicial" CssClass="form-control"></asp:TextBox>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="LabelFinalTime" runat="server" Text="Hora final:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:TextBox ID="TextBoxfinalhour" runat="server" placeholder="Hora final" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="LabelISpotnumber" runat="server" Text="Numero de espacio:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:TextBox ID="TextBoxSpotnumber" runat="server" placeholder="Numero de espacio" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
 
-                                <div class="container">
+                            <div class="form-group">
+                                <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
-                                <div class="form-group">
-                                    <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
-                                    <div class="col-lg-10">
-                                        <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <asp:Label ID="Label5" runat="server" Text="Sede:" CssClass="col-lg-2 control-label"></asp:Label>
-                                    <div class="col-lg-10">
-                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control ddl">
-                                            <asp:ListItem>San Pedro</asp:ListItem>
-                                            <asp:ListItem>Heredia</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-10 col-lg-offset-2">
-                                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" />
-                                    </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <asp:Button ID="btnBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" />
                                 </div>
+                            </div>
                         </fieldset>
                     </div>
                 </div>
             </div>
-            <!-- ESPACIO PARA IMAGEN O TEXTO -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th onclick="btn btn-primary">Firstname</th>
-                            <th>Lastname</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="success">
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                        </tr>
-                        <tr class="danger">
-                            <td>Mary</td>
-                            <td>Moe</td>
-                            <td>mary@example.com</td>
-                        </tr>
-                        <tr class="info">
-                            <td>July</td>
-                            <td>Dooley</td>
-                            <td>july@example.com</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
+        <!-- ESPACIO PARA IMAGEN O TEXTO -->
 
-        </div>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.backstretch.js" type="text/javascript"></script>

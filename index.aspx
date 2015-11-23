@@ -39,22 +39,21 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/">Reserva tu espacio</a> </li>
-                        <li><a href="/contact">Soporte</a> </li>
+                        <li><a href="booking.aspx">Reserva tu espacio</a> </li>
                         <li><a href="addvehicle.aspx">Agregar vehiculo</a> </li>
-                         <% if (loggedUser.Roletype == 2)
+                        <% if (loggedUser.Roletype == 2)
                             {
                         %>
-                        <li><a href="/products">Admin</a> </li>
-
+                        <li><a href="userregistry.aspx">Agregar usuario</a> </li>
+                        <li><a href="addparkinglot.aspx">Agregar parqueo</a></li>
                         <%} %>
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        <!-- ACA EL FORM -->
         <div class="container">
-            <!-- ACA EL FORM -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="registrationform">
                     <div class="form-horizontal">

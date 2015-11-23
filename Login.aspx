@@ -63,10 +63,6 @@
                             <div class="form-group">
                                 <asp:Label ID="Label5" runat="server" Text="Sede:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control ddl">
-                                        <asp:ListItem>San Pedro</asp:ListItem>
-                                        <asp:ListItem>Heredia</asp:ListItem>
-                                    </asp:DropDownList>
                                 </div>
                             </div>
 
