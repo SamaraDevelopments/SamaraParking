@@ -58,6 +58,14 @@ public class VehicleBusiness
         return isValid;
     }
 
+    public List<Vehicle> GetUserVehicles(User user)
+    {
+
+        List<Vehicle> userVehicles = user.ListOfVehicles;
+
+        return userVehicles;
+    }
+
     public List<Vehicle> GetUserListOfVehicles(User user)
     {
         List<Vehicle> userVehicles = new List<Vehicle>();

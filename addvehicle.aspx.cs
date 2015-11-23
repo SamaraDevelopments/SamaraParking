@@ -10,9 +10,40 @@ public partial class Form_addvehicle : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        FillTableUserVehicles();
+
+
+    }
+    protected List<Vehicle> UserVehicles()
+    {
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
         Session["LISTOFVEHICLES"] = vb.GetUserListOfVehicles(currentUser);
+
+        return vb.GetUserListOfVehicles(currentUser);
+    }
+    protected void FillTableUserVehicles()
+    {
+
+        List<Vehicle> userVehicles = UserVehicles();
+        TableRow tr = new TableRow();
+        TableCell tc = new TableCell();
+        tc.Text = "HOLA";
+        tr.Cells.Add(tc);
+
+        Table1.Rows.Add(tr);
+
+        foreach (Vehicle vehicle in userVehicles)
+        {
+            tc.Text = (vehicle.Id);
+            tr.Cells.Add(tc);
+            tc.Text = (vehicle.Brand);
+            tr.Cells.Add(tc);
+            tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
+            tr.Cells.Add(tc);
+            Table1.Rows.Add(tr);
+        }
+
     }
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
