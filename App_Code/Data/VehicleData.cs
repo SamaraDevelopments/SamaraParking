@@ -11,12 +11,12 @@ using System.Web;
 
 public class VehicleData : BaseData
 {
-    public void Insert(Vehicle newVehicle)
+    public int Insert(Vehicle newVehicle, User currentUser)
     {
-        //open database connection
+        int insertResult = 0;
         SqlConnection connection = ManageDatabaseConnection("Open");
 
-        string databaseCommand = "insert_vehicle";
+        string databaseCommand = "Insert_Vehicle";
 
         SqlCommand sqlCommand;
 
@@ -25,11 +25,11 @@ public class VehicleData : BaseData
 
             sqlCommand = new SqlCommand(databaseCommand, connection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newVehicle.Brand;
-            sqlCommand.Parameters.Add("@location", SqlDbType.NVarChar).Value = newVehicle.VehicleType;
-
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
+            sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
+            sqlCommand.Parameters.AddWithValue("@VehicleId", newVehicle.Id);
+            sqlCommand.Parameters.AddWithValue("@Brand", newVehicle.Brand);
+            sqlCommand.Parameters.AddWithValue("@Vehicletype", newVehicle.VehicleType);
+            insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
@@ -38,7 +38,7 @@ public class VehicleData : BaseData
             throw sqlException;
         }
 
-
+        return insertResult;
     }
 
     public void Update(Vehicle newVehicle)
