@@ -171,7 +171,63 @@ public class UserData : BaseData
             throw sqlException;
         }
 
+        public DataTable GetActiveProfessor()
+    {
+        //open database connection
+        SqlConnection connection = ManageDatabaseConnection("Open");
+        SqlCommand command = new SqlCommand();
+        command.Connection = connection;
+        command.CommandText = "SELECT Name, Lastname, Email FROM Users WHERE Registry=0 AND Roletype=2";
+        DataTable dt = new DataTable();
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+        dataAdapter.SelectCommand=command;
 
+        try
+        {
+            /*dt.Columns.Add("Nombre");
+            dt.Columns.Add("Last Name");
+            dt.Columns.Add("Email");
+            dt.Rows.Add*/
+            dataAdapter.Fill(dt);
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return dt;
 
     }
-}
+    public DataTable GetActiveStudent()
+    {
+        //open database connection
+        SqlConnection connection = ManageDatabaseConnection("Open");
+        DataTable dt = new DataTable();
+        try
+        {
+            
+            dt.Columns.Add("Name");
+            dt.Rows.Add("SELECT Name FROM Users WHERE Registry=1 AND Roletype=3");
+
+            dt.Rows.Add("SELECT Lastname FROM Users WHERE Registry=1 AND Roletype=3");
+            dt.Columns.Add("Lastname");
+
+            dt.Columns.Add("Email");
+            dt.Rows.Add("SELECT Email FROM Users WHERE Registry=1 AND Roletype=3");
+            dt.AcceptChanges();
+
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return dt;
+
+    }
+
+    }
