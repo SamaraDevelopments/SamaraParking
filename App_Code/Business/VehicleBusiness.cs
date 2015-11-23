@@ -12,6 +12,51 @@ public class VehicleBusiness
 
     public VehicleBusiness()
 	{ }
+    public bool ValidateLicensePlate(Vehicle vehicle)
+    {
+        bool isValid = true;
+        string plate = vehicle.Id;
+        if (plate.Length == 6)
+        {
+            for (int i = 0; i < plate.Length; i++)
+            {
+                if(!char.IsNumber(plate, i)){
+                    isValid = false;
+                }
+            }
+        }
+        else if (plate.Length == 7)
+        {
+            char holder = plate[4];
+            for (int i = 0; i < 3; i++)
+            {
+                char currentLetter = plate[i + 1];
+                if (!char.IsLetter(plate, i))
+                {
+                    isValid = false;
+                }
+                else if ("aeiouAEIOU".Contains(currentLetter.ToString()))
+                {
+                    isValid = false;
+                }
+            }
+            if (holder.Equals("-"))
+            {
+                for (int i = 4; i < plate.Length; i++)
+                {
+                    if (!char.IsNumber(plate, i))
+                    {
+                        isValid = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            isValid = false;
+        }
+        return isValid;
+    }
 
     public List<Vehicle> GetUserListOfVehicles(User user)
     {

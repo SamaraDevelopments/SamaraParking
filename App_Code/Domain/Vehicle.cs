@@ -9,7 +9,7 @@ using System.Web;
 public class Vehicle
 {
 
-    private int id;
+    private string id;
     private string brand;
     private bool vehicleType;
 
@@ -20,7 +20,7 @@ public class Vehicle
 
     }
 
-    public int Id
+    public string Id
     {
         get { return id; }
         set { id = value; }

@@ -13,7 +13,6 @@ public partial class Form_addvehicle : System.Web.UI.Page
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
         Session["LISTOFVEHICLES"] = vb.GetUserListOfVehicles(currentUser);
-
     }
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
@@ -23,7 +22,7 @@ public partial class Form_addvehicle : System.Web.UI.Page
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
 
-        vehicleToAdd.Id = Int32.Parse(TextBoxIdVehicle.Text);
+        vehicleToAdd.Id = TextBoxIdVehicle.Text;
         vehicleToAdd.Brand = TextBoxBrand.Text;
 
         if (CheckBoxIsMotrocycle.Checked)
@@ -34,14 +33,21 @@ public partial class Form_addvehicle : System.Web.UI.Page
         {
             vehicleToAdd.VehicleType = false;
         }
-        if (vb.AddVehicle(vehicleToAdd, currentUser) == null)
+        if (vb.ValidateLicensePlate(vehicleToAdd))
         {
 
+            if (vb.AddVehicle(vehicleToAdd, currentUser) != null)
+            {
+                Label4.Text = vb.AddVehicle(vehicleToAdd, currentUser);
+            }
         }
         else
         {
-            Label4.Text = vb.AddVehicle(vehicleToAdd, currentUser);
+            Label4.Text = "El formato de placa esta equivocado";
         }
-
+    }
+    protected void TextBoxIdVehicle_TextChanged(object sender, EventArgs e)
+    {
+        TextBoxIdVehicle.Text = TextBoxIdVehicle.Text.ToUpper();
     }
 }

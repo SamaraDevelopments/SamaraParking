@@ -58,7 +58,7 @@ public class VehicleData : BaseData
                     {
                         while (reader.Read())
                         {
-                            vehicleToAdd.Id = (int)reader["Vehicleid"];
+                            vehicleToAdd.Id = reader["Vehicleid"].ToString();
                             listOfVehicles.Add(LoadVehicles(vehicleToAdd));
 
                         }
@@ -98,7 +98,7 @@ public class VehicleData : BaseData
                 {
                     if (reader.Read())
                     {
-                        LoadedVehicle.Id = (int)reader["Id"];
+                        LoadedVehicle.Id = reader["Id"].ToString();
                         LoadedVehicle.Brand = (string)reader["Brand"];
                         LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
 
@@ -119,62 +119,4 @@ public class VehicleData : BaseData
         return LoadedVehicle;
     }
 
-    public void Update(Vehicle newVehicle)
-    {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "update_vehicle";
-
-        SqlCommand sqlCommand;
-
-        try
-        {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newVehicle.Id;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newVehicle.Brand;
-            sqlCommand.Parameters.Add("@location", SqlDbType.NVarChar).Value = newVehicle.VehicleType;
-
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-
-            throw sqlException;
-        }
-
-
-    }
-
-    public void Delete(Vehicle newVehicle)
-    {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "delete_vehicle";
-
-        SqlCommand sqlCommand;
-
-        try
-        {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newVehicle.Id;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-
-            throw sqlException;
-        }
-
-
-    }
 }

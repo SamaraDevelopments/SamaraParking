@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <asp:Label ID="LabelIdVehicle" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxIdVehicle" runat="server" placeholder="Numero de placa" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxIdVehicle" runat="server" placeholder="Numero de placa" CssClass="form-control" OnTextChanged="TextBoxIdVehicle_TextChanged"></asp:TextBox>
                                     <div class="checkbox">
                                         <label>
                                             <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es Moto?" Checked="false" />
