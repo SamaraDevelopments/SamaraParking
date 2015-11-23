@@ -49,7 +49,7 @@
                                         TextMode="Password"></asp:TextBox>
                                     <div class="checkbox">
                                         <label>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember Me" />
+                                            <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember Me" Checked="false"/>
                                         </label>
                                     </div>
                                 </div>

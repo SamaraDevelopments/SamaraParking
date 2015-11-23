@@ -56,50 +56,69 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="Label2" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
-                                <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" CssClass="form-control"
-                                        TextMode="Password"></asp:TextBox>
-                                    <div class="checkbox">
-                                        <label>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember Me" />
-                                        </label>
+                                <div class="container">
+                                </div>
+
+                                <div class="container">
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                    <div class="col-lg-10">
+                                        <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
-                                <div class="col-lg-10">
-                                    <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                <div class="form-group">
+                                    <asp:Label ID="Label5" runat="server" Text="Sede:" CssClass="col-lg-2 control-label"></asp:Label>
+                                    <div class="col-lg-10">
+                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control ddl">
+                                            <asp:ListItem>San Pedro</asp:ListItem>
+                                            <asp:ListItem>Heredia</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label ID="Label5" runat="server" Text="Sede:" CssClass="col-lg-2 control-label"></asp:Label>
-                                <div class="col-lg-10">
-                                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control ddl">
-                                        <asp:ListItem>San Pedro</asp:ListItem>
-                                        <asp:ListItem>Heredia</asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" />
+                                    </div>
                                 </div>
-                            </div>
                         </fieldset>
                     </div>
                 </div>
             </div>
             <!-- ESPACIO PARA IMAGEN O TEXTO -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                <div id="banner">
-                    <h1>Poner <strong>GRID DE SPOTS aqui.</strong> o algun texto</h1>
-                    <h5>
-                        <strong>www.samaradevs.com</strong></h5>
-                </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th onclick="btn btn-primary">Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="success">
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>Mary</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                        </tr>
+                        <tr class="info">
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+        </div>
+
         </div>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>

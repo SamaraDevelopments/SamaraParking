@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Form_index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="addvehicle.aspx.cs" Inherits="addvehicle" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,13 +41,12 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Reserva tu espacio</a> </li>
                         <li><a href="/contact">Soporte</a> </li>
-                        <li><a href="addvehicle.aspx">Agregar vehiculo</a> </li>
-                         <% if (loggedUser.Roletype == 2)
+                        <% if (loggedUser.Roletype == 2)
                             {
                         %>
                         <li><a href="/products">Admin</a> </li>
 
-                        <%} %>
+                        <%} %> 
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>
@@ -59,18 +58,46 @@
                 <div class="registrationform">
                     <div class="form-horizontal">
                         <fieldset>
-                            <legend>Bienvenido <%=loggedUser.Name%></legend>
+                            <legend>Sus vehiculos registrados son:</legend>
                             <div class="form-group">
+                                                                  
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Placa</th>
+                                                <th>Marca</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>John</td>
+                                                <td>Doe</td>
+                                                <td><asp:Button ID="Button8" runat="server" CssClass="btn btn-danger" Text="Danger"  /> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mary</td>
+                                                <td>Moe</td>
+                                                <td><asp:Button ID="Button9" runat="server" CssClass="btn btn-danger" Text="Danger"  /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>July</td>
+                                                <td>Dooley</td>
+                                                <td><asp:Button ID="Button10" runat="server" CssClass="btn btn-danger" Text="Danger"  /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Primary" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning" Text="Warning" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Success" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button3" runat="server" CssClass="btn btn-info" Text="Info" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button4" runat="server" CssClass="btn btn-default" Text="Default" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button5" runat="server" CssClass="btn btn-danger" Text="Danger" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button6" runat="server" CssClass="btn btn-link" Text="Link" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Primary"  />
+                                    <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning" Text="Warning"  />
+                                    <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Success"  />
+                                    <asp:Button ID="Button3" runat="server" CssClass="btn btn-info" Text="Info"  />
+                                    <asp:Button ID="Button4" runat="server" CssClass="btn btn-default" Text="Default"  />
+                                    <asp:Button ID="Button5" runat="server" CssClass="btn btn-danger" Text="Danger"  />
+                                    <asp:Button ID="Button6" runat="server" CssClass="btn btn-link" Text="Link"  />
                                 </div>
                             </div>
                         </fieldset>
