@@ -37,9 +37,57 @@ public class VehicleData : BaseData
 
             throw sqlException;
         }
-
+        if (insertResult == 0)
+        {
+            currentUser.AddVehicle(newVehicle);
+        }
         return insertResult;
     }
+
+    public Vehicle LoadVehicle(User userToValidate)
+    {
+        Vehicle vehicleToAdd = new Vehicle();
+
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            using (SqlCommand sqlCommand = new SqlCommand("Get_Vehicles", connection))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@UserId", userToValidate.Id);
+
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        receivedUser.Id = (int)reader["Id"];
+                        receivedUser.Name = reader["Name"].ToString();
+                        receivedUser.Lastname = reader["Lastname"].ToString();
+                        receivedUser.Password = reader["Password"].ToString();
+                        receivedUser.Email = reader["Email"].ToString();
+                        receivedUser.Roletype = (int)reader["Roletype"];
+                        receivedUser.Registry = (bool)reader["Registry"];
+                    }
+
+                }
+
+            }
+
+            ManageDatabaseConnection("Close");
+
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+
+        return receivedUser;
+    }
+
+
 
     public void Update(Vehicle newVehicle)
     {

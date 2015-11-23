@@ -61,7 +61,7 @@
                             <legend>Sus vehiculos registrados son:</legend>
                             <div class="form-group">
 
-                                <table class="table table-bordered">
+                                <table id="CarTable" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Placa</th>
@@ -101,11 +101,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="LabelVehicletype" runat="server" Text="Tipo de vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelIdVehicle" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxvehicletype" runat="server" placeholder="Tipo de vehiculo" CssClass="form-control"
-                                        TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxIdVehicle" runat="server" placeholder="Numero de placa" CssClass="form-control"
+                                       ></asp:TextBox>
                                     <div class="checkbox">
+                                        <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                </div>
+                            </div>
                                         <label>
                                             <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es moto?" Checked="false" />
                                         </label>
@@ -114,7 +117,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnAddVehicle" runat="server" CssClass="btn btn-primary" Text="Agregar Vehiculo" />
+                                    <asp:Button ID="btnAddVehicle" runat="server" CssClass="btn btn-primary" Text="Agregar Vehiculo" OnClick="btnAddVehicle_Click" />
                                 </div>
                             </div>
                         </fieldset>
