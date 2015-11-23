@@ -61,39 +61,15 @@
                         <fieldset>
                             <legend>Sus vehiculos registrados son:</legend>
                             <div class="form-group">
-
-                                <table id="CarTable" class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Placa</th>
-                                            <th>Marca</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td>
-                                                <asp:Button ID="Button8" runat="server" CssClass="btn btn-danger" Text="Danger" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mary</td>
-                                            <td>Moe</td>
-                                            <td>
-                                                <asp:Button ID="Button9" runat="server" CssClass="btn btn-danger" Text="Danger" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>July</td>
-                                            <td>Dooley</td>
-                                            <td>
-                                                <asp:Button ID="Button10" runat="server" CssClass="btn btn-danger" Text="Danger" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="col-lg-10">
+                                 <asp:Table ID="Table1" runat="server" class="table table-bordered">
+                                    <asp:TableHeaderRow>
+                                        <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>                                       
+                                    </asp:TableHeaderRow>
+                                </asp:Table>
+                                    </div>
                             </div>
-
                             <legend>Agregar Vehiculo:</legend>
                             <div class="form-group">
                                 <asp:Label ID="LabelBrand" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>

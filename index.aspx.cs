@@ -12,7 +12,7 @@ public partial class Form_index : System.Web.UI.Page
     {
         if (Session["USER"] == null)
         {
-            Response.Redirect(login.aspx);
+            Response.Redirect("login.aspx");
         }
     }
 

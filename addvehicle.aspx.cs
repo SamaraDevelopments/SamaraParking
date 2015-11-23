@@ -14,7 +14,7 @@ public partial class Form_addvehicle : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-        //FillTableUserVehicles();
+        FillTableUserVehicles();
 
 
     }
@@ -26,29 +26,36 @@ public partial class Form_addvehicle : System.Web.UI.Page
 
         return vb.GetUserListOfVehicles(currentUser);
     }
-   /* protected void FillTableUserVehicles()
+    protected void FillTableUserVehicles()
     {
 
         List<Vehicle> userVehicles = UserVehicles();
+
         TableRow tr = new TableRow();
-        TableCell tc = new TableCell();
-        tc.Text = "HOLA";
-        tr.Cells.Add(tc);
 
-        Table1.Rows.Add(tr);
-
-        foreach (Vehicle vehicle in userVehicles)
+        if (userVehicles != null)
         {
-            tc.Text = (vehicle.Id);
-            tr.Cells.Add(tc);
-            tc.Text = (vehicle.Brand);
-            tr.Cells.Add(tc);
-            tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
+            TableCell tc = new TableCell();
+            tc.Text = "INFO";
             tr.Cells.Add(tc);
             Table1.Rows.Add(tr);
         }
+      
+        foreach (Vehicle vehicle in userVehicles)
+        {
+            TableCell tc = new TableCell();
+            TableCell tc2 = new TableCell();
+            TableCell tc3 = new TableCell();
+            tc.Text = (vehicle.Id);
+            tr.Cells.Add(tc);
+            tc2.Text = (vehicle.Brand);
+            tr.Cells.Add(tc2);
+            tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
+            tr.Cells.Add(tc3);
+            Table1.Rows.Add(tr);
+        }
 
-    } */
+    } 
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
         
