@@ -30,15 +30,15 @@ public class VehicleBusiness
         VehicleData vd = new VehicleData();
         int insertResult = vd.Insert(vehicleToAdd, currentUser);
 
-        string failuretext = "";
-        if (insertResult == -1)
+        string failuretext = null;
+        if (insertResult == 0)
         {
-            failuretext = "La placa del vehiculo ya fue registrada.";
+            currentUser.ListOfVehicles.Add(vehicleToAdd);
+            failuretext = null;
         }
         else
         {
-            currentUser.ListOfVehicles.Add(vehicleToAdd);
-            failuretext = "";
+            failuretext = "La placa del vehiculo ya fue registrada.";
         }
         return failuretext;
     }
