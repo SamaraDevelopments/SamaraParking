@@ -8,14 +8,26 @@ using System.Web;
 /// </summary>
 public class VehicleBusiness
 {
-    VehicleData vd = new VehicleData();
+    
 
-
-	public VehicleBusiness()
+    public VehicleBusiness()
 	{ }
+
+    public List<Vehicle> GetUserListOfVehicles(User user)
+    {
+        List<Vehicle> userVehicles = new List<Vehicle>();
+        VehicleData vd = new VehicleData();
+
+        vd.GetIdVehiclesFromUserVehicles(user);
+
+        user.ListOfVehicles = userVehicles;
+
+        return userVehicles;
+    }
 
     public string AddVehicle(Vehicle vehicleToAdd, User currentUser)
     {
+        VehicleData vd = new VehicleData();
         int insertResult = vd.Insert(vehicleToAdd, currentUser);
 
         string failuretext = "";
@@ -25,9 +37,11 @@ public class VehicleBusiness
         }
         else
         {
-            failuretext = null;
+            currentUser.ListOfVehicles.Add(vehicleToAdd);
+            failuretext = "";
         }
         return failuretext;
     }
 
+    
 }

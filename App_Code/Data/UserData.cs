@@ -67,6 +67,7 @@ public class UserData : BaseData
                         receivedUser.Roletype = (int)reader["Roletype"];
                         receivedUser.Registry = (bool)reader["Registry"];
                     }
+                    reader.Close();
                             
                 }
 

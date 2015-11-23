@@ -14,22 +14,18 @@ public class VehicleData : BaseData
     public int Insert(Vehicle newVehicle, User currentUser)
     {
         int insertResult = 0;
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "Insert_Vehicle";
-
-        SqlCommand sqlCommand;
-
         try
         {
+            using (SqlCommand sqlCommand = new SqlCommand("Insert_Vehicle", ManageDatabaseConnection("Open")))
+            {
 
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
-            sqlCommand.Parameters.AddWithValue("@VehicleId", newVehicle.Id);
-            sqlCommand.Parameters.AddWithValue("@Brand", newVehicle.Brand);
-            sqlCommand.Parameters.AddWithValue("@Vehicletype", newVehicle.VehicleType);
-            insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
+                sqlCommand.Parameters.AddWithValue("@VehicleId", newVehicle.Id);
+                sqlCommand.Parameters.AddWithValue("@Brand", newVehicle.Brand);
+                sqlCommand.Parameters.AddWithValue("@Vehicletype", newVehicle.VehicleType);
+                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }         
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
@@ -37,17 +33,15 @@ public class VehicleData : BaseData
 
             throw sqlException;
         }
-        if (insertResult == 0)
-        {
-            currentUser.AddVehicle(newVehicle);
-        }
+       
         return insertResult;
     }
 
-    public Vehicle LoadVehicle(User userToValidate)
+    public List<Vehicle> GetIdVehiclesFromUserVehicles(User user)
     {
+        List<Vehicle> listOfVehicles = new List<Vehicle>();
         Vehicle vehicleToAdd = new Vehicle();
-
+        
         try
         {
             //open database connection
@@ -55,21 +49,59 @@ public class VehicleData : BaseData
 
             using (SqlCommand sqlCommand = new SqlCommand("Get_Vehicles", connection))
             {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
+
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            vehicleToAdd.Id = (int)reader["Vehicleid"];
+                            listOfVehicles.Add(LoadVehicles(vehicleToAdd));
+
+                        }
+                        reader.NextResult();                             
+                    }
+                    reader.Close();
+                }
+            }
+
+            ManageDatabaseConnection("Close");
+
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+
+        return listOfVehicles;
+    }
+
+    public Vehicle LoadVehicles(Vehicle vehicleToAdd)
+    {
+        Vehicle LoadedVehicle = new Vehicle();
+
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesFromUser", connection))
+            {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@UserId", userToValidate.Id);
+                sqlCommand.Parameters.AddWithValue("@VehicleId", vehicleToAdd.Id);
 
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        receivedUser.Id = (int)reader["Id"];
-                        receivedUser.Name = reader["Name"].ToString();
-                        receivedUser.Lastname = reader["Lastname"].ToString();
-                        receivedUser.Password = reader["Password"].ToString();
-                        receivedUser.Email = reader["Email"].ToString();
-                        receivedUser.Roletype = (int)reader["Roletype"];
-                        receivedUser.Registry = (bool)reader["Registry"];
+                        LoadedVehicle.Id = (int)reader["Id"];
+                        LoadedVehicle.Brand = (string)reader["Brand"];
+                        LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
+
                     }
 
                 }
@@ -84,10 +116,8 @@ public class VehicleData : BaseData
             throw sqlException;
         }
 
-        return receivedUser;
+        return LoadedVehicle;
     }
-
-
 
     public void Update(Vehicle newVehicle)
     {

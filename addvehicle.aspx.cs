@@ -7,23 +7,32 @@ using System.Web.UI.WebControls;
 
 public partial class Form_addvehicle : System.Web.UI.Page
 {
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        VehicleBusiness vb = new VehicleBusiness();
+        User currentUser = (User)Session["USER"];
+        Session["LISTOFVEHICLES"] = vb.GetUserListOfVehicles(currentUser);
 
     }
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
+        
+
         VehicleBusiness vb = new VehicleBusiness();
+        User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
-        vehicleToAdd.Id = TextBoxIdVehicle.Text;
+
+        vehicleToAdd.Id = Int32.Parse(TextBoxIdVehicle.Text);
         vehicleToAdd.Brand = TextBoxBrand.Text;
+
         if (CheckBoxIsMotrocycle.Checked)
         {
-            vehicleToAdd.VehicleType = 1;
+            vehicleToAdd.VehicleType = true;
         }
         else
         {
-            vehicleToAdd.VehicleType = 0;
+            vehicleToAdd.VehicleType = false;
         }
         if (vb.AddVehicle(vehicleToAdd, currentUser) == null)
         {

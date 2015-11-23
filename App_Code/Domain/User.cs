@@ -18,7 +18,7 @@ public class User
     private bool registry;
     private DateTime createdDate;
     private DateTime lastLogin;
-    private List<Vehicle> listOfCars;
+    private List<Vehicle> listOfVehicles;
 
     public User()
     {
@@ -59,10 +59,18 @@ public class User
         get { return registry; }
         set { registry = value; }
     }
-    
-    public List<Vehicle> AddVehicle(Vehicle vehicle)
+
+    public List<Vehicle> ListOfVehicles
     {
-        listOfCars.Add(vehicle);
-        return listOfCars;
+        get
+        {
+            return listOfVehicles;
+        }
+
+        set
+        {
+            listOfVehicles = value;
+        }
     }
+
 }

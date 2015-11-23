@@ -11,7 +11,7 @@ public class Vehicle
 
     private int id;
     private string brand;
-    private string vehicleType;
+    private bool vehicleType;
 
 
     public Vehicle()
@@ -31,7 +31,7 @@ public class Vehicle
         get { return brand; }
         set { brand = value; }
     }
-    public string VehicleType
+    public bool VehicleType
     {
         get { return vehicleType; }
         set { vehicleType = value; }

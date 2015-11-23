@@ -26,6 +26,7 @@
     <form id="form1" runat="server">
         <%
             User loggedUser = (User)Session["USER"];
+            List<Vehicle> userVehicles = (List<Vehicle>)Session["LISTOFVEHICLES"];
 
         %>
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
@@ -91,8 +92,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
+
                             <legend>Agregar Vehiculo:</legend>
                             <div class="form-group">
                                 <asp:Label ID="LabelBrand" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
@@ -103,16 +104,18 @@
                             <div class="form-group">
                                 <asp:Label ID="LabelIdVehicle" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxIdVehicle" runat="server" placeholder="Numero de placa" CssClass="form-control"
-                                       ></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxIdVehicle" runat="server" placeholder="Numero de placa" CssClass="form-control"></asp:TextBox>
                                     <div class="checkbox">
-                                        <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
-                                </div>
-                            </div>
                                         <label>
-                                            <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es moto?" Checked="false" />
+                                            <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es Moto?" Checked="false" />
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="Label2" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -132,31 +135,30 @@
                         <strong>www.samaradevs.com</strong></h5>
                 </div>
             </div>
-        </div>
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/jquery.backstretch.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            'use strict';
+            <script src="js/jquery.js" type="text/javascript"></script>
+            <script src="js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="js/jquery.backstretch.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                'use strict';
 
-            /* ========================== */
-            /* ::::::: Backstrech ::::::: */
-            /* ========================== */
-            // You may also attach Backstretch to a block-level element
-            $.backstretch(
-            [
+                /* ========================== */
+                /* ::::::: Backstrech ::::::: */
+                /* ========================== */
+                // You may also attach Backstretch to a block-level element
+                $.backstretch(
+                [
 
-                "img/colorful.jpg",
-                "img/34.jpg",
+                    "img/colorful.jpg",
+                    "img/34.jpg",
 
-            ],
+                ],
 
-            {
-                duration: 4500,
-                fade: 1500
-            }
-        );
-        </script>
+                {
+                    duration: 4500,
+                    fade: 1500
+                }
+            );
+            </script>
     </form>
 </body>
 </html>
