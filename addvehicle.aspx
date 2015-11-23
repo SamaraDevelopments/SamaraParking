@@ -39,12 +39,11 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/">Reserva tu espacio</a> </li>
-                        <li><a href="/contact">Soporte</a> </li>
+                        <li><a href="booking.aspx">Reserva tu espacio</a> </li>
                         <% if (loggedUser.Roletype == 2)
                             {
                         %>
-                        <li><a href="/products">Admin</a> </li>
+                        <li><a href="userregistry.aspx">Agregar usuario</a> </li>
 
                         <%} %> 
                         <li><a href="login.aspx" onclick="">Salir</a></li>
@@ -89,15 +88,28 @@
                                     </table>
                                 
                             </div>
+                            <legend>Agregar Vehiculo:</legend>
+                             <div class="form-group">
+                                <asp:Label ID="LabelBrand" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:TextBox ID="TextBoxBrand" runat="server" placeholder="Marca" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="LabelVehicletype" runat="server" Text="Tipo de vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:TextBox ID="TextBoxvehicletype" runat="server" placeholder="Tipo de vehiculo" CssClass="form-control"
+                                        TextMode="Password"></asp:TextBox>
+                                    <div class="checkbox">
+                                        <label>
+                                            <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es moto?" Checked="false"/>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Primary"  />
-                                    <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning" Text="Warning"  />
-                                    <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Success"  />
-                                    <asp:Button ID="Button3" runat="server" CssClass="btn btn-info" Text="Info"  />
-                                    <asp:Button ID="Button4" runat="server" CssClass="btn btn-default" Text="Default"  />
-                                    <asp:Button ID="Button5" runat="server" CssClass="btn btn-danger" Text="Danger"  />
-                                    <asp:Button ID="Button6" runat="server" CssClass="btn btn-link" Text="Link"  />
+                                    <asp:Button ID="btnAddVehicle" runat="server" CssClass="btn btn-primary" Text="Agregar Vehiculo"/>
                                 </div>
                             </div>
                         </fieldset>
