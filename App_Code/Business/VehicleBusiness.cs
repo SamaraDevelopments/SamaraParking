@@ -30,7 +30,7 @@ public class VehicleBusiness
             char holder = plate[4];
             for (int i = 0; i < 3; i++)
             {
-                char currentLetter = plate[i + 1];
+                char currentLetter = plate[i];
                 if (!char.IsLetter(plate, i))
                 {
                     isValid = false;
@@ -86,7 +86,6 @@ public class VehicleBusiness
         string failuretext = null;
         if (insertResult == 0)
         {
-            currentUser.ListOfVehicles.Add(vehicleToAdd);
             failuretext = null;
         }
         else

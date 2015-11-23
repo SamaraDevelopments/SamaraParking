@@ -99,7 +99,7 @@ public class VehicleData : BaseData
                     if (reader.Read())
                     {
                         LoadedVehicle.Id = reader["Id"].ToString();
-                        LoadedVehicle.Brand = (string)reader["Brand"];
+                        LoadedVehicle.Brand = reader["Brand"].ToString();
                         LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
 
                     }
