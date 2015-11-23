@@ -9,6 +9,9 @@ public partial class Form_booking : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["USER"] = null)
+        {
+            Response.Redirect(Login.aspx);
+        }
     }
 }

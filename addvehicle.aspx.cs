@@ -10,7 +10,11 @@ public partial class Form_addvehicle : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        FillTableUserVehicles();
+        if (Session["USER"] = null)
+        {
+            Response.Redirect(Login.aspx);
+        }
+        //FillTableUserVehicles();
 
 
     }
@@ -22,7 +26,7 @@ public partial class Form_addvehicle : System.Web.UI.Page
 
         return vb.GetUserListOfVehicles(currentUser);
     }
-    protected void FillTableUserVehicles()
+   /* protected void FillTableUserVehicles()
     {
 
         List<Vehicle> userVehicles = UserVehicles();
@@ -44,7 +48,7 @@ public partial class Form_addvehicle : System.Web.UI.Page
             Table1.Rows.Add(tr);
         }
 
-    }
+    } */
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
         
@@ -70,6 +74,11 @@ public partial class Form_addvehicle : System.Web.UI.Page
             if (vb.AddVehicle(vehicleToAdd, currentUser) != null)
             {
                 Label4.Text = vb.AddVehicle(vehicleToAdd, currentUser);
+            }
+            else
+            {
+                TextBoxIdVehicle.Text = null;
+                TextBoxBrand.Text = null;
             }
         }
         else

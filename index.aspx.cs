@@ -10,7 +10,10 @@ public partial class Form_index : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        if (Session["USER"] = null)
+        {
+            Response.Redirect(Login.aspx);
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
