@@ -1,11 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="Form_index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Form_index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <%
             User loggedUser = (User)Session["USER"];
-
         %>
         <!-- ACA EL FORM -->
         <div class="container">
@@ -16,7 +15,7 @@
                             <legend>Bienvenido <%=loggedUser.Name%></legend>
                             <div class="form-group">
                             </div>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Primary" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning" Text="Warning" OnClick="btnSubmit_Click" />
@@ -26,7 +25,7 @@
                                     <asp:Button ID="Button5" runat="server" CssClass="btn btn-danger" Text="Danger" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="Button6" runat="server" CssClass="btn btn-link" Text="Link" OnClick="btnSubmit_Click" />
                                 </div>
-                            </div>
+                            </div>-->
                         </fieldset>
                     </div>
                 </div>

@@ -37,7 +37,7 @@ public partial class form_addvehicle : System.Web.UI.Page
             TableCell tc = new TableCell();
             tc.Text = "INFO";
             tr.Cells.Add(tc);
-            Table1.Rows.Add(tr);
+            TableRegistryVehicles.Rows.Add(tr);
         }
 
         foreach (Vehicle vehicle in userVehicles)
@@ -51,7 +51,7 @@ public partial class form_addvehicle : System.Web.UI.Page
             tr.Cells.Add(tc2);
             tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
             tr.Cells.Add(tc3);
-            Table1.Rows.Add(tr);
+            TableRegistryVehicles.Rows.Add(tr);
         }
 
     }
@@ -63,8 +63,8 @@ public partial class form_addvehicle : System.Web.UI.Page
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
 
-        vehicleToAdd.Id = TextBoxIdVehicle.Text;
-        vehicleToAdd.Brand = TextBoxBrand.Text;
+        vehicleToAdd.Id = TextBoxIdOfVehicle.Text;
+        vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
 
         if (CheckBoxIsMotrocycle.Checked)
         {
@@ -79,21 +79,21 @@ public partial class form_addvehicle : System.Web.UI.Page
 
             if (vb.AddVehicle(vehicleToAdd, currentUser) != null)
             {
-                Label4.Text = vb.AddVehicle(vehicleToAdd, currentUser);
+                LabelError.Text = vb.AddVehicle(vehicleToAdd, currentUser);
             }
             else
             {
-                TextBoxIdVehicle.Text = null;
-                TextBoxBrand.Text = null;
+                TextBoxIdOfVehicle.Text = null;
+                TextBoxBrandOfVehicle.Text = null;
             }
         }
         else
         {
-            Label4.Text = "El formato de placa esta equivocado";
+            LabelError.Text = "El formato de placa esta equivocado";
         }
     }
     protected void TextBoxIdVehicle_TextChanged(object sender, EventArgs e)
     {
-        TextBoxIdVehicle.Text = TextBoxIdVehicle.Text.ToUpper();
+        TextBoxIdOfVehicle.Text = TextBoxIdOfVehicle.Text.ToUpper();
     }
 }

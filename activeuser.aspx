@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="ActiveUser.aspx.cs" Inherits="Form_activeUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="activeUser.aspx.cs" Inherits="Form_activeUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Body" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" Runat="Server">
     <div class="container">
             <!-- ACA EL FORM -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -25,6 +25,7 @@
                 <h5>
                     <strong>www.samaradevs.com</strong></h5>
             </div>
+        </div>
         </div>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>

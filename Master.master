@@ -25,7 +25,7 @@
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="formMaster" runat="server">
         
             <% User loggedUser = (User)Session["USER"];
             List<Vehicle> userVehicles = (List<Vehicle>)Session["LISTOFVEHICLES"];
@@ -55,9 +55,8 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        
-        <asp:ContentPlaceHolder id="Body" runat="server">
+        </div>        
+        <asp:ContentPlaceHolder id="BodyFront" runat="server">
         </asp:ContentPlaceHolder>
     </form>
 </body>

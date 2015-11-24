@@ -23,7 +23,7 @@
 </head>
 <body>
 
-    <form id="form1" runat="server">
+    <form id="formLogin" runat="server">
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
             <div class="container">
                 
@@ -35,40 +35,35 @@
                 <div class="registrationform">
                     <div class="form-horizontal">
                         <fieldset>
-                            <legend>Ingresar. <i class="fa fa-pencil pull-right"></i></legend>
+                            <legend>Ingresar.<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="Label1" runat="server" Text="Email" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelEmailIncomingUser" runat="server" Text="Email" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBox1" runat="server" placeholder="Email" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxEmailIncomingUser" runat="server" placeholder="Email" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="Label2" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelPasswordIncomingUser" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" CssClass="form-control"
+                                    <asp:TextBox ID="TextBoxPasswordIncomingUser" runat="server" placeholder="Password" CssClass="form-control"
                                         TextMode="Password"></asp:TextBox>
                                     <div class="checkbox">
                                         <label>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember Me" Checked="false"/>
+                                            <asp:CheckBox ID="CheckBoxRememberIncomingUser" runat="server" Text="Remember Me" Checked="false"  CssClass="checkbox"/>
                                         </label>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                             <div class="form-group">
                                 <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label ID="Label5" runat="server" Text="Sede:" CssClass="col-lg-2 control-label"></asp:Label>
-                                <div class="col-lg-10">
+                                    <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="ButtonSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
                                 </div>
                             </div>
                         </fieldset>

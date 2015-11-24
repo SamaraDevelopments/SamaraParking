@@ -19,8 +19,8 @@ public partial class Form_login : System.Web.UI.Page
         {
             if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null)
             {
-                TextBox1.Text = Request.Cookies["UserName"].Value;
-                TextBox2.Attributes["value"] = Request.Cookies["Password"].Value;
+                TextBoxEmailIncomingUser.Text = Request.Cookies["UserName"].Value;
+                TextBoxPasswordIncomingUser.Attributes["value"] = Request.Cookies["Password"].Value;
             }
         }
 
@@ -32,15 +32,15 @@ public partial class Form_login : System.Web.UI.Page
        
         LoginBusiness lb = new LoginBusiness();
         User loginUser = new User();
-        loginUser.Email = TextBox1.Text;
-        loginUser.Password = TextBox2.Text;
+        loginUser.Email = TextBoxEmailIncomingUser.Text;
+        loginUser.Password = TextBoxPasswordIncomingUser.Text;
 
         if (lb.ValidateUser(loginUser) == null)
         {
             Session["USER"] = lb.GetUser(loginUser);
             Response.Redirect("index.aspx");
 
-            if (CheckBox1.Checked)
+            if (CheckBoxRememberIncomingUser.Checked)
             {
                 Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
                 Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
@@ -52,12 +52,12 @@ public partial class Form_login : System.Web.UI.Page
 
             }
 
-            Response.Cookies["UserName"].Value = TextBox1.Text.Trim();
-            Response.Cookies["Password"].Value = TextBox2.Text.Trim();
+            Response.Cookies["UserName"].Value = TextBoxEmailIncomingUser.Text.Trim();
+            Response.Cookies["Password"].Value = TextBoxPasswordIncomingUser.Text.Trim();
         }
         else
         {
-            Label4.Text = lb.ValidateUser(loginUser);
+            LabelError.Text = lb.ValidateUser(loginUser);
 
         }
 
