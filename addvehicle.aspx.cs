@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Form_addvehicle : System.Web.UI.Page
+public partial class form_addvehicle : System.Web.UI.Page
 {
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["USER"] == null)
@@ -40,7 +39,7 @@ public partial class Form_addvehicle : System.Web.UI.Page
             tr.Cells.Add(tc);
             Table1.Rows.Add(tr);
         }
-      
+
         foreach (Vehicle vehicle in userVehicles)
         {
             TableCell tc = new TableCell();
@@ -55,10 +54,10 @@ public partial class Form_addvehicle : System.Web.UI.Page
             Table1.Rows.Add(tr);
         }
 
-    } 
+    }
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
-        
+
 
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];

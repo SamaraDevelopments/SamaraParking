@@ -170,6 +170,7 @@ public class UserData : BaseData
 
             throw sqlException;
         }
+    }
 
         public DataTable GetActiveProfessor()
     {
