@@ -21,9 +21,6 @@ public class BookingData : BaseData
             {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                //SqlDataReader reader;
-                //int id = reader.GetInt32(0);
-                //sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
 
             }

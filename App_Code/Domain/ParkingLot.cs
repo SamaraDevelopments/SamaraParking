@@ -14,10 +14,11 @@ public class ParkingLot
     private string location;
     private int capacity;
     private List<ParkingSpot> listOfSpots;
+    private ParkingSpot[,] parkingSpotsMatrix;
 
     public ParkingLot()
     {
-
+        ParkingSpotsMatrix = new ParkingSpot[10, 20];
 
     }
 
@@ -48,5 +49,18 @@ public class ParkingLot
     {
         get { return listOfSpots; }
         set { listOfSpots = value; }
+    }
+
+    public ParkingSpot[,] ParkingSpotsMatrix
+    {
+        get
+        {
+            return parkingSpotsMatrix;
+        }
+
+        set
+        {
+            parkingSpotsMatrix = value;
+        }
     }
 }

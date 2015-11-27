@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Latina Parking</title>
-    <asp:ContentPlaceHolder id="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
     <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
     <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
     <!--[if IE 9]> <html class="no-js ie9 oldie" lang="en"> <![endif]-->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <!-- ============ Google fonts ============ -->
@@ -23,18 +23,18 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="css/toastr.css" rel="stylesheet" />
+    <script type="js/text/javascript" src="toastr.js"></script>
 </head>
 <body>
     <form id="formMaster" runat="server">
-        
-            <% User loggedUser = (User)Session["USER"];
-            List<Vehicle> userVehicles = (List<Vehicle>)Session["LISTOFVEHICLES"];
 
-        %>
+        <% User loggedUser = (User)Session["USER"];  %>
+
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.aspx">Latina Parking</a>
+                    <a class="" href="index.aspx"><img src="img/logo-latina-2015.png" alt="Logo Ulatina"/></a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span>
@@ -42,10 +42,11 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="AddVehicle.aspx">Sus vehiculos</a> </li>
                         <li><a href="Booking.aspx">Reserva tu espacio</a> </li>
-                        <li><a href="AddVehicle.aspx">Agregar vehiculo</a> </li>
 
-                        <%if (loggedUser.Roletype == 2) {%>
+                        <%if (loggedUser.Roletype == 3)
+                            {%>
                         <li><a href="UserRegistry.aspx">Agregar usuario</a> </li>
                         <li><a href="AddParking.aspx">Agregar parqueo</a></li>
                         <li><a href="ActiveUser.aspx">Usuarios con marchamo activo</a></li>
@@ -55,8 +56,8 @@
                     </ul>
                 </div>
             </div>
-        </div>        
-        <asp:ContentPlaceHolder id="BodyFront" runat="server">
+        </div>
+        <asp:ContentPlaceHolder ID="BodyFront" runat="server">
         </asp:ContentPlaceHolder>
     </form>
 </body>

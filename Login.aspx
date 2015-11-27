@@ -66,6 +66,11 @@
                                     <asp:Button ID="ButtonSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <asp:Button ID="Button1" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
                 </div>

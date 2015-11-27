@@ -62,8 +62,14 @@ public partial class Form_login : System.Web.UI.Page
         }
 
     }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+
+       
+
+    }
 
 
 
-    
+
 }

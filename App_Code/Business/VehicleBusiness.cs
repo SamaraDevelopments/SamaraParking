@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -11,7 +12,8 @@ public class VehicleBusiness
     
 
     public VehicleBusiness()
-	{ }
+	{
+    }
     public bool ValidateLicensePlate(Vehicle vehicle)
     {
         bool isValid = true;
@@ -58,24 +60,11 @@ public class VehicleBusiness
         return isValid;
     }
 
-    public List<Vehicle> GetUserVehicles(User user)
+      public DataTable GetVehiclesFromUser(User user)
     {
-
-        List<Vehicle> userVehicles = user.ListOfVehicles;
-
-        return userVehicles;
-    }
-
-    public List<Vehicle> GetUserListOfVehicles(User user)
-    {
-        List<Vehicle> userVehicles = new List<Vehicle>();
         VehicleData vd = new VehicleData();
 
-        vd.GetIdVehiclesFromUserVehicles(user);
-
-        user.ListOfVehicles = userVehicles;
-
-        return userVehicles;
+        return vd.GetVehiclesFromUser(user);
     }
 
     public string AddVehicle(Vehicle vehicleToAdd, User currentUser)

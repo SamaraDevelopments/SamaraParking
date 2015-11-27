@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,51 +15,69 @@ public partial class form_addvehicle : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
+
         FillTableUserVehicles();
 
-
     }
-    protected List<Vehicle> UserVehicles()
+
+    protected void FillTableUserVehicles()
     {
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
-        Session["LISTOFVEHICLES"] = vb.GetUserListOfVehicles(currentUser);
+        DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
 
-        return vb.GetUserListOfVehicles(currentUser);
-    }
-    protected void FillTableUserVehicles()
-    {
-
-        List<Vehicle> userVehicles = UserVehicles();
-
-        TableRow tr = new TableRow();
-
-        if (userVehicles != null)
+        foreach (DataRow dr in userVehiclesTable.Rows)
         {
-            TableCell tc = new TableCell();
-            tc.Text = "INFO";
-            tr.Cells.Add(tc);
-            TableRegistryVehicles.Rows.Add(tr);
-        }
+            TableRow tr = new TableRow();
+            int counterCells = 0;
 
-        foreach (Vehicle vehicle in userVehicles)
-        {
-            TableCell tc = new TableCell();
-            TableCell tc2 = new TableCell();
-            TableCell tc3 = new TableCell();
-            tc.Text = (vehicle.Id);
-            tr.Cells.Add(tc);
-            tc2.Text = (vehicle.Brand);
-            tr.Cells.Add(tc2);
-            tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
-            tr.Cells.Add(tc3);
-            TableRegistryVehicles.Rows.Add(tr);
-        }
+            foreach (DataColumn dc in userVehiclesTable.Columns)
+            {
+                TableCell tc = new TableCell();
 
+
+                if (counterCells == 3)
+                {
+                    tc.Text = string.Format("<button ID=\"Button8\" Class=\"btn btn-danger\" title=\"Eliminar\"><span class=\"glyphicon glyphicon-remove\"></span>  </button> &nbsp <button ID=\"Button8\" Class=\"btn btn-warning\" title=\"Editar\"><span class=\"glyphicon glyphicon-edit\"></span>  </button>");
+                    tr.Cells.Add(tc);
+                }
+                else
+                {
+
+                    try
+                    {
+                        bool isMoto = (bool)dr[dc.ColumnName];
+                        if (isMoto)
+                        {
+                            tc.Text = string.Format("M");
+                        }
+                        else
+                        {
+                            tc.Text = string.Format("VL");
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+
+                        tc.Text = string.Format(dr[dc.ColumnName].ToString());
+                    }
+
+                  
+                    tr.Cells.Add(tc);
+                    //tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
+
+                }
+                counterCells++;
+                TableRegistryVehicles.Rows.Add(tr);
+
+            }
+        }
     }
+
     protected void btnAddVehicle_Click(object sender, EventArgs e)
     {
-
 
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
@@ -92,6 +112,7 @@ public partial class form_addvehicle : System.Web.UI.Page
             LabelError.Text = "El formato de placa esta equivocado";
         }
     }
+
     protected void TextBoxIdVehicle_TextChanged(object sender, EventArgs e)
     {
         TextBoxIdOfVehicle.Text = TextBoxIdOfVehicle.Text.ToUpper();

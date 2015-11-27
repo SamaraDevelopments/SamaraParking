@@ -11,6 +11,7 @@ using System.Web;
 
 public class VehicleData : BaseData
 {
+
     public int Insert(Vehicle newVehicle, User currentUser)
     {
         int insertResult = 0;
@@ -25,7 +26,7 @@ public class VehicleData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Brand", newVehicle.Brand);
                 sqlCommand.Parameters.AddWithValue("@Vehicletype", newVehicle.VehicleType);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            }         
+            }
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
@@ -33,39 +34,33 @@ public class VehicleData : BaseData
 
             throw sqlException;
         }
-       
+
         return insertResult;
     }
 
-    public List<Vehicle> GetIdVehiclesFromUserVehicles(User user)
+    public DataTable GetVehiclesFromUser(User user)
     {
-        List<Vehicle> listOfVehicles = new List<Vehicle>();
-        Vehicle vehicleToAdd = new Vehicle();
-        
+
+        DataTable dt = new DataTable();
+
         try
         {
             //open database connection
             SqlConnection connection = ManageDatabaseConnection("Open");
 
-            using (SqlCommand sqlCommand = new SqlCommand("Get_Vehicles", connection))
+            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesFromUser", connection))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
 
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
                 {
-                    while (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            vehicleToAdd.Id = reader["Vehicleid"].ToString();
-                            listOfVehicles.Add(LoadVehicles(vehicleToAdd));
 
-                        }
-                        reader.NextResult();                             
-                    }
-                    reader.Close();
+                    sqlDataAdapter.SelectCommand = sqlCommand;
+                    sqlDataAdapter.Fill(dt);
+                    
                 }
+
             }
 
             ManageDatabaseConnection("Close");
@@ -76,7 +71,7 @@ public class VehicleData : BaseData
             throw sqlException;
         }
 
-        return listOfVehicles;
+        return dt;
     }
 
     public Vehicle LoadVehicles(Vehicle vehicleToAdd)
@@ -101,7 +96,7 @@ public class VehicleData : BaseData
                         LoadedVehicle.Id = reader["Id"].ToString();
                         LoadedVehicle.Brand = reader["Brand"].ToString();
                         LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
-
+                        
                     }
 
                 }
