@@ -113,5 +113,51 @@ public class VehicleData : BaseData
 
         return LoadedVehicle;
     }
+    public int Edit(Vehicle editVehicle)
+    {
+        int editResult = 0;
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Update_Vehicle", ManageDatabaseConnection("Open")))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@VehicleId", editVehicle.Id);
+                sqlCommand.Parameters.AddWithValue("@Brand", editVehicle.Brand);
+                sqlCommand.Parameters.AddWithValue("@Vehicletype", editVehicle.VehicleType);
+                editResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return editResult;
+    }
+    public int Delete(Vehicle editVehicle, User currentUser)
+    {
+        int deleteResult = 0;
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Delete_Vehicle", ManageDatabaseConnection("Open")))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
+                sqlCommand.Parameters.AddWithValue("@VehicleId", deleteVehicle.Id);
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return deleteResult;
+    }
 
 }

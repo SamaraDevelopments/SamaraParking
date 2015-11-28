@@ -83,6 +83,36 @@ public class VehicleBusiness
         }
         return failuretext;
     }
+    public string DeleteVehicle(Vehicle vehicleToAdd, User currentUser)
+    {
+        VehicleData vd = new VehicleData();
+        int deleteResult = vd.Delete(vehicleToAdd, currentUser);
 
-    
+        string failuretext = null;
+        if (deleteResult == 0)
+        {
+            failuretext = null;
+        }
+        else
+        {
+            failuretext = "El vehiculo no se logro eliminar";
+        }
+        return failuretext;
+    }
+    public string EditVehicle(Vehicle vehicleToAdd)
+    {
+        VehicleData vd = new VehicleData();
+        int EditResult = vd.Edit(vehicleToAdd);
+
+        string failuretext = null;
+        if (EditResult == 0)
+        {
+            failuretext = null;
+        }
+        else
+        {
+            failuretext = "El vehiculo no se logro editar";
+        }
+        return failuretext;
+    }
 }

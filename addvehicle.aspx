@@ -4,13 +4,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
+    
     <div class="container">
+        <script type="text/javascript" src="js/vehicle.js"></script>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
                         <legend>Sus vehiculos registrados son:</legend>
-                        
+
                         <div class="form-group">
                             <div class="col-lg-10">
                                 <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
@@ -20,11 +22,11 @@
                                         <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
-                                 <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
-                            <asp:Label ID="Label3" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
-                       
+
                         <legend>Agregar Vehiculo:</legend>
                         <div class="form-group">
                             <asp:Label ID="LabelBrandOfVehicle" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
