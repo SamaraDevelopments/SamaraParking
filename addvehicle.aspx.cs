@@ -44,12 +44,12 @@ public partial class form_addvehicle : System.Web.UI.Page
 
                     Button updateBtn = new Button();
                     updateBtn.Click += new System.EventHandler(btnEditVehicle_Click);
-                    updateBtn.Attributes.Add("<span class=\"glyphicon glyphicon-edit\"></span>");
+                    updateBtn.Text = "Update";
                     updateBtn.ID = idToButton + "e";
                     updateBtn.CssClass = "btn btn-warning";
                     Button deleteBtn = new Button();
                     deleteBtn.Click += new System.EventHandler(btnDeleteVehicle_Click);
-                    deleteBtn.Attributes.Add("<span class="glyphicon glyphicon-remove"></span>");
+                    deleteBtn.Text = "Delete";
                     deleteBtn.ID = idToButton + "d";
                     deleteBtn.CssClass = "btn btn-danger";
                     tc.Controls.Add(updateBtn);
