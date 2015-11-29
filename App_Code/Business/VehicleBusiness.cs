@@ -83,10 +83,10 @@ public class VehicleBusiness
         }
         return failuretext;
     }
-    public string DeleteVehicle(Vehicle vehicleToAdd, User currentUser)
+    public string DeleteVehicle(Vehicle vehicleToDelete, User currentUser)
     {
         VehicleData vd = new VehicleData();
-        int deleteResult = vd.Delete(vehicleToAdd, currentUser);
+        int deleteResult = vd.Delete(vehicleToDelete, currentUser);
 
         string failuretext = null;
         if (deleteResult == 0)

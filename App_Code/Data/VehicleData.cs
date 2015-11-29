@@ -137,7 +137,7 @@ public class VehicleData : BaseData
 
         return editResult;
     }
-    public int Delete(Vehicle editVehicle, User currentUser)
+    public int Delete(Vehicle deleteVehicle, User currentUser)
     {
         int deleteResult = 0;
         try
@@ -148,6 +148,7 @@ public class VehicleData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
                 sqlCommand.Parameters.AddWithValue("@VehicleId", deleteVehicle.Id);
+                deleteResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
         }

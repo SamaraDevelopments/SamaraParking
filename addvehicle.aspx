@@ -4,9 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
-    
+
     <div class="container">
-        <script type="text/javascript" src="js/vehicle.js"></script>
+
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">

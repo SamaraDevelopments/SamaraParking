@@ -21,6 +21,7 @@ public partial class form_addvehicle : System.Web.UI.Page
 
     protected void FillTableUserVehicles()
     {
+        string idToButton = "";
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
         DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
@@ -33,11 +34,26 @@ public partial class form_addvehicle : System.Web.UI.Page
             foreach (DataColumn dc in userVehiclesTable.Columns)
             {
                 TableCell tc = new TableCell();
-
+                if (counterCells == 0)
+                {
+                    idToButton = dr[dc.ColumnName].ToString().Trim();
+                }
 
                 if (counterCells == 3)
                 {
-                    tc.Text = string.Format("<button ID=\"btnDelete\" Class=\"btn btn-danger\" title=\"Eliminar\"><span class=\"glyphicon glyphicon-remove\"></span>  </button> &nbsp <button ID=\"btnEdit\" Class=\"btn btn-warning\" title=\"Editar\"><span class=\"glyphicon glyphicon-edit\"></span>  </button>");
+
+                    Button updateBtn = new Button();
+                    updateBtn.Click += new System.EventHandler(btnEditVehicle_Click);
+                    updateBtn.Attributes.Add("<span class=\"glyphicon glyphicon-edit\"></span>");
+                    updateBtn.ID = idToButton + "e";
+                    updateBtn.CssClass = "btn btn-warning";
+                    Button deleteBtn = new Button();
+                    deleteBtn.Click += new System.EventHandler(btnDeleteVehicle_Click);
+                    deleteBtn.Attributes.Add("<span class="glyphicon glyphicon-remove"></span>");
+                    deleteBtn.ID = idToButton + "d";
+                    deleteBtn.CssClass = "btn btn-danger";
+                    tc.Controls.Add(updateBtn);
+                    tc.Controls.Add(deleteBtn);
                     tr.Cells.Add(tc);
                 }
                 else
@@ -124,34 +140,32 @@ public partial class form_addvehicle : System.Web.UI.Page
     {
         TextBoxIdOfVehicle.Text = TextBoxIdOfVehicle.Text.ToUpper();
     }
-    protected void btnDelete_Click(object sender, EventArgs e)
+    protected void btnDeleteVehicle_Click(object sender, EventArgs e)
     {
+        Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
-        Vehicle vehicleToAdd = new Vehicle();
-        //aplicar metodo que hagarre el id de la tabla
-        //idToDelete agarra el id del metodo
-        string idToDelete = "";
-        vehicleToAdd.Id = idToDelete;
+        Vehicle vehicleToDelete = new Vehicle();
+        btn.ID = btn.ID.Remove(btn.ID.Length - 1);
+        vehicleToDelete.Id = btn.ID;
 
-        if (vb.DeleteVehicle(vehicleToAdd, currentUser) != null)
+        if (vb.DeleteVehicle(vehicleToDelete, currentUser) != null)
         {
-            LabelError.Text = vb.DeleteVehicle(vehicleToAdd, currentUser);
+            LabelError.Text = vb.DeleteVehicle(vehicleToDelete, currentUser);
         }
         else
         {
             LabelError.Text = "El vehiculo fue eliminado exitosamente";
         }
     }
-    protected void btnEdit_Click(object sender, EventArgs e)
+    protected void btnEditVehicle_Click(object sender, EventArgs e)
     {
+        Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
-        //aplicar metodo que hagarre el id de la tabla
-        //idToDelete agarra el id del metodo
-        string idToEdit = "";
-        vehicleToAdd.Id = idToEdit;
+        btn.ID = btn.ID.Remove(btn.ID.Length - 1);
+        vehicleToAdd.Id = btn.ID;
         vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
 
         if (CheckBoxIsMotrocycle.Checked)
@@ -171,7 +185,7 @@ public partial class form_addvehicle : System.Web.UI.Page
             LabelError.Text = "Porfavor ingrese una placa";
         }else if (vb.EditVehicle(vehicleToAdd) != null)
         {
-            LabelError.Text = vb.EditVehicle(vehicleToAdd, currentUser);
+            LabelError.Text = vb.EditVehicle(vehicleToAdd);
         }
         else
         {

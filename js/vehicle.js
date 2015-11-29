@@ -15,3 +15,10 @@ function validateVehicleData()
     }
     return true;
 }
+
+function editButton(idToEdit) {
+    PageMethods.btnEditVehicle_Click(idToEdit);
+}
+function deleteButton(idToDelete) {
+    PageMethods.btnDeleteVehicle_Click(idToDelete);
+}
