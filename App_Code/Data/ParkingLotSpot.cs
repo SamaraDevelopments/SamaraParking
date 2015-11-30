@@ -11,7 +11,7 @@ using System.Web;
 public class ParkingSpotData : BaseData
 
 {
-    public void Insert(ParkingSpot newSpot, ParkingLot newParking)
+    public void Insert(ParkingSpot newSpot)
     {
         try
         {
@@ -19,7 +19,7 @@ public class ParkingSpotData : BaseData
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
-                sqlCommand.Parameters.AddWithValue("@IdParking", newParking.Id);
+                sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
                 
             }
             ManageDatabaseConnection("Close");

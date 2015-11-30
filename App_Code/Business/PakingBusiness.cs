@@ -35,10 +35,10 @@ public class PakingBusiness
         }
         return failuretext;
     }
-    public void AddParkingSpot(ParkingSpot parkingSpotToAdd, ParkingLot parkingLotToAdd) 
+    public void AddParkingSpot(ParkingSpot parkingSpotToAdd) 
     {
         ParkingSpotData psd = new ParkingSpotData();
-        psd.Insert(parkingSpotToAdd, parkingLotToAdd);
+        psd.Insert(parkingSpotToAdd);
     }
        
 }

@@ -34,22 +34,25 @@ public partial class Form_addparking : System.Web.UI.Page
             else
             {
                 pl.Id = pb.AddParking(pl);
-                for (int counter = 0; counter < Integer.Parse(TextBoxReserveSpot.Text); counter++)
+                for (int counter = 0; counter < Int32.Parse(TextBoxReserveSpot.Text); counter++)
                 {
                     ps.SpotType = "Espacio Reservado";//Spot for disabled people
-                    pb.AddParkingSpot(ps, pl);
+                    ps.IdParking = pl.Id;
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
-                for (int counter = 0; counter < Convert.ToInt64(TextBoxMotorcycleSpots.Text); counter++)
+                for (int counter = 0; counter < Int32.Parse(TextBoxMotorcycleSpots.Text); counter++)
                 {
                     ps.SpotType = "Espacio para motocicletas";//MotorcycleSpot
-                    pb.AddParkingSpot(ps, pl);
+                    ps.IdParking = pl.Id;
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
-                for (int counter = 0; counter < Convert.ToInt64(TextBoxNormalSpot.Text); counter++)
+                for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
                 {
                     ps.SpotType = "Normal Spot";//Normal Spot
-                    pb.AddParkingSpot(ps, pl);
+                    ps.IdParking = pl.Id;
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
                 pl.Capacity = pl.ListOfSpots.Count;
