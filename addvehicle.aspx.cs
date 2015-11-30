@@ -176,14 +176,11 @@ public partial class form_addvehicle : System.Web.UI.Page
         {
             vehicleToAdd.VehicleType = false;
         }
-        if (vehicleToAdd.Id == "")
+        if (vehicleToAdd.Brand == "")
         {
             LabelError.Text = "Porfavor ingrese una marca";
         }
-        else if (vehicleToAdd.Brand == "")
-        {
-            LabelError.Text = "Porfavor ingrese una placa";
-        }else if (vb.EditVehicle(vehicleToAdd) != null)
+        else if (vb.EditVehicle(vehicleToAdd) != null)
         {
             LabelError.Text = vb.EditVehicle(vehicleToAdd);
         }
