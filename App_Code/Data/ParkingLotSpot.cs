@@ -11,12 +11,12 @@ using System.Web;
 public class ParkingSpotData : BaseData
 
 {
-    public void Insert(ParkingSpot newSpot)
+    public void Insert(ParkingSpot newSpot, ParkingLot newParking)
     {
         //open database connection
         SqlConnection connection = ManageDatabaseConnection("Open");
 
-        string databaseCommand = "insert_parkinglotspot";
+        string databaseCommand = "insert_parkingspot";
 
         SqlCommand sqlCommand;
 
@@ -25,7 +25,8 @@ public class ParkingSpotData : BaseData
 
             sqlCommand = new SqlCommand(databaseCommand, connection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newSpot.SpotType;
+            sqlCommand.Parameters.Add("@Spottype", SqlDbType.NVarChar).Value = newSpot.SpotType;
+            sqlCommand.Parameters.Add("@IdParking", SqlDbType.NVarChar).Value = newParking.Id;
 
             sqlCommand.ExecuteNonQuery();
             sqlCommand.Dispose();
@@ -33,7 +34,6 @@ public class ParkingSpotData : BaseData
         }
         catch (SqlException sqlException)
         {
-
             throw sqlException;
         }
 

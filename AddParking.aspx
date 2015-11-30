@@ -16,16 +16,32 @@
                                 <asp:TextBox ID="TextBoxNameOfNewParking" runat="server" placeholder="Nombre" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <asp:Label ID="LabelLocationOfNewParking" runat="server" Text="Locación:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxLocationOfNewParking" runat="server" placeholder="Locación" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <asp:Label ID="LabelCapacityOfNewParking" runat="server" Text="Capacidad:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelReserveSpots" runat="server" Text="Espacios reservados:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxCapacityOfNewParking" runat="server" placeholder="Capacidad" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxReserveSpot" runat="server" placeholder="Reservados" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <asp:Label ID="LabelMotorcycleSpots" runat="server" Text="Espacios para Motocicleta:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="TextBoxMotorcycleSpots" runat="server" placeholder="Motocicleta" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <asp:Label ID="LabelnormalSpots" runat="server" Text="Espacios normales:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Normales" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
 
@@ -36,10 +52,9 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonAddNewParking" runat="server" CssClass="btn btn-primary" Text="Agregar Parqueo" />
+                                <asp:Button ID="ButtonAddNewParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click"/>
                             </div>
                         </div>
                     </fieldset>

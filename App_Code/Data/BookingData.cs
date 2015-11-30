@@ -118,5 +118,32 @@ public class BookingData : BaseData
             throw sqlException;
         }
     }
+    public DataTable GetReportBooking()
+    {
+
+        DataTable dt = new DataTable();
+
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            SqlCommand sqlCommand = new SqlCommand("Get_Report_Booking", connection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
+            {
+                sqlDataAdapter.SelectCommand = sqlCommand;
+                sqlDataAdapter.Fill(dt);
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+        return dt;
+    }
 
 }

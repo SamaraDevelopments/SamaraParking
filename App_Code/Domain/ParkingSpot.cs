@@ -10,6 +10,7 @@ public class ParkingSpot
 {
     private int id;
     private string spotType;
+    private int idParking;
 
     public ParkingSpot()
     {
@@ -27,5 +28,11 @@ public class ParkingSpot
     {
         get { return this.spotType; }
         set { spotType = value; }
+    }
+
+    public int IdParking
+    {
+        get { return idParking; }
+        set { idParking = value; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -57,6 +58,12 @@ using System.Web;
             {
                 //Throw error here invalid time selection (to short time span)
             }
+        }
+        public DataTable GetReportBooking()
+        {
+            BookingData bd = new BookingData();
+
+            return bd.GetReportBooking();
         }
 
     }

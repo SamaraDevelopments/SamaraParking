@@ -10,8 +10,9 @@ using System.Web;
 /// </summary>
 public class ParkingLotData : BaseData
 {
-    public void Insert(ParkingLot newParkingLot)
+    public int Insert(ParkingLot newParkingLot)
     {
+        int insertResult = 0;
         //open database connection
         SqlConnection connection = ManageDatabaseConnection("Open");
 
@@ -31,6 +32,9 @@ public class ParkingLotData : BaseData
             sqlCommand.ExecuteNonQuery();
             sqlCommand.Dispose();
             ManageDatabaseConnection("Close");
+
+            insertResult = 1;
+
         }
         catch (SqlException sqlException)
         {
@@ -38,7 +42,7 @@ public class ParkingLotData : BaseData
             throw sqlException;
         }
 
-
+        return insertResult;
     }
 
     public void Update(ParkingLot newParkingLot)

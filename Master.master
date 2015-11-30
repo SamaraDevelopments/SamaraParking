@@ -42,17 +42,23 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="AddVehicle.aspx">Sus vehiculos</a> </li>
-                        <li><a href="Booking.aspx">Reserva tu espacio</a> </li>
+                        <li><a href="addVehicle.aspx">Sus vehiculos</a> </li>
+                        <li><a href="booking.aspx">Reserva tu espacio</a> </li>
 
-                        <%if (loggedUser.Roletype == 3)
+                        <%if (loggedUser.Roletype == 0)
                             {%>
                         <li><a href="UserRegistry.aspx">Agregar usuario</a> </li>
                         <li><a href="AddParking.aspx">Agregar parqueo</a></li>
-                        <li><a href="ActiveUser.aspx">Usuarios con marchamo activo</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="reportbooking.aspx">Reservas</a></li>
+                                <li><a href="activeUser.aspx">Profesores activos</a></li>
+                            </ul>
+                        </li>
                         <% } %>
 
-                        <li><a href="Login.aspx" onclick="">Salir</a></li>
+                        <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>
             </div>
