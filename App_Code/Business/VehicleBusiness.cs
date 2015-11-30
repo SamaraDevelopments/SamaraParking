@@ -18,6 +18,29 @@ public class VehicleBusiness
     {
         bool isValid = true;
         string plate = vehicle.Id;
+        if (plate.Length == 5)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                char currentLetter = plate[i];
+                if (!char.IsLetter(plate, i))
+                {
+                    isValid = false;
+                }
+                else if ("aeiouAEIOU".Contains(currentLetter.ToString()))
+                {
+                    isValid = false;
+                }
+
+            }
+            for (int i = 1; i < plate.Length; i++)
+            {
+                if (!char.IsNumber(plate, i))
+                {
+                    isValid = false;
+                }
+            }
+        }
         if (plate.Length == 6)
         {
             for (int i = 0; i < plate.Length; i++)
