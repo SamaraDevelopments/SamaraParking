@@ -11,8 +11,9 @@ using System.Web;
 public class ParkingSpotData : BaseData
 
 {
-    public void Insert(ParkingSpot newSpot)
+    public int Insert(ParkingSpot newSpot)
     {
+        int insertresult = 0;
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkingspot", ManageDatabaseConnection("Open")))
@@ -28,7 +29,7 @@ public class ParkingSpotData : BaseData
         {
             throw sqlException;
         }
-
+        return insertresult;
 
     }
 
