@@ -5,6 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
 
+    <% Vehicle vehicleFromUser = (Vehicle)Session["VEHICLE"];  %>
+
     <div class="container">
 
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -22,12 +24,21 @@
                                         <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
-                                <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
-                                <asp:Label ID="Label3" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelLegendMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelLegendCar" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
 
+                        <%if (vehicleFromUser != null)
+                            { %>
+                        <legend>Editando su vehiculo</legend>
+                        <% 
+                            }
+                            else
+                            {%>
                         <legend>Agregar Vehiculo:</legend>
+                        <% }%>
+
                         <div class="form-group">
                             <asp:Label ID="LabelBrandOfVehicle" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">

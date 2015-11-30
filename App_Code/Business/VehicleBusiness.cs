@@ -14,6 +14,16 @@ public class VehicleBusiness
     public VehicleBusiness()
 	{
     }
+
+    public Vehicle LoadVehicles(string idVehicle) {
+
+        VehicleData vd = new VehicleData();
+        Vehicle vehicle = new Vehicle();
+        vehicle.Id = idVehicle;
+        vehicle = vd.LoadVehicles(vehicle);
+
+        return vehicle;
+    }
     public bool ValidateLicensePlate(Vehicle vehicle)
     {
         bool isValid = true;
