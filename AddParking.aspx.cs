@@ -14,7 +14,6 @@ public partial class Form_addparking : System.Web.UI.Page
     public void btnAddNewParking_Click(object sender, EventArgs e)
     {
         PakingBusiness pb = new PakingBusiness();
-        ParkingSpot ps = new ParkingSpot(); ;
         ParkingLot pl = new ParkingLot();
         pl.ListOfSpots = new List<ParkingSpot>();
 
@@ -36,23 +35,26 @@ public partial class Form_addparking : System.Web.UI.Page
                 pl.Id = pb.AddParking(pl);
                 for (int counter = 0; counter < Int32.Parse(TextBoxReserveSpot.Text); counter++)
                 {
+                    ParkingSpot ps = new ParkingSpot();
                     ps.SpotType = "Espacio Reservado";//Spot for disabled people
                     ps.IdParking = pl.Id;
-                    int holder = pb.AddParkingSpot(ps);
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
                 for (int counter = 0; counter < Int32.Parse(TextBoxMotorcycleSpots.Text); counter++)
                 {
+                    ParkingSpot ps = new ParkingSpot();
                     ps.SpotType = "Espacio para motocicletas";//MotorcycleSpot
                     ps.IdParking = pl.Id;
-                    int holder = pb.AddParkingSpot(ps);
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
                 for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
                 {
+                    ParkingSpot ps = new ParkingSpot();
                     ps.SpotType = "Normal Spot";//Normal Spot
                     ps.IdParking = pl.Id;
-                    int holder = pb.AddParkingSpot(ps);
+                    pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
                 pl.Capacity = pl.ListOfSpots.Count;

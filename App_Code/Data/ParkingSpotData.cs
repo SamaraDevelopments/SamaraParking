@@ -6,14 +6,13 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for ParkingLotSpot
+/// Summary description for ParkingSpotData
 /// </summary>
 public class ParkingSpotData : BaseData
-
 {
-    public int Insert(ParkingSpot newSpot)
+    public void Insert(ParkingSpot newSpot)
     {
-        int insertresult = 0;
+        int insertResult = 1;
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkingspot", ManageDatabaseConnection("Open")))
@@ -21,7 +20,7 @@ public class ParkingSpotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
                 sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
-                
+                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
         }
@@ -29,8 +28,6 @@ public class ParkingSpotData : BaseData
         {
             throw sqlException;
         }
-        return insertresult;
-
     }
 
     public void Update(ParkingSpot newSpot)
