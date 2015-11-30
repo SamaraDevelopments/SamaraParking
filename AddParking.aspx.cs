@@ -26,14 +26,35 @@ public partial class Form_addparking : System.Web.UI.Page
         {
             pl.Name = TextBoxNameOfNewParking.Text;
             pl.Location = TextBoxLocationOfNewParking.Text;
-            pl.ListOfSpots = null;
 
-            if (pb.AddParking(pl) != null)
+            if (pb.AddParking(pl) == -1)
             {
-                LabelError.Text = pb.AddParking(pl);
+                LabelError.Text = "Parqueo ya existe";
             }
             else
             {
+                pl.Id = pb.AddParking(pl);
+                for (int counter = 0; counter < Integer.Parse(TextBoxReserveSpot.Text); counter++)
+                {
+                    ps.SpotType = "Espacio Reservado";//Spot for disabled people
+                    pb.AddParkingSpot(ps, pl);
+                    pl.ListOfSpots.Add(ps);
+                }
+                for (int counter = 0; counter < Convert.ToInt64(TextBoxMotorcycleSpots.Text); counter++)
+                {
+                    ps.SpotType = "Espacio para motocicletas";//MotorcycleSpot
+                    pb.AddParkingSpot(ps, pl);
+                    pl.ListOfSpots.Add(ps);
+                }
+                for (int counter = 0; counter < Convert.ToInt64(TextBoxNormalSpot.Text); counter++)
+                {
+                    ps.SpotType = "Normal Spot";//Normal Spot
+                    pb.AddParkingSpot(ps, pl);
+                    pl.ListOfSpots.Add(ps);
+                }
+                pl.Capacity = pl.ListOfSpots.Count;
+                pb.UpdateParking(pl);
+
                 TextBoxNormalSpot.Text = null;
                 TextBoxNameOfNewParking.Text = null;
                 TextBoxReserveSpot.Text = null;
@@ -41,27 +62,6 @@ public partial class Form_addparking : System.Web.UI.Page
                 TextBoxLocationOfNewParking.Text = null;
             }
 
-            for (int counter = 0; counter < Convert.ToInt64(TextBoxReserveSpot.Text); counter++)
-            {
-                ps.SpotType = "Espacio Reservado";//Spot for disabled people
-                pb.AddParkingSpot(ps,pl);
-                pl.ListOfSpots.Add(ps);
-            }
-            for (int counter = 0; counter < Convert.ToInt64(TextBoxMotorcycleSpots.Text); counter++)
-            {
-                ps.SpotType = "Espacio para motocicletas";//MotorcycleSpot
-                pb.AddParkingSpot(ps, pl);
-                pl.ListOfSpots.Add(ps);
-            }
-            for (int counter = 0; counter < Convert.ToInt64(TextBoxNormalSpot.Text); counter++)
-            {
-                ps.SpotType = "Normal Spot";//Normal Spot
-                pb.AddParkingSpot(ps, pl);
-                pl.ListOfSpots.Add(ps);
-            }
-            pl.Capacity = pl.ListOfSpots.Count;
-            pb.UpdateParking(pl);
-            
 
         }
     }

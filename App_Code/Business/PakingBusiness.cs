@@ -12,21 +12,12 @@ public class PakingBusiness
     {
 
     }
-    public string AddParking(ParkingLot parkingToAdd) 
+    public int AddParking(ParkingLot parkingToAdd) 
     { 
         ParkingLotData pld = new ParkingLotData();
         int insertResult = pld.Insert(parkingToAdd);
 
-        string failuretext = null;
-        if (insertResult != 1)
-        {
-            failuretext = "El parqueo ya fue creado";
-        }
-        else
-        {
-            failuretext = null;
-        }
-        return failuretext;
+        return insertResult;
     }
     public string UpdateParking(ParkingLot parkingToUpdate)
     {

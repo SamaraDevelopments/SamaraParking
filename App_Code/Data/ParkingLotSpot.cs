@@ -20,11 +20,9 @@ public class ParkingSpotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
                 sqlCommand.Parameters.AddWithValue("@IdParking", newParking.Id);
-
-                sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
-                ManageDatabaseConnection("Close");
+                
             }
+            ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {

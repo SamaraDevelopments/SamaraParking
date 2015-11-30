@@ -12,22 +12,19 @@ public class ParkingLotData : BaseData
 {
     public int Insert(ParkingLot newParkingLot)
     {
-        int insertResult = 0;
+        int insertResult = -1;
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkinglot", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@name", newParkingLot.Name);
-                sqlCommand.Parameters.AddWithValue("@location", newParkingLot.Location);
-                sqlCommand.Parameters.AddWithValue("@capacity", newParkingLot.Capacity);
-
-                sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
-                ManageDatabaseConnection("Close");
-
-                insertResult = 1;
+                sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
+                sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
+                sqlCommand.Parameters.AddWithValue("@Capacity", newParkingLot.Capacity);
+                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+               
             }
+            ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
@@ -46,10 +43,10 @@ public class ParkingLotData : BaseData
             using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingLot", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@id", newParkingLot.Id);
-                sqlCommand.Parameters.AddWithValue("@name", newParkingLot.Name);
-                sqlCommand.Parameters.AddWithValue("@location", newParkingLot.Location);
-                sqlCommand.Parameters.AddWithValue("@capacity", newParkingLot.Capacity);
+                sqlCommand.Parameters.AddWithValue("@Id", newParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
+                sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
+                sqlCommand.Parameters.AddWithValue("@Capacity", newParkingLot.Capacity);
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
                 ManageDatabaseConnection("Close");
