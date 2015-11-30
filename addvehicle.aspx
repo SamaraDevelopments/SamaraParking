@@ -22,6 +22,7 @@
                                         <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
                                 <asp:Label ID="LabelLegendMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
