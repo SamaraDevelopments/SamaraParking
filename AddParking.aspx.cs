@@ -27,7 +27,20 @@ public partial class Form_addparking : System.Web.UI.Page
             pl.Name = TextBoxNameOfNewParking.Text;
             pl.Location = TextBoxLocationOfNewParking.Text;
             pl.ListOfSpots = null;
-           
+
+            if (pb.AddParking(pl) != null)
+            {
+                LabelError.Text = pb.AddParking(pl);
+            }
+            else
+            {
+                TextBoxNormalSpot.Text = null;
+                TextBoxNameOfNewParking.Text = null;
+                TextBoxReserveSpot.Text = null;
+                TextBoxMotorcycleSpots.Text = null;
+                TextBoxLocationOfNewParking.Text = null;
+            }
+
             for (int counter = 0; counter < Convert.ToInt64(TextBoxReserveSpot.Text); counter++)
             {
                 ps.SpotType = "Espacio Reservado";//Spot for disabled people
@@ -46,19 +59,9 @@ public partial class Form_addparking : System.Web.UI.Page
                 pb.AddParkingSpot(ps, pl);
                 pl.ListOfSpots.Add(ps);
             }
-           
-            if (pb.AddParking(pl) != null)
-            {
-                LabelError.Text = pb.AddParking(pl);
-            }
-            else
-            {
-                TextBoxNormalSpot.Text = null;
-                TextBoxNameOfNewParking.Text = null;
-                TextBoxReserveSpot.Text = null;
-                TextBoxMotorcycleSpots.Text = null;
-                TextBoxLocationOfNewParking.Text = null;
-            }
+            pl.Capacity = pl.ListOfSpots.Count;
+            pb.UpdateParking(pl);
+            
 
         }
     }

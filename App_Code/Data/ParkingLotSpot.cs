@@ -13,24 +13,18 @@ public class ParkingSpotData : BaseData
 {
     public void Insert(ParkingSpot newSpot, ParkingLot newParking)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "insert_parkingspot";
-
-        SqlCommand sqlCommand;
-
         try
         {
+            using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkingspot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
+                sqlCommand.Parameters.AddWithValue("@IdParking", newParking.Id);
 
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@Spottype", SqlDbType.NVarChar).Value = newSpot.SpotType;
-            sqlCommand.Parameters.Add("@IdParking", SqlDbType.NVarChar).Value = newParking.Id;
-
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
+                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Dispose();
+                ManageDatabaseConnection("Close");
+            }
         }
         catch (SqlException sqlException)
         {

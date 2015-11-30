@@ -13,28 +13,21 @@ public class ParkingLotData : BaseData
     public int Insert(ParkingLot newParkingLot)
     {
         int insertResult = 0;
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "insert_parkinglot";
-
-        SqlCommand sqlCommand;
-
         try
         {
+            using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkinglot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@name", newParkingLot.Name);
+                sqlCommand.Parameters.AddWithValue("@location", newParkingLot.Location);
+                sqlCommand.Parameters.AddWithValue("@capacity", newParkingLot.Capacity);
 
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newParkingLot.Name;
-            sqlCommand.Parameters.Add("@location", SqlDbType.NVarChar).Value = newParkingLot.Location;
-            sqlCommand.Parameters.Add("@capacity", SqlDbType.Int).Value = newParkingLot.Capacity;
+                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Dispose();
+                ManageDatabaseConnection("Close");
 
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
-
-            insertResult = 1;
-
+                insertResult = 1;
+            }
         }
         catch (SqlException sqlException)
         {
@@ -45,27 +38,22 @@ public class ParkingLotData : BaseData
         return insertResult;
     }
 
-    public void Update(ParkingLot newParkingLot)
+    public int Update(ParkingLot newParkingLot)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "update_parkinglot";
-
-        SqlCommand sqlCommand;
-
+        int insertResult = 0;
         try
         {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newParkingLot.Id;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newParkingLot.Name;
-            sqlCommand.Parameters.Add("@location", SqlDbType.NVarChar).Value = newParkingLot.Location;
-            sqlCommand.Parameters.Add("@capacity", SqlDbType.Int).Value = newParkingLot.Capacity;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
+            using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingLot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", newParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@name", newParkingLot.Name);
+                sqlCommand.Parameters.AddWithValue("@location", newParkingLot.Location);
+                sqlCommand.Parameters.AddWithValue("@capacity", newParkingLot.Capacity);
+                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Dispose();
+                ManageDatabaseConnection("Close");
+            }
         }
         catch (SqlException sqlException)
         {
@@ -73,7 +61,7 @@ public class ParkingLotData : BaseData
             throw sqlException;
         }
 
-
+        return insertResult;
     }
 
     public void Delete(ParkingLot newParkingLot)

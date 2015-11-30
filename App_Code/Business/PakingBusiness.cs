@@ -18,20 +18,36 @@ public class PakingBusiness
         int insertResult = pld.Insert(parkingToAdd);
 
         string failuretext = null;
-        if (insertResult != 0)
+        if (insertResult != 1)
         {
-            failuretext = null;
+            failuretext = "El parqueo ya fue creado";
         }
         else
         {
-            failuretext = "El parqueo ya fue creado";
+            failuretext = null;
+        }
+        return failuretext;
+    }
+    public string UpdateParking(ParkingLot parkingToUpdate)
+    {
+        ParkingLotData pld = new ParkingLotData();
+        int insertResult = pld.Update(parkingToUpdate);
+
+        string failuretext = null;
+        if (insertResult != 0)
+        {
+            failuretext = "No se pudo actualizar";
+        }
+        else
+        {
+            failuretext = "Se actualizo de manera exitosa";
         }
         return failuretext;
     }
     public void AddParkingSpot(ParkingSpot parkingSpotToAdd, ParkingLot parkingLotToAdd) 
     {
         ParkingSpotData psd = new ParkingSpotData();
-        psd.Insert(parkingSpotToAdd,parkingLotToAdd);
+        psd.Insert(parkingSpotToAdd, parkingLotToAdd);
     }
        
 }
