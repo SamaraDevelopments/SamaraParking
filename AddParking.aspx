@@ -32,24 +32,34 @@
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="LabelMotorcycleSpots" runat="server" Text="Espacios para Motocicleta:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelNormalSpots" runat="server" Text="Espacios regulares:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxMotorcycleSpots" runat="server" placeholder="Motocicleta" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Regulares" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="LabelMotocyclesForRegularSpot" runat="server" Text="Motocicletas por espacio:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="TextBoxMotocyclesForRegularSpot" runat="server" placeholder="Cantidad de motocicletas" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="LabelDimensionsOfParking" runat="server" Text="Dimensiones del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="TextBoxDimensionsOfParkingX" runat="server" placeholder="Dimension X" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxDimensionsOfParkingY" runat="server" placeholder="Dimension Y" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="LabelnormalSpots" runat="server" Text="Espacios normales:" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Normales" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelNothingError" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="LabelNothingInfo" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelInfo" runat="server" Text="* Cada espacio de la matriz sera un espacio regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
 
                         <div class="form-group">

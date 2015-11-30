@@ -17,7 +17,7 @@ public partial class Form_addparking : System.Web.UI.Page
         ParkingLot pl = new ParkingLot();
         pl.ListOfSpots = new List<ParkingSpot>();
 
-        if (TextBoxNameOfNewParking.Text.Equals(null) || TextBoxLocationOfNewParking.Text.Equals(null) || TextBoxMotorcycleSpots.Text.Equals(null) || TextBoxNormalSpot.Text.Equals(null) || TextBoxReserveSpot.Text.Equals(null))
+        if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxNormalSpot.Text.Equals("") || TextBoxReserveSpot.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
         {
             LabelError.Text = "Espacios vacíos";
         }
@@ -41,14 +41,6 @@ public partial class Form_addparking : System.Web.UI.Page
                     pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
-                for (int counter = 0; counter < Int32.Parse(TextBoxMotorcycleSpots.Text); counter++)
-                {
-                    ParkingSpot ps = new ParkingSpot();
-                    ps.SpotType = "Espacio para motocicletas";//MotorcycleSpot
-                    ps.IdParking = pl.Id;
-                    pb.AddParkingSpot(ps);
-                    pl.ListOfSpots.Add(ps);
-                }
                 for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
                 {
                     ParkingSpot ps = new ParkingSpot();
@@ -63,8 +55,11 @@ public partial class Form_addparking : System.Web.UI.Page
                 TextBoxNormalSpot.Text = null;
                 TextBoxNameOfNewParking.Text = null;
                 TextBoxReserveSpot.Text = null;
-                TextBoxMotorcycleSpots.Text = null;
                 TextBoxLocationOfNewParking.Text = null;
+                TextBoxDimensionsOfParkingX.Text = null;
+                TextBoxDimensionsOfParkingY.Text = null;
+                TextBoxMotocyclesForRegularSpot.Text = null;
+
             }
 
 
