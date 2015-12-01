@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -51,6 +52,7 @@ public partial class Form_addparking : System.Web.UI.Page
                 }
                 pl.Capacity = pl.ListOfSpots.Count;
                 pb.UpdateParking(pl);
+                FillTableDesignOfNewParking();
 
                 TextBoxNormalSpot.Text = null;
                 TextBoxNameOfNewParking.Text = null;
@@ -61,8 +63,47 @@ public partial class Form_addparking : System.Web.UI.Page
                 TextBoxMotocyclesForRegularSpot.Text = null;
 
             }
+        }
+    }
+    public void FillTableDesignOfNewParking()
+    {
+        string idToRadiobutton = "";
+        DataTable tableDesingOfParking = new DataTable();
+        for (int counteRow=0; counteRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counteRow++)
+        {
+            foreach (DataRow dtr in tableDesingOfParking.Rows)
+            {
+                TableRow tr = new TableRow();
+                for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
+                {
+                    foreach (DataColumn dtc in tableDesingOfParking.Columns)
+                    {
+                        TableCell tc = new TableCell();
 
+                        CheckBox rdbStreet = new CheckBox();
+                        rdbStreet.Text = "Calle";
+                        rdbStreet.ID = idToRadiobutton + "nothing";
+                        rdbStreet.CssClass = "checkbox";
 
+                        CheckBox rdbReserveSpot = new CheckBox();
+                        rdbReserveSpot.Text = "Discapacitados";
+                        rdbReserveSpot.ID = idToRadiobutton + "reserveSpot";
+                        rdbReserveSpot.CssClass = "checkbox";
+
+                        CheckBox rdbRegularSpot = new CheckBox();
+                        rdbRegularSpot.Text = "Regulares";
+                        rdbRegularSpot.ID = idToRadiobutton + "RegularSpot";
+                        rdbRegularSpot.CssClass = "checkbox";
+
+                        tc.Controls.Add(rdbStreet);
+                        tc.Controls.Add(rdbReserveSpot);
+                        tc.Controls.Add(rdbRegularSpot);
+
+                        tr.Cells.Add(tc);
+                    }
+                }
+                TableDesignOfNewParking.Rows.Add(tr);
+            }
         }
     }
 }

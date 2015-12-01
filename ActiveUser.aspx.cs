@@ -21,21 +21,12 @@ public partial class Form_activeUser : System.Web.UI.Page
         foreach (DataRow dr in dataTableProfessorActive.Rows)
         {
             TableRow tr = new TableRow();
-            int counterCells = 0;
+
             foreach (DataColumn dc in dataTableProfessorActive.Columns)
             {
                 TableCell tc = new TableCell();
-                if (counterCells == 4)
-                {
-                    tc.Text = "Activo";
-                    tr.Cells.Add(tc);
-                }
-                else
-                {
-                    tr.Cells.Add(tc);
-                    tc.Text = string.Format(dr[dc.ColumnName].ToString());
-                }
-                counterCells++;
+                tr.Cells.Add(tc);
+                tc.Text = string.Format(dr[dc.ColumnName].ToString());           
                 TableActiveProfessor.Rows.Add(tr);
             }
         }
@@ -47,21 +38,12 @@ public partial class Form_activeUser : System.Web.UI.Page
         foreach (DataRow dr in dataTableStudentActive.Rows)
         {
             TableRow tr = new TableRow();
-            int counterCells = 0;
+
             foreach (DataColumn dc in dataTableStudentActive.Columns)
             {
                 TableCell tc = new TableCell();
-                if (counterCells == 4)
-                {
-                    tc.Text = "Activo";
-                    tr.Cells.Add(tc);
-                }
-                else
-                {
-                    tr.Cells.Add(tc);
-                    tc.Text = string.Format(dr[dc.ColumnName].ToString());
-                }
-                counterCells++;
+                tr.Cells.Add(tc);
+                tc.Text = string.Format(dr[dc.ColumnName].ToString());
                 TableActiveStudent.Rows.Add(tr);
             }
         }

@@ -4,9 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
-
     <div class="container">
-
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
@@ -22,8 +20,8 @@
                                         <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
-                                <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
-                                <asp:Label ID="Label3" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelIsMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelIsRegularVehicule" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
 
@@ -58,15 +56,6 @@
                         </div>
                     </fieldset>
                 </div>
-            </div>
-        </div>
-
-        <!-- ESPACIO PARA IMAGEN O TEXTO -->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-            <div id="banner">
-                <h1>Poner <strong>IMAGEN aqui.</strong> o algun texto</h1>
-                <h5>
-                    <strong>www.samaradevs.com</strong></h5>
             </div>
         </div>
     </div>

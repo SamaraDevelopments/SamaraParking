@@ -34,7 +34,7 @@
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="" href="index.aspx"><img src="img/logo-latina-2015.png" alt="Logo Ulatina"/></a>
+                    <a class="navbar-brand" href="#">Menú</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span>

@@ -61,14 +61,6 @@
                     </div>
                 </div>
             </div>
-            <!-- ESPACIO PARA IMAGEN O TEXTO -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                <div id="banner">
-                    <h1>Poner <strong>IMAGEN aqui.</strong> o algun texto</h1>
-                    <h5>
-                        <strong>www.samaradevs.com</strong></h5>
-                </div>
-            </div>
         </div>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
