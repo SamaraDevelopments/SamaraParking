@@ -11,11 +11,13 @@ public partial class form_addvehicle : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
+
         if (Session["USER"] == null)
         {
             Response.Redirect("login.aspx");
         }
-
+        Session["VEHICLE"] = null;
         FillTableUserVehicles();
     }
 
@@ -44,12 +46,13 @@ public partial class form_addvehicle : System.Web.UI.Page
 
                     Button updateBtn = new Button();
                     updateBtn.Click += new System.EventHandler(btnEditVehicle_Click);
-                    updateBtn.Text = "Update";
+                    updateBtn.Text = "Editar";
                     updateBtn.ID = idToButton + "e";
                     updateBtn.CssClass = "btn btn-warning";
+
                     Button deleteBtn = new Button();
                     deleteBtn.Click += new System.EventHandler(btnDeleteVehicle_Click);
-                    deleteBtn.Text = "Delete";
+                    deleteBtn.Text = "Borrar";
                     deleteBtn.ID = idToButton + "d";
                     deleteBtn.CssClass = "btn btn-danger";
                     tc.Controls.Add(updateBtn);
@@ -162,11 +165,13 @@ public partial class form_addvehicle : System.Web.UI.Page
     {
         Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
-        User currentUser = (User)Session["USER"];
-        Vehicle vehicleToAdd = new Vehicle();
+        Vehicle vehicleToAdd = new Vehicle();       
         btn.ID = btn.ID.Remove(btn.ID.Length - 1);
-        vehicleToAdd.Id = btn.ID;
+        vehicleToAdd.Id = btn.ID;       
+        Session["VEHICLE"] = vb.LoadVehicles(vehicleToAdd.Id);
         vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
+        TextBoxIdOfVehicle.Text = vehicleToAdd.Id;
+        TextBoxIdOfVehicle.Enabled = false;
 
         if (CheckBoxIsMotrocycle.Checked)
         {
@@ -176,14 +181,11 @@ public partial class form_addvehicle : System.Web.UI.Page
         {
             vehicleToAdd.VehicleType = false;
         }
-        if (vehicleToAdd.Id == "")
+        if (vehicleToAdd.Brand == "")
         {
             LabelError.Text = "Porfavor ingrese una marca";
         }
-        else if (vehicleToAdd.Brand == "")
-        {
-            LabelError.Text = "Porfavor ingrese una placa";
-        }else if (vb.EditVehicle(vehicleToAdd) != null)
+        else if (vb.EditVehicle(vehicleToAdd) != null)
         {
             LabelError.Text = vb.EditVehicle(vehicleToAdd);
         }

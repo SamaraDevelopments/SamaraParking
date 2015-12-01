@@ -4,6 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
+<<<<<<< HEAD
+=======
+
+    <% Vehicle vehicleFromUser = (Vehicle)Session["VEHICLE"];  %>
+
+>>>>>>> origin/master
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
@@ -18,14 +24,29 @@
                                         <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
+<<<<<<< HEAD
                                 <asp:Label ID="LabelIsMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
                                 <asp:Label ID="LabelIsRegularVehicule" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+=======
+                                <asp:Label ID="LabelLegendMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelLegendCar" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+>>>>>>> origin/master
                             </div>
                         </div>
 
+                        <%if (vehicleFromUser != null)
+                            { %>
+                        <legend>Editando su vehiculo</legend>
+                        <% 
+                            }
+                            else
+                            {%>
                         <legend>Agregar Vehiculo:</legend>
+                        <% }%>
+
                         <div class="form-group">
                             <asp:Label ID="LabelBrandOfVehicle" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">

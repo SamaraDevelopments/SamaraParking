@@ -83,7 +83,7 @@ public class VehicleData : BaseData
             //open database connection
             SqlConnection connection = ManageDatabaseConnection("Open");
 
-            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesFromUser", connection))
+            using (SqlCommand sqlCommand = new SqlCommand("Get_Vehicle", connection))
             {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
