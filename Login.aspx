@@ -20,13 +20,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <style>
-
-        .container 
-        {
-        align-content:center;
-        }
-    </style>
 </head>
 <body>
 

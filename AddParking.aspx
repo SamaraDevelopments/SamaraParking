@@ -25,13 +25,6 @@
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="LabelReserveSpots" runat="server" Text="Espacios reservados:" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxReserveSpot" runat="server" placeholder="Reservados" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <asp:Label ID="LabelNormalSpots" runat="server" Text="Espacios regulares:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Regulares" CssClass="form-control"></asp:TextBox>
