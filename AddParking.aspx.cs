@@ -12,11 +12,13 @@ public partial class Form_addparking : System.Web.UI.Page
     {
 
     }
+
     public void btnAddNewParking_Click(object sender, EventArgs e)
     {
         PakingBusiness pb = new PakingBusiness();
         ParkingLot pl = new ParkingLot();
         pl.ListOfSpots = new List<ParkingSpot>();
+        ParkingSpot ps = new ParkingSpot();
 
         if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxNormalSpot.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
         {
@@ -42,16 +44,16 @@ public partial class Form_addparking : System.Web.UI.Page
                     pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }*/
+
                 for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
                 {
-                    ParkingSpot ps = new ParkingSpot();
                     ps.SpotType = "Normal Spot";//Normal Spot
                     ps.IdParking = pl.Id;
-                    pb.AddParkingSpot(ps);
+                    //pb.AddParkingSpot(ps);
                     pl.ListOfSpots.Add(ps);
                 }
                 pl.Capacity = pl.ListOfSpots.Count;
-                pb.UpdateParking(pl);
+                //pb.UpdateParking(pl);
                 FillTableDesignOfNewParking();
 
                 TextBoxNormalSpot.Text = null;
@@ -67,32 +69,35 @@ public partial class Form_addparking : System.Web.UI.Page
     public void FillTableDesignOfNewParking()
     {
 
-        for (int counterRow=0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
+
+        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
         {
-                TableRow tr = new TableRow();
-                for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
-                {
-                        TableCell tc = new TableCell();
+            TableRow tr = new TableRow();
 
-                        Button btnStreet = new Button();
-                        //btnStreet.Click += new System.EventHandler(btnEditVehicle_Click);
-                        btnStreet.Text = "Calle";
-                        //btnStreet.ID = idToButton + "e";
-                        btnStreet.CssClass = "btn btn-info";
-                        
-                        Button btnReserve = new Button();
-                        //btnReserve.Click += new System.EventHandler(btnEditVehicle_Click);
-                        btnReserve.Text = "Discapacitado";
-                        //btnReserve.ID = idToButton + "e";
-                        btnReserve.CssClass = "btn btn-info";
+            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
+            {
+                TableCell tc = new TableCell();
+                tc.CssClass = "btn-primary";
 
-                        tc.Controls.Add(btnStreet);
-                        tc.Controls.Add(btnReserve);
+                //Button btnStreet = new Button();
+                ////btnStreet.Click += new System.EventHandler(btnEditVehicle_Click);
+                //btnStreet.Text = "C";
+                ////btnStreet.ID = idToButton + "e";
+                //btnStreet.CssClass = "btn-primary";
 
-                        tr.Cells.Add(tc);
-                    }
-                
-                TableDesignOfNewParking.Rows.Add(tr);
+                //Button btnReserve = new Button();
+                ////btnReserve.Click += new System.EventHandler(btnEditVehicle_Click);
+                //btnReserve.Text = "";
+                ////btnReserve.ID = idToButton + "e";
+                //btnReserve.CssClass = "btn-success";
+
+                ////tc.Controls.Add(btnStreet);
+                //tc.Controls.Add(btnReserve);
+
+                tr.Cells.Add(tc);
             }
+
+            TableDesignOfNewParking.Rows.Add(tr);
         }
+    }
 }

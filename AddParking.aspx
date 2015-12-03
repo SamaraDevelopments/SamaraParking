@@ -73,9 +73,7 @@
                         <legend>Diseño del parqueo:</legend>                     
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
-                                    <asp:TableHeaderRow>
-                                    </asp:TableHeaderRow>
+                                <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">                                    
                                 </asp:Table>
                             </div>
                         </div>

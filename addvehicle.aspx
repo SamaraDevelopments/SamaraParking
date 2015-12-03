@@ -15,6 +15,7 @@
                         <legend>Sus vehiculos registrados son:</legend>
 
                         <div class="form-group">
+                            
                             <div class="col-lg-10">
                                 <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
                                     <asp:TableHeaderRow>

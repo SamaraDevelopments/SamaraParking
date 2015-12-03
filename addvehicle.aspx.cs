@@ -145,6 +145,7 @@ public partial class form_addvehicle : System.Web.UI.Page
     }
     protected void btnDeleteVehicle_Click(object sender, EventArgs e)
     {
+        
         Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
