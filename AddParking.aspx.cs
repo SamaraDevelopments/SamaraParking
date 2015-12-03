@@ -70,11 +70,11 @@ public partial class Form_addparking : System.Web.UI.Page
     {
 
 
-        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
+        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
         {
             TableRow tr = new TableRow();
 
-            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
+            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
             {
                 TableCell tc = new TableCell();
                 tc.CssClass = "btn-primary";
