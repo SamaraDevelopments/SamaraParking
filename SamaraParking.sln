@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamaraParking", ".", "{4DCF4A51-F320-4C21-87E7-B70767468ADD}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57489"
 		Debug.AspNetCompiler.PhysicalPath = "..\SamaraParking\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57489\"
@@ -21,7 +19,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamaraParking", ".", "{4DCF
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "57489"
-		SlnRelativePath = "..\SamaraParking\"
 	EndProjectSection
 EndProject
 Global

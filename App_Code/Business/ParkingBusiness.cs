@@ -6,14 +6,14 @@ using System.Web;
 /// <summary>
 /// Summary description for PakingBusiness
 /// </summary>
-public class PakingBusiness
+public class ParkingBusiness
 {
-    public PakingBusiness()
+    public ParkingBusiness()
     {
 
     }
-    public int AddParking(ParkingLot parkingToAdd) 
-    { 
+    public int AddParking(ParkingLot parkingToAdd)
+    {
         ParkingLotData pld = new ParkingLotData();
         int insertResult = pld.Insert(parkingToAdd);
 
@@ -35,11 +35,11 @@ public class PakingBusiness
         }
         return failuretext;
     }
-    public void AddParkingSpot(ParkingSpot parkingSpotToAdd) 
+    public void AddParkingSpot(ParkingSpot parkingSpotToAdd)
     {
         ParkingSpotData psd = new ParkingSpotData();
         psd.Insert(parkingSpotToAdd);
 
     }
-       
+
 }

@@ -15,7 +15,7 @@ public partial class Form_addparking : System.Web.UI.Page
 
     public void btnAddNewParking_Click(object sender, EventArgs e)
     {
-        PakingBusiness pb = new PakingBusiness();
+        ParkingBusiness pb = new ParkingBusiness();
         ParkingLot pl = new ParkingLot();
         pl.ListOfSpots = new List<ParkingSpot>();
         ParkingSpot ps = new ParkingSpot();
