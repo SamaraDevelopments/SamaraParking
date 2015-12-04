@@ -94,9 +94,9 @@ public partial class Form_addparking : System.Web.UI.Page
         switch (TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor.Name)
         {
             case "Transparent":
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Gray;
+                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.DarkGray;
                 break;
-            case "Gray":
+            case "DarkGray":
                 TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Blue;
                 break;
             case "Blue":
