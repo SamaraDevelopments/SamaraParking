@@ -25,8 +25,6 @@
                                         <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
                                 </asp:Table>
-                                <asp:Label ID="LabelIsMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
-                                <asp:Label ID="LabelIsRegularVehicule" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
                                 <asp:Label ID="LabelLegendMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
                                 <asp:Label ID="LabelLegendCar" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
 
