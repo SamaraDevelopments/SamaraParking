@@ -29,14 +29,14 @@ public partial class Form_addparking : System.Web.UI.Page
         {
             pl.Name = TextBoxNameOfNewParking.Text;
             pl.Location = TextBoxLocationOfNewParking.Text;
-
-            if (pb.AddParking(pl) == -1)
+            pl.Id = pb.AddParking(pl);
+            if (pl.Id == -1)
             {
                 LabelError.Text = "Parqueo ya existe";
             }
             else
             {
-                pl.Id = pb.AddParking(pl);
+                
 
                 for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
                 {
