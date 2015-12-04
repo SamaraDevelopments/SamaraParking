@@ -10,8 +10,13 @@ using System.Drawing;
 public partial class Form_addparking : System.Web.UI.Page
 {
     int totalRoadToAdd = 0;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (IsPostBack)
+        {
+            FillTableDesignOfNewParking();
+        }
     }
 
     public void btnAddNewParking_Click(object sender, EventArgs e)
@@ -47,78 +52,66 @@ public partial class Form_addparking : System.Web.UI.Page
                 }
                 pl.Capacity = pl.ListOfSpots.Count;
                 pb.UpdateParking(pl);
-                FillTableDesignOfNewParking(pl.Id);
-
-                TextBoxNormalSpot.Text = null;
-                TextBoxNameOfNewParking.Text = null;
-                TextBoxLocationOfNewParking.Text = null;
-                TextBoxDimensionsOfParkingX.Text = null;
-                TextBoxDimensionsOfParkingY.Text = null;
-                TextBoxMotocyclesForRegularSpot.Text = null;
-
             }
         }
     }
-    public void FillTableDesignOfNewParking(int id)
+    public void FillTableDesignOfNewParking()
     {
-
-
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
         {
             TableRow tr = new TableRow();
-
             for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
             {
                 TableCell tc = new TableCell();
                 tc.CssClass = "btn-error";
-
-                Button btnStreet = new Button();
-                btnStreet.UseSubmitBehavior = false;
-                btnStreet.Click += new System.EventHandler(btnStreet_Click);
-                btnStreet.Text = "";
-                btnStreet.ID = ""+id;
-                btnStreet.CommandArgument = counterColumn+","+counterRow;
-                btnStreet.Attributes.Add("onclick", "return false");
-                btnStreet.CssClass = "btn-success";
-
-                Button btnReserve = new Button();
-                btnReserve.UseSubmitBehavior = false;
-                btnReserve.Click += new System.EventHandler(btnHandicap_Click);
-                btnReserve.Text = "";
-                btnReserve.ID = ""+id;
-                btnReserve.CommandArgument = counterColumn + "," + counterRow;
-                btnReserve.Attributes.Add("onclick", "return false");
-                btnReserve.CssClass = "btn-primary";
-
-                tc.Controls.Add(btnStreet);
-                tc.Controls.Add(btnReserve);
-
+                tc.Controls.Add(addStreetButton(counterColumn, counterRow));
+                tc.Controls.Add(addReserveButton(counterColumn, counterRow));
                 tr.Cells.Add(tc);
             }
-
             TableDesignOfNewParking.Rows.Add(tr);
         }
+        Session["NEWPARKING"] = TableDesignOfNewParking;
     }
 
     protected void btnStreet_Click(object sender, EventArgs e)
     {
-
+        TableDesignOfNewParking = (Table)Session["NEWPARKING"];
         Button btn = (Button)sender;
         string getColumnAndRow = btn.CommandArgument;
-        TableDesignOfNewParking.Rows[getColumnAndRow[1]].Cells[getColumnAndRow[3]].Enabled = false;
-        TableDesignOfNewParking.Rows[getColumnAndRow[1]].Cells[getColumnAndRow[3]].BackColor = Color.Gray;
-
+        TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].Enabled = false;
+        TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Gray;
+        Session["NEWPARKING"] = TableDesignOfNewParking;
         totalRoadToAdd++;
     }
 
     protected void btnHandicap_Click(object sender, EventArgs e)
     {
+        TableDesignOfNewParking = (Table)Session["NEWPARKING"];
         Button btn = (Button)sender;
         string getColumnAndRow = btn.CommandArgument;
-        TableDesignOfNewParking.Rows[getColumnAndRow[1]].Cells[getColumnAndRow[3]].Enabled = false;
-        TableDesignOfNewParking.Rows[getColumnAndRow[1]].Cells[getColumnAndRow[3]].BackColor = Color.Gray;
-
+        TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].Enabled = false;
+        TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Blue;
+        Session["NEWPARKING"] = TableDesignOfNewParking;
 
     }
-    
+    public Button addStreetButton(int counterColumn, int counterRow)
+    {
+        Button btnStreet = new Button();
+        btnStreet.Click += new System.EventHandler(btnStreet_Click);
+        btnStreet.Text = "";
+        btnStreet.ID = "s" + (((counterRow+1)*100)+counterColumn+1);
+        btnStreet.CommandArgument = counterColumn + "," + counterRow;
+        btnStreet.CssClass = "btn-success";
+        return btnStreet;
+    }
+    public Button addReserveButton(int counterColumn, int counterRow)
+    {
+        Button btnReserves = new Button();
+        btnReserves.Click += new System.EventHandler(btnStreet_Click);
+        btnReserves.Text = "";
+        btnReserves.ID = "d" + (((counterRow + 1) * 100) + counterColumn + 1);
+        btnReserves.CommandArgument = counterColumn + "," + counterRow;
+        btnReserves.CssClass = "btn-primary";
+        return btnReserves;
+    }
 }
