@@ -16,6 +16,21 @@ public partial class Form_addparking : System.Web.UI.Page
         if (IsPostBack)
         {
             FillTableDesignOfNewParking();
+            TextBoxNormalSpot.Enabled = false;
+            TextBoxNameOfNewParking.Enabled = false;
+            TextBoxLocationOfNewParking.Enabled = false;
+            TextBoxDimensionsOfParkingX.Enabled = false;
+            TextBoxDimensionsOfParkingY.Enabled = false;
+            TextBoxMotocyclesForRegularSpot.Enabled = false;
+        }
+        else
+        {
+            TextBoxNormalSpot.Enabled = true;
+            TextBoxNameOfNewParking.Enabled = true;
+            TextBoxLocationOfNewParking.Enabled = true;
+            TextBoxDimensionsOfParkingX.Enabled = true;
+            TextBoxDimensionsOfParkingY.Enabled = true;
+            TextBoxMotocyclesForRegularSpot.Enabled = true;
         }
     }
 
