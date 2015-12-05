@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="Label2" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelTransparent" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>

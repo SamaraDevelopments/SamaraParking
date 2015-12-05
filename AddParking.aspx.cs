@@ -34,7 +34,7 @@ public partial class Form_addparking : System.Web.UI.Page
         }
     }
 
-    public void btnAddNewParking_Click(object sender, EventArgs e)
+    public void btnNext_Click(object sender, EventArgs e)
     {
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot pl = new ParkingLot();
@@ -117,5 +117,11 @@ public partial class Form_addparking : System.Web.UI.Page
         btnStreet.CommandArgument = counterColumn + "," + counterRow;
         btnStreet.CssClass = "btn-success";
         return btnStreet;
+    }
+
+
+    protected void btnAddNewParking_Click(object sender, EventArgs e)
+    {
+
     }
 }
