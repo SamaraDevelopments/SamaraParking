@@ -9,8 +9,7 @@ using System.Drawing;
 
 public partial class Form_addparking : System.Web.UI.Page
 {
-    int totalRoadToAdd = 0;
-
+    ParkingLot pl = new ParkingLot();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack)
@@ -37,7 +36,6 @@ public partial class Form_addparking : System.Web.UI.Page
     public void btnNext_Click(object sender, EventArgs e)
     {
         ParkingBusiness pb = new ParkingBusiness();
-        ParkingLot pl = new ParkingLot();
         pl.ListOfSpots = new List<ParkingSpot>();
         ParkingSpot ps = new ParkingSpot();
 
@@ -52,21 +50,7 @@ public partial class Form_addparking : System.Web.UI.Page
             pl.Id = pb.AddParking(pl);
             if (pl.Id == -1)
             {
-                LabelError.Text = "Parqueo ya existe";
-            }
-            else
-            {
-                
-
-                for (int counter = 0; counter < Int32.Parse(TextBoxNormalSpot.Text); counter++)
-                {
-                    ps.SpotType = "Normal Spot";//Normal Spot
-                    ps.IdParking = pl.Id;
-                    //pb.AddParkingSpot(ps);
-                    pl.ListOfSpots.Add(ps);
-                }
-                pl.Capacity = pl.ListOfSpots.Count;
-                pb.UpdateParking(pl);
+                LabelError.Text = "Nombre del parqueo ya existe";
             }
         }
     }
@@ -106,14 +90,13 @@ public partial class Form_addparking : System.Web.UI.Page
                 TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Gray;
                 break;
         }
-        totalRoadToAdd++;
     }
     public Button addButton(int counterColumn, int counterRow)
     {
         Button btnStreet = new Button();
         btnStreet.Click += new System.EventHandler(btnStreet_Click);
         btnStreet.Text = "";
-        btnStreet.ID = "s" + (((counterRow+1)*100)+counterColumn+1);
+        btnStreet.ID = "s" + (((counterRow + 1) * 100) + counterColumn + 1);
         btnStreet.CommandArgument = counterColumn + "," + counterRow;
         btnStreet.CssClass = "btn-success";
         return btnStreet;
@@ -122,6 +105,42 @@ public partial class Form_addparking : System.Web.UI.Page
 
     protected void btnAddNewParking_Click(object sender, EventArgs e)
     {
+        ParkingSpot ps = new ParkingSpot();
+        ParkingBusiness pb = new ParkingBusiness();
+        int counter = 0;
+        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
+        {
 
+            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
+            {
+                switch (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor.Name)
+                {
+                    case "Transparent":
+                        ps.SpotType = "Normal Spot";
+                        ps.IdParking = pl.Id;
+                        pb.AddParkingSpot(ps, counter);
+                        counter++;
+                        break;
+                    case "DarkGray":
+                        ps.SpotType = "Road Spot";
+                        ps.IdParking = pl.Id;
+                        pb.AddParkingSpot(ps, counter);
+                        counter++;
+                        break;
+                    case "Blue":
+                        ps.SpotType = "Handicap Spot";
+                        ps.IdParking = pl.Id;
+                        pb.AddParkingSpot(ps, counter);
+                        counter++;
+                        break;
+                    default:
+                        ps.SpotType = "Normal Spot";
+                        ps.IdParking = pl.Id;
+                        pb.AddParkingSpot(ps, counter);
+                        counter++;
+                        break;
+                }
+            }
+        }
     }
 }

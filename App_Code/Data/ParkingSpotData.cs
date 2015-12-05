@@ -10,7 +10,7 @@ using System.Web;
 /// </summary>
 public class ParkingSpotData : BaseData
 {
-    public void Insert(ParkingSpot newSpot)
+    public void Insert(ParkingSpot newSpot, int position)
     {
         int insertResult = 1;
         try
@@ -23,41 +23,21 @@ public class ParkingSpotData : BaseData
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-            throw sqlException;
-        }
-    }
 
-    public void Update(ParkingSpot newSpot)
-    {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "update_parkinglotspot";
-
-        SqlCommand sqlCommand;
-
-        try
-        {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newSpot.Id;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newSpot.SpotType;
-
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
+            using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingSpotPosition", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Position", position);
+                sqlCommand.Parameters.AddWithValue("@IdSpot", newSpot.Id);
+                sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
+                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
-
             throw sqlException;
         }
-
-
     }
 
     public void Delete(ParkingSpot newSpot)
