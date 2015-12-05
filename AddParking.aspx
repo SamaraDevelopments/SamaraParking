@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <!-- ESPACIO PARA IMAGEN O TEXTO -->
+        <!-- Diseño del parqueo -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div class="registrationform">
                 <div class="form-horizontal">

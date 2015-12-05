@@ -51,6 +51,6 @@ public partial class Form_booking : System.Web.UI.Page
         newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue;
         newBooking.IdUser.Id = currentUser.Id;
         newBooking.Date = DateTime.Today;
-        newBooking.IdParkingSpot.Id = DropDownListParking.SelectedValue; //Esto seria con la logica cuando le da click a un sspot del diseño del parqueo.
+        //newBooking.IdParkingSpot.Id = DropDownListParking.SelectedValue; //Esto seria con la logica cuando le da click a un sspot del diseño del parqueo.
     }
 }
