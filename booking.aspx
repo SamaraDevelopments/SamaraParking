@@ -14,8 +14,6 @@
                                 <asp:Label ID="LabelaParkingName" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl">
-                                        <asp:ListItem>Aguja</asp:ListItem>
-                                        <asp:ListItem>Banderas....</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                             </div>
@@ -37,9 +35,16 @@
                                     <asp:TextBox ID="TextBoxSpotNumber" runat="server" placeholder="Numero de espacio" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <asp:Label ID="LabelIdVehicle" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    <asp:DropDownList ID="DropDownListVehicleFormUser" runat="server" CssClass="form-control ddl">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelNothing" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
@@ -48,7 +53,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="ButtonBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" />
+                                    <asp:Button ID="ButtonBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btn_BookingSpot_Click" />
                                 </div>
                             </div>
                         </fieldset>

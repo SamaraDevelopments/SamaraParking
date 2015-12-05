@@ -148,4 +148,10 @@ public class VehicleBusiness
         }
         return failuretext;
     }
+    public DataSet GetVehiclesForBooking(User user)
+    {
+        VehicleData vd = new VehicleData();
+
+        return vd.GetVehiclesForBoking(user);
+    }
 }

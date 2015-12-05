@@ -86,6 +86,26 @@ public class ParkingLotData : BaseData
             throw sqlException;
         }
 
+    }
+       public DataSet GetParkingForBooking()
+    {
+        DataSet ds = new DataSet();
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Get_Parking", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                da.Fill(ds);  // fill dataset
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
 
+            throw sqlException;
+        }
+
+        return ds;
     }
 }

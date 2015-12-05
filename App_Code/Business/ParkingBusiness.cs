@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -40,6 +41,12 @@ public class ParkingBusiness
         ParkingSpotData psd = new ParkingSpotData();
         psd.Insert(parkingSpotToAdd, Position);
 
+    }
+    public DataSet GetParkingForBooking()
+    {
+        ParkingLotData pld = new ParkingLotData();
+
+        return  pld.GetParkingForBooking();
     }
 
 }

@@ -66,4 +66,9 @@ using System.Web;
             return bd.GetReportBooking();
         }
 
+    public void InsertBooking(Booking booking)
+    {
+        BookingData bb = new BookingData();
+        bb.Insert(booking);
+    }
     }
