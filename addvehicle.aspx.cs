@@ -11,7 +11,7 @@ public partial class form_addvehicle : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
 
         if (Session["USER"] == null)
         {
@@ -82,7 +82,7 @@ public partial class form_addvehicle : System.Web.UI.Page
                         tc.Text = string.Format(dr[dc.ColumnName].ToString());
                     }
 
-                  
+
                     tr.Cells.Add(tc);
                     //tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
 
@@ -145,7 +145,7 @@ public partial class form_addvehicle : System.Web.UI.Page
     }
     protected void btnDeleteVehicle_Click(object sender, EventArgs e)
     {
-        
+
         Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
@@ -166,13 +166,33 @@ public partial class form_addvehicle : System.Web.UI.Page
     {
         Button btn = (Button)sender;
         VehicleBusiness vb = new VehicleBusiness();
-        Vehicle vehicleToAdd = new Vehicle();       
+        Vehicle vehicleToAdd = new Vehicle();
         btn.ID = btn.ID.Remove(btn.ID.Length - 1);
-        vehicleToAdd.Id = btn.ID;       
-        Session["VEHICLE"] = vb.LoadVehicles(vehicleToAdd.Id);
-        vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
+        vehicleToAdd.Id = btn.ID;
+        vehicleToAdd = vb.LoadVehicles(vehicleToAdd.Id);
+        Session["VEHICLE"] = vehicleToAdd;
+        TextBoxBrandOfVehicle.Text = vehicleToAdd.Brand;
         TextBoxIdOfVehicle.Text = vehicleToAdd.Id;
         TextBoxIdOfVehicle.Enabled = false;
+
+        if (vehicleToAdd.VehicleType)
+        {
+            CheckBoxIsMotrocycle.Checked = true;
+        }
+        else
+        {
+            CheckBoxIsMotrocycle.Checked = false;
+        }
+
+    }
+
+    protected void btnExecuteEditVehicle_Click(object sender, EventArgs e)
+    {
+
+        VehicleBusiness vb = new VehicleBusiness();
+        Vehicle vehicleToAdd = new Vehicle();
+        vehicleToAdd.Id = TextBoxIdOfVehicle.Text;
+        vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
 
         if (CheckBoxIsMotrocycle.Checked)
         {
@@ -189,10 +209,22 @@ public partial class form_addvehicle : System.Web.UI.Page
         else if (vb.EditVehicle(vehicleToAdd) != null)
         {
             LabelError.Text = vb.EditVehicle(vehicleToAdd);
+
         }
         else
         {
+            LabelError.ForeColor = System.Drawing.Color.Green;
             LabelError.Text = "El vehiculo fue editado";
+            Session["VEHICLE"] = null;
         }
+    }
+
+    protected void btnCancelEditVehicle_Click(object sender, EventArgs e)
+    {
+        Session["VEHICLE"] = null;
+        TextBoxIdOfVehicle.Enabled = true;
+        TextBoxIdOfVehicle.Text = string.Empty;
+        TextBoxBrandOfVehicle.Text = string.Empty;
+        CheckBoxIsMotrocycle.Checked = false;
     }
 }

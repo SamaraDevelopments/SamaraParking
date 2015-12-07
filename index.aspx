@@ -1,20 +1,18 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<%@ Page ContentType="text/html; charset=utf-8" Title="Ingreso Latina Parking" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Form_index" %>
+﻿<%@ Page ContentType="text/html; charset=utf-8" Title="Ingreso Latina Parking" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Form_index" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="BodyFront" runat="Server">
 
     <%
             User loggedUser = (User)Session["USER"];
     %>
+
     <!-- ACA EL FORM -->
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        <legend>Bienvenido</legend>
-                        <legend><%=loggedUser.Name%></legend>
+                        <legend>Bienvenido <%=loggedUser.Name%></legend>
                         <div class="form-group">
                         </div>
                         <!--<div class="form-group">

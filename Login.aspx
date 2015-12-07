@@ -26,7 +26,7 @@
         <div id="custom-bootstrap-menu" class="navbar navbar-default ">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Latina Parking</a>
+                    <a class="navbar-brand" href="index.aspx">Latina Parking</a>
                 </div>
             </div>
         </div>
