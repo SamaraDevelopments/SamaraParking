@@ -20,7 +20,7 @@ public partial class Form_addparking : System.Web.UI.Page
 
         if (IsPostBack)
         {
-            
+            FillTableDesignOfNewParking();
             TextBoxNormalSpot.Enabled = false;
             TextBoxNameOfNewParking.Enabled = false;
             TextBoxLocationOfNewParking.Enabled = false;
@@ -30,7 +30,7 @@ public partial class Form_addparking : System.Web.UI.Page
         }
         else
         {
-            TextBoxNormalSpot.Enabled = true;
+            TextBoxNormalSpot.Enabled = false;
             TextBoxNameOfNewParking.Enabled = true;
             TextBoxLocationOfNewParking.Enabled = true;
             TextBoxDimensionsOfParkingX.Enabled = true;
@@ -48,7 +48,7 @@ public partial class Form_addparking : System.Web.UI.Page
         pl.ListOfSpots = new List<ParkingSpot>();
         ParkingSpot ps = new ParkingSpot();
 
-        if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxNormalSpot.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
+        if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
         {
             LabelError.Text = "Espacios vacíos";
         }
@@ -77,7 +77,6 @@ public partial class Form_addparking : System.Web.UI.Page
                 ButtonCancel.CssClass = "btn btn-default";
                 ButtonCancel.Enabled = false;
                 Session["AddParking"] = 1;
-                FillTableDesignOfNewParking();
             }
         }
     }
@@ -90,7 +89,7 @@ public partial class Form_addparking : System.Web.UI.Page
             for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
             {
                 TableCell tc = new TableCell();
-                tc.CssClass = "btn-default";
+                tc.CssClass = "btn-error";
                 tc.Controls.Add(addButton(counterColumn, counterRow));
                 tr.Cells.Add(tc);
             }
@@ -138,6 +137,7 @@ public partial class Form_addparking : System.Web.UI.Page
         ps.IdParking = (int)Session["ParkingId"];
         ParkingBusiness pb = new ParkingBusiness();
         int counter = 0;
+        int freeSpots = 0;
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
         {
             for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
@@ -148,6 +148,7 @@ public partial class Form_addparking : System.Web.UI.Page
                         ps.SpotType = "Normal Spot";
                         ps.Position = counter;
                         pb.AddParkingSpot(ps);
+                        freeSpots++;
                         break;
                     case "DarkGray":
                         ps.SpotType = "Road Spot";
@@ -163,15 +164,18 @@ public partial class Form_addparking : System.Web.UI.Page
                         ps.SpotType = "Normal Spot";
                         ps.Position = counter;
                         pb.AddParkingSpot(ps);
+                        freeSpots++;
                         break;
                 }
                 counter++;
             }
         }
+        TextBoxNormalSpot.Text = "" + freeSpots;
     }
 
     public void btnCancel_Click(object sender, EventArgs e)
     {
+        TableDesignOfNewParking.Rows.Clear();
         TextBoxNormalSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Text = string.Empty;
         TextBoxLocationOfNewParking.Text = string.Empty;
@@ -188,6 +192,7 @@ public partial class Form_addparking : System.Web.UI.Page
     }
     public void ButtonCancelAddParking_Click(object sender, EventArgs e)
     {
+        TableDesignOfNewParking.Rows.Clear();
         TextBoxNormalSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Text = string.Empty;
         TextBoxLocationOfNewParking.Text = string.Empty;

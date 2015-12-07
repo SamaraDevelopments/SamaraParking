@@ -23,13 +23,6 @@
                                 <asp:TextBox ID="TextBoxLocationOfNewParking" runat="server" placeholder="Locación" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <asp:Label ID="LabelNormalSpots" runat="server" Text="Espacios regulares:" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Regulares" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <asp:Label ID="LabelMotocyclesForRegularSpot" runat="server" Text="Motocicletas por espacio:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
@@ -41,6 +34,12 @@
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingX" runat="server" placeholder="Dimension X" CssClass="form-control"></asp:TextBox>
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingY" runat="server" placeholder="Dimension Y" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="LabelNormalSpots" runat="server" Text="Espacios regulares:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="TextBoxNormalSpot" runat="server" placeholder="Regulares" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
 
