@@ -20,6 +20,13 @@ public class ParkingBusiness
 
         return insertResult;
     }
+    public int VerifyParking(ParkingLot parkingToAdd)
+    {
+        ParkingLotData pld = new ParkingLotData();
+        int insertResult = pld.VerifyName(parkingToAdd);
+
+        return insertResult;
+    }
     public string UpdateParking(ParkingLot parkingToUpdate)
     {
         ParkingLotData pld = new ParkingLotData();

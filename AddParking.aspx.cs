@@ -47,6 +47,7 @@ public partial class Form_addparking : System.Web.UI.Page
         ParkingBusiness pb = new ParkingBusiness();
         pl.ListOfSpots = new List<ParkingSpot>();
         ParkingSpot ps = new ParkingSpot();
+        int validNameResult = 0;
 
         if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
         {
@@ -58,9 +59,9 @@ public partial class Form_addparking : System.Web.UI.Page
             pl.Location = TextBoxLocationOfNewParking.Text;
             pl.DimensionX = Int32.Parse(TextBoxDimensionsOfParkingX.Text);
             pl.DimensionY = Int32.Parse(TextBoxDimensionsOfParkingY.Text);
-            pl.Id = pb.AddParking(pl);
-            Session["ParkingId"] = pl.Id;
-            if (pl.Id == -1)
+            Session["PARKINGLOT"] = pl;
+            validNameResult = pb.VerifyParking(pl);
+            if (validNameResult == -1)
             {
                 LabelError.Text = "Nombre del parqueo ya existe";
                 TextBoxNormalSpot.Enabled = true;
@@ -102,20 +103,37 @@ public partial class Form_addparking : System.Web.UI.Page
     {
 
         Button btn = (Button)sender;
+        string column = "";
+        string row = "";
         string getColumnAndRow = btn.CommandArgument;
-        switch (TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor.Name)
+        char holder = getColumnAndRow [0];
+        int counter = 1;
+        while (!char.IsWhiteSpace(holder))
+        {
+            column += holder;
+            holder = getColumnAndRow[counter];
+            counter++;
+
+        }
+        while (counter < getColumnAndRow.Length)
+        {
+            holder = getColumnAndRow[counter];
+            row += holder;
+            counter++;
+        }
+        switch (TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor.Name)
         {
             case "Transparent":
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.DarkGray;
+                TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.DarkGray;
                 break;
             case "DarkGray":
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Blue;
+                TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Blue;
                 break;
             case "Blue":
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Transparent;
+                TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Transparent;
                 break;
             default:
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.DarkGray;
+                TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.DarkGray;
                 break;
         }
     }
@@ -125,7 +143,7 @@ public partial class Form_addparking : System.Web.UI.Page
         btnStreet.Click += new System.EventHandler(btnStreet_Click);
         btnStreet.Text = "";
         btnStreet.ID = "" + (((counterRow + 1) * 100) + counterColumn + 1);
-        btnStreet.CommandArgument = counterColumn + "," + counterRow;
+        btnStreet.CommandArgument = counterColumn + " " + counterRow;
         btnStreet.CssClass = "btn-success";
         return btnStreet;
     }
@@ -134,8 +152,9 @@ public partial class Form_addparking : System.Web.UI.Page
     protected void btnAddNewParking_Click(object sender, EventArgs e)
     {
         ParkingSpot ps = new ParkingSpot();
-        ps.IdParking = (int)Session["ParkingId"];
         ParkingBusiness pb = new ParkingBusiness();
+        ParkingLot currentParking = (ParkingLot)Session["PARKINGLOT"];
+        ps.IdParking = pb.AddParking(currentParking);        
         int counter = 0;
         int freeSpots = 0;
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)

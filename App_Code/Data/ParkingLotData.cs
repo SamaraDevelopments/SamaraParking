@@ -35,7 +35,28 @@ public class ParkingLotData : BaseData
 
         return insertResult;
     }
+    public int VerifyName(ParkingLot newParkingLot)
+    {
+        int insertResult = -1;
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Verify_ParkingName", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
+                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
 
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return insertResult;
+    }
     public int Update(ParkingLot newParkingLot)
     {
         int insertResult = 0;
