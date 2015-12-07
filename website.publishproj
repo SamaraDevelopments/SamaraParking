@@ -19,7 +19,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <ProjectGuid>{7d2c5962-57aa-4969-b0c6-f735182d5086}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
     <SourceWebVirtualPath>/SamaraParking</SourceWebVirtualPath>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <SourceWebProject>
     </SourceWebProject>
     <SourceWebMetabasePath>
