@@ -16,6 +16,16 @@ public partial class Form_index : System.Web.UI.Page
         }
     }
 
+    //public string GetCookie()
+    //{
+    //    HttpCookie loginCookie = Request.Cookies["UserSettings"];
+    //    string msg = loginCookie["Email"].ToString();
+    //    return msg;
+
+    //}
+
+
+
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
 

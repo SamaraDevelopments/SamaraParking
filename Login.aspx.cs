@@ -12,24 +12,29 @@ public partial class Form_login : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         Session["USER"] = null;
 
-        if (!IsPostBack)
+        HttpCookie loginCookie = Request.Cookies["UserSettings"];
+       
+        if (loginCookie != null)
         {
-            if (Request.Cookies["UserName"] != null && Request.Cookies["Password"] != null)
-            {
-                TextBoxEmailIncomingUser.Text = Request.Cookies["UserName"].Value;
-                TextBoxPasswordIncomingUser.Attributes["value"] = Request.Cookies["Password"].Value;
-            }
+            TextBoxEmailIncomingUser.Text = loginCookie["Email"];
+            TextBoxPasswordIncomingUser.Text = loginCookie["Password"];
         }
+       
 
     }
 
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-       
+        HttpCookie loginCookie = Request.Cookies["UserSettings"];
+
+        if (loginCookie == null)
+        {
+            loginCookie = new HttpCookie("UserSettings");
+        }
+
         LoginBusiness lb = new LoginBusiness();
         User loginUser = new User();
         loginUser.Email = TextBoxEmailIncomingUser.Text;
@@ -41,19 +46,18 @@ public partial class Form_login : System.Web.UI.Page
             Response.Redirect("index.aspx");
 
             if (CheckBoxRememberIncomingUser.Checked)
-            {
-                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+            {               
+                loginCookie["Email"] = loginUser.Email;
+                loginCookie["Password"] = loginUser.Password;
+                loginCookie.Expires = DateTime.Now.AddDays(30d);
+                Response.Cookies.Add(loginCookie);
             }
             else
-            {
-                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
-
+            {             
+                loginCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(loginCookie);
             }
 
-            Response.Cookies["UserName"].Value = TextBoxEmailIncomingUser.Text.Trim();
-            Response.Cookies["Password"].Value = TextBoxPasswordIncomingUser.Text.Trim();
         }
         else
         {

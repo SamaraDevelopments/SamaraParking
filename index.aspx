@@ -4,6 +4,7 @@
 
     <%
             User loggedUser = (User)Session["USER"];
+        
     %>
 
     <!-- ACA EL FORM -->

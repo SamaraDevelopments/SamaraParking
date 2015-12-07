@@ -1,15 +1,15 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="Form_login" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
     <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
     <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
     <!--[if IE 9]> <html class="no-js ie9 oldie" lang="en"> <![endif]-->
     <!-- Set the viewport width to device width for mobile -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Ingreso Latina Parking</title>
     <!-- ============ Google fonts ============ -->
     <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet'
@@ -66,7 +66,7 @@
                                     <asp:Button ID="ButtonSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="ButtonCancel" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                                 </div>
-                            </div>                          
+                            </div>
                         </fieldset>
                     </div>
                 </div>
