@@ -10,17 +10,23 @@ using System.Drawing;
 public partial class Form_addparking : System.Web.UI.Page
 {
     ParkingLot pl = new ParkingLot();
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["USER"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
+
         if (IsPostBack)
         {
-            FillTableDesignOfNewParking();
+            
             TextBoxNormalSpot.Enabled = false;
             TextBoxNameOfNewParking.Enabled = false;
             TextBoxLocationOfNewParking.Enabled = false;
             TextBoxDimensionsOfParkingX.Enabled = false;
             TextBoxDimensionsOfParkingY.Enabled = false;
-            TextBoxMotocyclesForRegularSpot.Enabled = false;
+            TextBoxMotocyclesForRegularSpot.Enabled = false;          
         }
         else
         {
@@ -30,6 +36,9 @@ public partial class Form_addparking : System.Web.UI.Page
             TextBoxDimensionsOfParkingX.Enabled = true;
             TextBoxDimensionsOfParkingY.Enabled = true;
             TextBoxMotocyclesForRegularSpot.Enabled = true;
+            Session["AddParking"] = 0;
+            ButtonNext.Enabled = true;
+            ButtonCancel.Enabled = true;
         }
     }
 
@@ -61,8 +70,18 @@ public partial class Form_addparking : System.Web.UI.Page
                 TextBoxDimensionsOfParkingY.Enabled = true;
                 TextBoxMotocyclesForRegularSpot.Enabled = true;
             }
+            else
+            {
+                ButtonNext.CssClass = "btn btn-default";
+                ButtonNext.Enabled = false;
+                ButtonCancel.CssClass = "btn btn-default";
+                ButtonCancel.Enabled = false;
+                Session["AddParking"] = 1;
+                FillTableDesignOfNewParking();
+            }
         }
     }
+
     public void FillTableDesignOfNewParking()
     {
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
@@ -71,7 +90,7 @@ public partial class Form_addparking : System.Web.UI.Page
             for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
             {
                 TableCell tc = new TableCell();
-                tc.CssClass = "btn-error";
+                tc.CssClass = "btn-default";
                 tc.Controls.Add(addButton(counterColumn, counterRow));
                 tr.Cells.Add(tc);
             }
@@ -134,14 +153,14 @@ public partial class Form_addparking : System.Web.UI.Page
                         break;
                     case "DarkGray":
                         ps.SpotType = "Road Spot";
-                       pb.AddParkingSpot(ps);
-                         ps.Position = counter;
+                        pb.AddParkingSpot(ps);
+                        ps.Position = counter;
                         pb.UpdateParkingSpot(ps);
                         break;
                     case "Blue":
                         ps.SpotType = "Handicap Spot";
                         pb.AddParkingSpot(ps);
-                         ps.Position = counter;
+                        ps.Position = counter;
                         pb.UpdateParkingSpot(ps);
                         break;
                     default:
@@ -154,5 +173,42 @@ public partial class Form_addparking : System.Web.UI.Page
                 counter++;
             }
         }
+    }
+
+    public void btnCancel_Click(object sender, EventArgs e)
+    {
+        TextBoxNormalSpot.Text = string.Empty;
+        TextBoxNameOfNewParking.Text = string.Empty;
+        TextBoxLocationOfNewParking.Text = string.Empty;
+        TextBoxDimensionsOfParkingX.Text = string.Empty;
+        TextBoxDimensionsOfParkingY.Text = string.Empty;
+        TextBoxMotocyclesForRegularSpot.Text = string.Empty;
+        TextBoxNormalSpot.Enabled = true;
+        TextBoxNameOfNewParking.Enabled = true;
+        TextBoxLocationOfNewParking.Enabled = true;
+        TextBoxDimensionsOfParkingX.Enabled = true;
+        TextBoxDimensionsOfParkingY.Enabled = true;
+        TextBoxMotocyclesForRegularSpot.Enabled = true;
+
+    }
+    public void ButtonCancelAddParking_Click(object sender, EventArgs e)
+    {
+        TextBoxNormalSpot.Text = string.Empty;
+        TextBoxNameOfNewParking.Text = string.Empty;
+        TextBoxLocationOfNewParking.Text = string.Empty;
+        TextBoxDimensionsOfParkingX.Text = string.Empty;
+        TextBoxDimensionsOfParkingY.Text = string.Empty;
+        TextBoxMotocyclesForRegularSpot.Text = string.Empty;
+        TextBoxNormalSpot.Enabled = true;
+        TextBoxNameOfNewParking.Enabled = true;
+        TextBoxLocationOfNewParking.Enabled = true;
+        TextBoxDimensionsOfParkingX.Enabled = true;
+        TextBoxDimensionsOfParkingY.Enabled = true;
+        TextBoxMotocyclesForRegularSpot.Enabled = true;
+        Session["AddParking"] = 0;
+        ButtonNext.CssClass = "btn-primary";
+        ButtonCancel.CssClass = "btn-danger";
+        ButtonNext.Enabled = true;
+        ButtonCancel.Enabled = true;
     }
 }

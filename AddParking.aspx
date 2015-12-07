@@ -66,13 +66,20 @@
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <asp:Button ID="ButtonNext" runat="server" CssClass="btn btn-primary" Text="Siguiente" OnClick="btnNext_Click"/>
+                                <asp:Button ID="ButtonCancel" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
         </div>
+        <%
+            int action = (Int32)Session["AddParking"];
 
+            if (action == 1)
+            {%>
+
+            
         <!-- Diseño del parqueo -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div class="registrationform">
@@ -84,8 +91,9 @@
                                 <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">                                    
                                 </asp:Table>
                             </div>
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-10 col-lg-offset-2">                               
                                 <asp:Button ID="ButtonAddParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click"/>
+                                <asp:Button ID="ButtonCancelAddParking" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="ButtonCancelAddParking_Click" />
                             </div>
                         </div>
                         </fieldset>
@@ -93,6 +101,7 @@
                 </div>
         </div>
   </div>
+       <% } %>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
