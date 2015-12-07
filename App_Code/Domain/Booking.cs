@@ -12,6 +12,7 @@ public class Booking
     private User idUser;
     private Vehicle idVehicle;
     private ParkingSpot idParkingSpot;
+    private ParkingLot idParkingLot;
     private DateTime date;
     private DateTime entryTime;
     private DateTime exitTime;
@@ -66,6 +67,12 @@ public class Booking
         {
             idParkingSpot = value;
         }
+    }
+
+    public ParkingLot IdParkingLot
+    {
+        get { return idParkingLot; }
+        set { idParkingLot = value; }
     }
 
     public DateTime Date

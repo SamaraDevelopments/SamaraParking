@@ -44,12 +44,13 @@ public class BookingData : BaseData
             {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add("@idPerson", SqlDbType.Int).Value = newBooking.IdUser.Id;
-                sqlCommand.Parameters.Add("@idVehicle", SqlDbType.NVarChar).Value = newBooking.IdVehicle.Id;
-                sqlCommand.Parameters.Add("@idParkingSpot", SqlDbType.Int).Value = newBooking.IdParkingSpot.Id;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = newBooking.EntryTime;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = newBooking.ExitTime;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = newBooking.Date;
+                sqlCommand.Parameters.Add("@IdUser", SqlDbType.Int).Value = newBooking.IdUser.Id;
+                sqlCommand.Parameters.Add("@IdVehicle", SqlDbType.NVarChar).Value = newBooking.IdVehicle.Id;
+                sqlCommand.Parameters.Add("@IdParkingSpot", SqlDbType.Int).Value = newBooking.IdParkingSpot.Id;
+                sqlCommand.Parameters.Add("@IdParkingLot", SqlDbType.Int).Value = newBooking.IdParkingLot.Id;
+                sqlCommand.Parameters.Add("@EntryTime", SqlDbType.DateTime).Value = newBooking.EntryTime;
+                sqlCommand.Parameters.Add("@ExitTime", SqlDbType.DateTime).Value = newBooking.ExitTime;
+                sqlCommand.Parameters.Add("@CurrentDate", SqlDbType.DateTime).Value = newBooking.Date;
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
 

@@ -8,22 +8,25 @@ using System.Drawing;
 
 public partial class Form_booking : System.Web.UI.Page
 {
+    
     int selectedPosition = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (Session["USER"] == null)
         {
             Response.Redirect("login.aspx");
         }
         if (!IsPostBack)
         {
+            Session["DropDownIndex"] = 0;
             FillDropDownListVehiclesFromUser();
             FillDropDownListParking();
             FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
         }
         else
         {
-            FillTableDesignOfNewParking((int)Session["DropDownIndex"]);
+            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
         }
     }
     public void FillDropDownListParking()
@@ -54,14 +57,32 @@ public partial class Form_booking : System.Web.UI.Page
         BookingBusiness bb = new BookingBusiness();
         ParkingBusiness pb = new ParkingBusiness();
         User currentUser = (User)Session["USER"];
-        int spotId = pb.GetSpotFromPosition(selectedPosition, Int32.Parse(DropDownListParking.SelectedValue));
-
+        Vehicle bookingVehicle = new Vehicle();
+        User bookingUser = new User();
+        ParkingSpot bookingSpot = new ParkingSpot();
+        ParkingLot bookingParking = new ParkingLot();
+        int spotId = pb.GetSpotFromPosition((int)Session["Position"], Int32.Parse(DropDownListParking.SelectedValue));
+        newBooking.IdVehicle = bookingVehicle;
+        newBooking.IdUser = bookingUser;
+        newBooking.IdParkingSpot = bookingSpot;
+        newBooking.IdParkingLot = bookingParking;
+        
         newBooking.EntryTime = DateTime.Parse(TextBoxInitialTime.Text);
         newBooking.ExitTime = DateTime.Parse(TextBoxFinalTime.Text);
-        newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue;
+        newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue.Trim();
         newBooking.IdUser.Id = currentUser.Id;
         newBooking.Date = DateTime.Today;
         newBooking.IdParkingSpot.Id = spotId;
+        newBooking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);
+
+        if (spotId == 0)
+        {
+            //Return error here
+        }
+        else
+        {
+            bb.InsertBooking(newBooking);
+        }
     }
 
     public void FillTableDesignOfNewParking(int parkingName)
@@ -120,6 +141,7 @@ public partial class Form_booking : System.Web.UI.Page
 
         Button btn = (Button)sender;
         selectedPosition = Int32.Parse(btn.ID);
+        Session["Position"] = selectedPosition;
     }
     protected void UpdateParking_SelectedIndexChange(object sender, EventArgs e)
     {
