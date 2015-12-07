@@ -17,14 +17,16 @@
                         <div class="form-group">
 
                             <div class="col-lg-10">
-                                <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
-                                    <asp:TableHeaderRow>
-                                        <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
-                                </asp:Table>
+                                <div class="vehiclesOfUser">
+                                    <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
+                                        <asp:TableHeaderRow>
+                                            <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
+                                        </asp:TableHeaderRow>
+                                    </asp:Table>
+                                </div>
                                 <asp:Label ID="LabelLegendMoto" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
                                 <asp:Label ID="LabelLegendCar" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
 
@@ -67,7 +69,7 @@
                         <%if (vehicleFromUser != null)
                             { %>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">                                
+                            <div class="col-lg-10 col-lg-offset-2">
                                 <asp:Button ID="ButtonEditVehicle" runat="server" CssClass="btn btn-primary" Text="Editar Vehiculo" OnClick="btnExecuteEditVehicle_Click" />
                                 <asp:Button ID="ButtonCancelVehicle" runat="server" CssClass="btn btn-danger" Text="Cancelar Vehiculo" OnClick="btnCancelEditVehicle_Click" />
                             </div>
@@ -107,6 +109,12 @@
         }
     );
     </script>
-
+    <style>
+        .vehiclesOfUser {
+            height: 300px;
+            width: auto;
+            overflow: auto;
+        }
+    </style>
 </asp:Content>
 

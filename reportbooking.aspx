@@ -2,27 +2,29 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" Runat="Server">
-     <!-- ACA EL FORM -->
+<asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
+    <!-- ACA EL FORM -->
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
                         <legend>Uso de parqueos:</legend>
-                        
+
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Table ID="TableReportBooking" runat="server" class="table table-bordered">
-                                    <asp:TableHeaderRow>
-                                        <asp:TableHeaderCell>Usuario</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Parqueo</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Fecha</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
-                                </asp:Table>
+                                <div class="reportBooking">
+                                    <asp:Table ID="TableReportBooking" runat="server" class="table table-bordered">
+                                        <asp:TableHeaderRow>
+                                            <asp:TableHeaderCell>Usuario</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Parqueo</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Fecha</asp:TableHeaderCell>
+                                        </asp:TableHeaderRow>
+                                    </asp:Table>
+                                </div>
                             </div>
-                        </div>                      
+                        </div>
                     </fieldset>
                 </div>
             </div>
@@ -48,6 +50,12 @@
         }
     );
     </script>
-
+    <style>
+        .reportBooking {
+            height: 475px;
+            width: auto;
+            overflow: auto;
+        }
+    </style>
 </asp:Content>
 

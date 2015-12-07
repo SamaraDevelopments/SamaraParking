@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <asp:Label ID="LabelaParkingName" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged ="UpdateParking_SelectedIndexChange">
+                                <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -68,8 +68,10 @@
                         <legend>Diseño del parqueo:</legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
-                                </asp:Table>
+                                <div class="designOfParking">
+                                    <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
+                                    </asp:Table>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -101,6 +103,12 @@
         }
     );
     </script>
-    </div>
+    <style>
+        .designOfParking {
+            height: 500px;
+            width: 500px;
+            overflow: auto;
+        }
+    </style>
 </asp:Content>
 

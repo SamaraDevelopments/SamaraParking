@@ -51,20 +51,20 @@
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelNothingInfo" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
-                                <asp:Label ID="LabelInfo" runat="server" Text="* Cada espacio de la matriz sera un espacio regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
+                            <asp:Label ID="LabelInfo" runat="server" Text="* Cada espacio de la matriz sera un espacio regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
                         <div class="form-group">
-                                <asp:Label ID="LabelReseveSpot" runat="server" Text="Azul = Reserva" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
+                            <asp:Label ID="LabelReseveSpot" runat="server" Text="Azul = Reserva" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
                         <div class="form-group">
-                                <asp:Label ID="LabelCalleSpot" runat="server" Text="Gris = Calle " EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
+                            <asp:Label ID="LabelCalleSpot" runat="server" Text="Gris = Calle " EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
                         <div class="form-group">
-                                <asp:Label ID="LabelRegularSpot" runat="server" Text="Transparente = Regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
+                            <asp:Label ID="LabelRegularSpot" runat="server" Text="Transparente = Regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonNext" runat="server" CssClass="btn btn-primary" Text="Siguiente" OnClick="btnNext_Click"/>
+                                <asp:Button ID="ButtonNext" runat="server" CssClass="btn btn-primary" Text="Siguiente" OnClick="btnNext_Click" />
                                 <asp:Button ID="ButtonCancel" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                             </div>
                         </div>
@@ -78,29 +78,31 @@
             if (action == 1)
             {%>
 
-            
+
         <!-- Diseño del parqueo -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        <legend>Diseño del parqueo:</legend>                     
+                        <legend>Diseño del parqueo:</legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">                                    
-                                </asp:Table>
+                                <div class="desingOfParking">
+                                    <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
+                                    </asp:Table>
+                                </div>
                             </div>
-                            <div class="col-lg-10 col-lg-offset-2">                               
-                                <asp:Button ID="ButtonAddParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click"/>
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <asp:Button ID="ButtonAddParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click" />
                                 <asp:Button ID="ButtonCancelAddParking" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="ButtonCancelAddParking_Click" />
                             </div>
                         </div>
-                        </fieldset>
-                    </div>
+                    </fieldset>
                 </div>
+            </div>
         </div>
-  </div>
-       <% } %>
+    </div>
+    <% } %>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
@@ -125,5 +127,12 @@
         }
     );
     </script>
+    <style>
+        .desingOfParking {
+            height: 525px;
+            width: 485px;
+            overflow: auto;
+        }
+    </style>
 </asp:Content>
 
