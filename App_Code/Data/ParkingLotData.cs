@@ -23,7 +23,7 @@ public class ParkingLotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@DimensionX", newParkingLot.DimensionX);
                 sqlCommand.Parameters.AddWithValue("@DimensionY", newParkingLot.DimensionY);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
-               
+
             }
             ManageDatabaseConnection("Close");
         }
@@ -83,7 +83,7 @@ public class ParkingLotData : BaseData
 
         return insertResult;
     }
-       public DataSet GetParkingForBooking()
+    public DataSet GetParkingForBooking()
     {
         DataSet ds = new DataSet();
         try
@@ -104,33 +104,33 @@ public class ParkingLotData : BaseData
 
         return ds;
     }
-       public ParkingLot GetParkingTable(ParkingLot parkingToTable)
-       {
+    public ParkingLot GetParkingTable(ParkingLot parkingToTable)
+    {
 
-           try
-           {
-               using (SqlCommand sqlCommand = new SqlCommand("Get_ParkingDimension", ManageDatabaseConnection("Open")))
-               {
-                   sqlCommand.CommandType = CommandType.StoredProcedure;
-                   sqlCommand.Parameters.AddWithValue("@Name", parkingToTable.Name);
-                   using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                   {
-                       if (reader.Read())
-                       {
-                           parkingToTable.DimensionX = (int)reader["DimensionX"];
-                           parkingToTable.DimensionY = (int)reader["DimensionY"];
-                       }
-                   }
-                   ManageDatabaseConnection("Close");
-               }
-           }
-           catch (SqlException sqlException)
-           {
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Get_ParkingDimension", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", parkingToTable.Id);
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        parkingToTable.DimensionX = (int)reader["DimensionX"];
+                        parkingToTable.DimensionY = (int)reader["DimensionY"];
+                    }
+                }
+                ManageDatabaseConnection("Close");
+            }
+        }
+        catch (SqlException sqlException)
+        {
 
-               throw sqlException;
-           }
+            throw sqlException;
+        }
 
-           return parkingToTable;
-       }
+        return parkingToTable;
+    }
 
 }

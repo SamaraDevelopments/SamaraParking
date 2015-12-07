@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 public partial class Form_booking : System.Web.UI.Page
 {
@@ -14,18 +15,19 @@ public partial class Form_booking : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-        
-        FillDropDownListVehiclesFromUser();
-        FillDropDownListParking();
-        FillTableDesignOfNewParking((string)Session["ParkingName"]);
         if (!IsPostBack)
         {
-            FillTableDesignOfNewParking((string)Session["ParkingName"]);
+            FillDropDownListVehiclesFromUser();
+            FillDropDownListParking();
+            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
+        }
+        else
+        {
+            FillTableDesignOfNewParking((int)Session["DropDownIndex"]);
         }
     }
     public void FillDropDownListParking()
     {
-        string parkingName="";
         ParkingBusiness pb = new ParkingBusiness();
         pb.GetParkingForBooking();
 
@@ -33,7 +35,6 @@ public partial class Form_booking : System.Web.UI.Page
         DropDownListParking.DataValueField = pb.GetParkingForBooking().Tables[0].Columns["Id"].ToString();
         DropDownListParking.DataSource = pb.GetParkingForBooking().Tables[0];
         DropDownListParking.DataBind();
-        parkingName = DropDownListParking.SelectedItem.Text;
     }
     public void FillDropDownListVehiclesFromUser()
     {
@@ -53,7 +54,7 @@ public partial class Form_booking : System.Web.UI.Page
         BookingBusiness bb = new BookingBusiness();
         ParkingBusiness pb = new ParkingBusiness();
         User currentUser = (User)Session["USER"];
-        int spotId = pb.GetSpotFromPosition(selectedPosition, (string)Session["ParkingName"]);
+        int spotId = pb.GetSpotFromPosition(selectedPosition, Int32.Parse(DropDownListParking.SelectedValue));
 
         newBooking.EntryTime = DateTime.Parse(TextBoxInitialTime.Text);
         newBooking.ExitTime = DateTime.Parse(TextBoxFinalTime.Text);
@@ -63,13 +64,15 @@ public partial class Form_booking : System.Web.UI.Page
         newBooking.IdParkingSpot.Id = spotId;
     }
 
-    public void FillTableDesignOfNewParking(string parkingName)
+    public void FillTableDesignOfNewParking(int parkingName)
     {
         TableDesignOfNewParking.Rows.Clear();
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot parkingTable = new ParkingLot();
-        parkingTable.Name = parkingName;
+        parkingTable.Id = parkingName;
         int counter = 0;
+        int spotId = 0;
+        string spotType = "";
         parkingTable = pb.GetDimensions(parkingTable);
         for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
         {
@@ -79,12 +82,29 @@ public partial class Form_booking : System.Web.UI.Page
                 TableCell tc = new TableCell();
                 tc.CssClass = "btn-error";
                 tc.Controls.Add(addButton(counter));
+                spotId = pb.GetSpotFromPosition(counter, parkingTable.Id);
+                spotType = pb.GetSpotType(spotId).Trim();
+
+                switch (spotType)
+                {
+                    case "Normal Spot":
+                        tc.BackColor = Color.Transparent;
+                        break;
+                    case "Road Spot":
+                        tc.BackColor = Color.DarkGray;
+                        tc.Enabled = false;
+                        break;
+                    case "Handicap Spot":
+                        tc.BackColor = Color.Blue;
+                        tc.Enabled = false;
+                        break;
+                }
                 tr.Cells.Add(tc);
                 counter++;
             }
-            counter++;
             TableDesignOfNewParking.Rows.Add(tr);
         }
+
     }
     public Button addButton(int counter)
     {
@@ -103,9 +123,11 @@ public partial class Form_booking : System.Web.UI.Page
     }
     protected void UpdateParking_SelectedIndexChange(object sender, EventArgs e)
     {
-        string parkingName = "";
-        parkingName = DropDownListParking.SelectedItem.Text;
-        Session["ParkingName"] = parkingName;
-        DropDownListParking.SelectedIndex = DropDownListParking.Items.IndexOf(DropDownListParking.Items.FindByText(parkingName));
+        if (Int32.Parse(DropDownListParking.SelectedValue) > 0)
+        {
+            Session["DropDownIndex"] = DropDownListParking.SelectedIndex;
+            DropDownListParking.SelectedIndex = (int)Session["DropDownIndex"];
+            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
+        }
     }
 }

@@ -140,34 +140,29 @@ public partial class Form_addparking : System.Web.UI.Page
         int counter = 0;
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
         {
-
             for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
             {
                 switch (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor.Name)
                 {
                     case "Transparent":
                         ps.SpotType = "Normal Spot";
-                        pb.AddParkingSpot(ps);
                         ps.Position = counter;
-                        pb.UpdateParkingSpot(ps);
+                        pb.AddParkingSpot(ps);
                         break;
                     case "DarkGray":
                         ps.SpotType = "Road Spot";
-                        pb.AddParkingSpot(ps);
                         ps.Position = counter;
-                        pb.UpdateParkingSpot(ps);
+                        pb.AddParkingSpot(ps);
                         break;
                     case "Blue":
                         ps.SpotType = "Handicap Spot";
-                        pb.AddParkingSpot(ps);
                         ps.Position = counter;
-                        pb.UpdateParkingSpot(ps);
+                        pb.AddParkingSpot(ps);
                         break;
                     default:
                         ps.SpotType = "Normal Spot";
-                        pb.AddParkingSpot(ps);
                         ps.Position = counter;
-                        pb.UpdateParkingSpot(ps);
+                        pb.AddParkingSpot(ps);
                         break;
                 }
                 counter++;

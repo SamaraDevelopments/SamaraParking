@@ -20,6 +20,7 @@ public class ParkingSpotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
                 sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
+                sqlCommand.Parameters.AddWithValue("@Position", newSpot.Position);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
@@ -30,42 +31,9 @@ public class ParkingSpotData : BaseData
         }
     }
 
-    public void Update(ParkingSpot newSpot)
+    public int GetSpot(int selectedPosition, int parkingId)
     {
-        try
-        {
-            using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingSpotPosition", ManageDatabaseConnection("Open")))
-            {
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Position", newSpot.Position);
-                sqlCommand.Parameters.AddWithValue("@IdSpot", newSpot.Id);
-            }
-            ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-            throw sqlException;
-        }
-    }
-
-    public int GetSpot(int selectedPosition, string parkingName)
-    {
-        int parkingId;
-        int spotId;
-        try
-        {
-            using (SqlCommand sqlCommand = new SqlCommand("Get_SingleParking", ManageDatabaseConnection("Open")))
-            {
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Name", parkingName);
-                parkingId = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            }
-            ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-            throw sqlException;
-        }
+        int spotId = 0;
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_Spot", ManageDatabaseConnection("Open")))
@@ -74,6 +42,25 @@ public class ParkingSpotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@ParkingId", parkingId);
                 sqlCommand.Parameters.AddWithValue("@Position", selectedPosition);
                 spotId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                ManageDatabaseConnection("Close");
+            }
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+        return spotId;
+    }
+    public string GetSpotType(int spotId)
+    {
+        string spotType = "";
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Get_SpotType", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", spotId);
+                spotType = Convert.ToString(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
         }
@@ -81,6 +68,6 @@ public class ParkingSpotData : BaseData
         {
             throw sqlException;
         }
-        return spotId;
+        return spotType;
     }
 }

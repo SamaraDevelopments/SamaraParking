@@ -42,17 +42,11 @@ public class ParkingBusiness
         psd.Insert(parkingSpotToAdd);
 
     }
-    public void UpdateParkingSpot(ParkingSpot parkingSpotToAdd)
-    {
-        ParkingSpotData psd = new ParkingSpotData();
-        psd.Update(parkingSpotToAdd);
-
-    }
     public DataSet GetParkingForBooking()
     {
         ParkingLotData pld = new ParkingLotData();
-        
-        return  pld.GetParkingForBooking();
+
+        return pld.GetParkingForBooking();
     }
     public int DeleteParking(ParkingLot parkingToDelete)
     {
@@ -68,10 +62,16 @@ public class ParkingBusiness
 
         return parkingToTable;
     }
-    public int GetSpotFromPosition(int selectedPosition, string parkingName)
+    public int GetSpotFromPosition(int selectedPosition, int parkingId)
+    {
+
+        ParkingSpotData psd = new ParkingSpotData();
+        int spotId = psd.GetSpot(selectedPosition, parkingId);
+        return spotId;
+    }
+    public string GetSpotType(int spotId)
     {
         ParkingSpotData psd = new ParkingSpotData();
-        int spotId = psd.GetSpot(selectedPosition, parkingName);
-        return spotId;
+        return psd.GetSpotType(spotId);
     }
 }
