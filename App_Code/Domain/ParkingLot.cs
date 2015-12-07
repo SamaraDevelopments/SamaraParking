@@ -12,7 +12,8 @@ public class ParkingLot
     private int id;
     private string name;
     private string location;
-    private int capacity;
+    private int dimensionX;
+    private int dimensionY;
     private List<ParkingSpot> listOfSpots;
     private ParkingSpot[,] parkingSpotsMatrix;
 
@@ -39,12 +40,16 @@ public class ParkingLot
         get { return location; }
         set { location = value; }
     }
-    public int Capacity
+    public int DimensionX
     {
-        get { return capacity; }
-        set { capacity = value; }
+        get { return dimensionX; }
+        set { dimensionX = value; }
     }
-
+    public int DimensionY
+    {
+        get { return dimensionY; }
+        set { dimensionY = value; }
+    }
     public List<ParkingSpot> ListOfSpots
     {
         get { return listOfSpots; }

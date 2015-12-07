@@ -20,7 +20,8 @@ public class ParkingLotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
-                sqlCommand.Parameters.AddWithValue("@Capacity", newParkingLot.Capacity);
+                sqlCommand.Parameters.AddWithValue("@DimensionX", newParkingLot.DimensionX);
+                sqlCommand.Parameters.AddWithValue("@DimensionY", newParkingLot.DimensionY);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
                
             }
@@ -46,7 +47,6 @@ public class ParkingLotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Id", newParkingLot.Id);
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
-                sqlCommand.Parameters.AddWithValue("@Capacity", newParkingLot.Capacity);
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
                 ManageDatabaseConnection("Close");
@@ -61,24 +61,19 @@ public class ParkingLotData : BaseData
         return insertResult;
     }
 
-    public void Delete(ParkingLot newParkingLot)
+    public int Delete(ParkingLot newParkingLot)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "delete_parkinglot";
-
-        SqlCommand sqlCommand;
-
+        int insertResult = 0;
         try
         {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newParkingLot.Id;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
-            ManageDatabaseConnection("Close");
+            using (SqlCommand sqlCommand = new SqlCommand("Delete_ParkingLot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
+                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Dispose();
+                ManageDatabaseConnection("Close");
+            }
         }
         catch (SqlException sqlException)
         {
@@ -86,6 +81,7 @@ public class ParkingLotData : BaseData
             throw sqlException;
         }
 
+        return insertResult;
     }
        public DataSet GetParkingForBooking()
     {
@@ -108,4 +104,33 @@ public class ParkingLotData : BaseData
 
         return ds;
     }
+       public ParkingLot GetParkingTable(ParkingLot parkingToTable)
+       {
+
+           try
+           {
+               using (SqlCommand sqlCommand = new SqlCommand("Get_ParkingDimension", ManageDatabaseConnection("Open")))
+               {
+                   sqlCommand.CommandType = CommandType.StoredProcedure;
+                   sqlCommand.Parameters.AddWithValue("@Name", parkingToTable.Name);
+                   using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                   {
+                       if (reader.Read())
+                       {
+                           parkingToTable.DimensionX = (int)reader["DimensionX"];
+                           parkingToTable.DimensionY = (int)reader["DimensionY"];
+                       }
+                   }
+                   ManageDatabaseConnection("Close");
+               }
+           }
+           catch (SqlException sqlException)
+           {
+
+               throw sqlException;
+           }
+
+           return parkingToTable;
+       }
+
 }

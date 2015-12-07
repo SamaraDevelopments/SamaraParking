@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <asp:Label ID="LabelaParkingName" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl">
+                                <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged ="UpdateParking_SelectedIndexChange">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
 
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btn_BookingSpot_Click" />
+                                <asp:Button ID="ButtonBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
                             </div>
                         </div>
                     </fieldset>

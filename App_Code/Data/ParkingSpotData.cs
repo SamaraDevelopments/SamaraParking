@@ -10,7 +10,7 @@ using System.Web;
 /// </summary>
 public class ParkingSpotData : BaseData
 {
-    public void Insert(ParkingSpot newSpot, int position)
+    public void Insert(ParkingSpot newSpot)
     {
         int insertResult = 1;
         try
@@ -23,14 +23,22 @@ public class ParkingSpotData : BaseData
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+    }
 
+    public void Update(ParkingSpot newSpot)
+    {
+        try
+        {
             using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingSpotPosition", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Position", position);
+                sqlCommand.Parameters.AddWithValue("@Position", newSpot.Position);
                 sqlCommand.Parameters.AddWithValue("@IdSpot", newSpot.Id);
-                sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
-                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
         }
@@ -40,31 +48,39 @@ public class ParkingSpotData : BaseData
         }
     }
 
-    public void Delete(ParkingSpot newSpot)
+    public int GetSpot(int selectedPosition, string parkingName)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "delete_parkinglotspot";
-
-        SqlCommand sqlCommand;
-
+        int parkingId;
+        int spotId;
         try
         {
-
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newSpot.Id;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
+            using (SqlCommand sqlCommand = new SqlCommand("Get_SingleParking", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Name", parkingName);
+                parkingId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
-
             throw sqlException;
         }
-
-
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Get_Spot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ParkingId", parkingId);
+                sqlCommand.Parameters.AddWithValue("@Position", selectedPosition);
+                spotId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+        return spotId;
     }
 }

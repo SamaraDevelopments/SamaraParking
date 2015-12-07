@@ -36,17 +36,42 @@ public class ParkingBusiness
         }
         return failuretext;
     }
-    public void AddParkingSpot(ParkingSpot parkingSpotToAdd, int Position)
+    public void AddParkingSpot(ParkingSpot parkingSpotToAdd)
     {
         ParkingSpotData psd = new ParkingSpotData();
-        psd.Insert(parkingSpotToAdd, Position);
+        psd.Insert(parkingSpotToAdd);
+
+    }
+    public void UpdateParkingSpot(ParkingSpot parkingSpotToAdd)
+    {
+        ParkingSpotData psd = new ParkingSpotData();
+        psd.Update(parkingSpotToAdd);
 
     }
     public DataSet GetParkingForBooking()
     {
         ParkingLotData pld = new ParkingLotData();
-
+        
         return  pld.GetParkingForBooking();
     }
+    public int DeleteParking(ParkingLot parkingToDelete)
+    {
+        ParkingLotData pld = new ParkingLotData();
+        int insertResult = pld.Delete(parkingToDelete);
 
+        return insertResult;
+    }
+    public ParkingLot GetDimensions(ParkingLot parkingToTable)
+    {
+        ParkingLotData pld = new ParkingLotData();
+        parkingToTable = pld.GetParkingTable(parkingToTable);
+
+        return parkingToTable;
+    }
+    public int GetSpotFromPosition(int selectedPosition, string parkingName)
+    {
+        ParkingSpotData psd = new ParkingSpotData();
+        int spotId = psd.GetSpot(selectedPosition, parkingName);
+        return spotId;
+    }
 }

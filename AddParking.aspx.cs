@@ -47,19 +47,28 @@ public partial class Form_addparking : System.Web.UI.Page
         {
             pl.Name = TextBoxNameOfNewParking.Text;
             pl.Location = TextBoxLocationOfNewParking.Text;
+            pl.DimensionX = Int32.Parse(TextBoxDimensionsOfParkingX.Text);
+            pl.DimensionY = Int32.Parse(TextBoxDimensionsOfParkingY.Text);
             pl.Id = pb.AddParking(pl);
+            Session["ParkingId"] = pl.Id;
             if (pl.Id == -1)
             {
                 LabelError.Text = "Nombre del parqueo ya existe";
+                TextBoxNormalSpot.Enabled = true;
+                TextBoxNameOfNewParking.Enabled = true;
+                TextBoxLocationOfNewParking.Enabled = true;
+                TextBoxDimensionsOfParkingX.Enabled = true;
+                TextBoxDimensionsOfParkingY.Enabled = true;
+                TextBoxMotocyclesForRegularSpot.Enabled = true;
             }
         }
     }
     public void FillTableDesignOfNewParking()
     {
-        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
+        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
         {
             TableRow tr = new TableRow();
-            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
+            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
             {
                 TableCell tc = new TableCell();
                 tc.CssClass = "btn-error";
@@ -68,6 +77,7 @@ public partial class Form_addparking : System.Web.UI.Page
             }
             TableDesignOfNewParking.Rows.Add(tr);
         }
+
     }
 
     protected void btnStreet_Click(object sender, EventArgs e)
@@ -87,7 +97,7 @@ public partial class Form_addparking : System.Web.UI.Page
                 TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Transparent;
                 break;
             default:
-                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.Gray;
+                TableDesignOfNewParking.Rows[(int)Char.GetNumericValue(getColumnAndRow[2])].Cells[(int)Char.GetNumericValue(getColumnAndRow[0])].BackColor = Color.DarkGray;
                 break;
         }
     }
@@ -96,7 +106,7 @@ public partial class Form_addparking : System.Web.UI.Page
         Button btnStreet = new Button();
         btnStreet.Click += new System.EventHandler(btnStreet_Click);
         btnStreet.Text = "";
-        btnStreet.ID = "s" + (((counterRow + 1) * 100) + counterColumn + 1);
+        btnStreet.ID = "" + (((counterRow + 1) * 100) + counterColumn + 1);
         btnStreet.CommandArgument = counterColumn + "," + counterRow;
         btnStreet.CssClass = "btn-success";
         return btnStreet;
@@ -106,6 +116,7 @@ public partial class Form_addparking : System.Web.UI.Page
     protected void btnAddNewParking_Click(object sender, EventArgs e)
     {
         ParkingSpot ps = new ParkingSpot();
+        ps.IdParking = (int)Session["ParkingId"];
         ParkingBusiness pb = new ParkingBusiness();
         int counter = 0;
         for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
@@ -117,29 +128,30 @@ public partial class Form_addparking : System.Web.UI.Page
                 {
                     case "Transparent":
                         ps.SpotType = "Normal Spot";
-                        ps.IdParking = pl.Id;
-                        pb.AddParkingSpot(ps, counter);
-                        counter++;
+                        pb.AddParkingSpot(ps);
+                        ps.Position = counter;
+                        pb.UpdateParkingSpot(ps);
                         break;
                     case "DarkGray":
                         ps.SpotType = "Road Spot";
-                        ps.IdParking = pl.Id;
-                        pb.AddParkingSpot(ps, counter);
-                        counter++;
+                       pb.AddParkingSpot(ps);
+                         ps.Position = counter;
+                        pb.UpdateParkingSpot(ps);
                         break;
                     case "Blue":
                         ps.SpotType = "Handicap Spot";
-                        ps.IdParking = pl.Id;
-                        pb.AddParkingSpot(ps, counter);
-                        counter++;
+                        pb.AddParkingSpot(ps);
+                         ps.Position = counter;
+                        pb.UpdateParkingSpot(ps);
                         break;
                     default:
                         ps.SpotType = "Normal Spot";
-                        ps.IdParking = pl.Id;
-                        pb.AddParkingSpot(ps, counter);
-                        counter++;
+                        pb.AddParkingSpot(ps);
+                        ps.Position = counter;
+                        pb.UpdateParkingSpot(ps);
                         break;
                 }
+                counter++;
             }
         }
     }
