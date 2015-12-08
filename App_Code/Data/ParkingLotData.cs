@@ -105,12 +105,13 @@ public class ParkingLotData : BaseData
     public DataSet GetParkingForBooking()
     {
         DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter();
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_Parking", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                da.SelectCommand = sqlCommand;
                 da.Fill(ds);  // fill dataset
             }
             ManageDatabaseConnection("Close");
@@ -120,7 +121,6 @@ public class ParkingLotData : BaseData
 
             throw sqlException;
         }
-
         return ds;
     }
     public ParkingLot GetParkingTable(ParkingLot parkingToTable)

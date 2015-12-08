@@ -161,29 +161,26 @@ public class VehicleData : BaseData
         return deleteResult;
     }
     public DataSet GetVehiclesForBoking(User user)
+
     {
         DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter();
         try
         {
-            //open database connection
-            SqlConnection connection = ManageDatabaseConnection("Open");
-
-            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesForBooking", connection))
+            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesForBooking", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
-                SqlDataAdapter sqlda = new SqlDataAdapter(sqlCommand);
-                sqlda.Fill(ds);  // fill dataset
+                da.SelectCommand = sqlCommand;
+                da.Fill(ds);  // fill dataset
             }
-
             ManageDatabaseConnection("Close");
-
         }
         catch (SqlException sqlException)
         {
+
             throw sqlException;
         }
-
         return ds;
     }
 
