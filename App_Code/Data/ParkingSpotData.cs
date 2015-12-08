@@ -31,17 +31,24 @@ public class ParkingSpotData : BaseData
         }
     }
 
-    public int GetSpot(int selectedPosition, int parkingId)
+    public ParkingSpot GetSpot(ParkingSpot spotToRecieve, int selectedPosition)
     {
-        int spotId = 0;
+        
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_Spot", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@ParkingId", parkingId);
+                sqlCommand.Parameters.AddWithValue("@ParkingId", spotToRecieve.IdParking);
                 sqlCommand.Parameters.AddWithValue("@Position", selectedPosition);
-                spotId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        spotToRecieve.Id = (int)reader["Id"];
+                        spotToRecieve.SpotType = reader["Spottype"].ToString().Trim();
+                    }
+                }
             }
             ManageDatabaseConnection("Close");
         }
@@ -49,25 +56,6 @@ public class ParkingSpotData : BaseData
         {
             throw sqlException;
         }
-        return spotId;
-    }
-    public string GetSpotType(int spotId)
-    {
-        string spotType = "";
-        try
-        {
-            using (SqlCommand sqlCommand = new SqlCommand("Get_SpotType", ManageDatabaseConnection("Open")))
-            {
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Id", spotId);
-                spotType = Convert.ToString(sqlCommand.ExecuteScalar());
-            }
-            ManageDatabaseConnection("Close");
-        }
-        catch (SqlException sqlException)
-        {
-            throw sqlException;
-        }
-        return spotType;
+        return spotToRecieve;
     }
 }

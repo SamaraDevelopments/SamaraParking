@@ -139,9 +139,9 @@ public class ParkingLotData : BaseData
                         parkingToTable.DimensionX = (int)reader["DimensionX"];
                         parkingToTable.DimensionY = (int)reader["DimensionY"];
                     }
-                }
-                ManageDatabaseConnection("Close");
+                } 
             }
+            ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {

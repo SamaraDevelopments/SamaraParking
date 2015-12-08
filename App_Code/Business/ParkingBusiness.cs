@@ -69,16 +69,10 @@ public class ParkingBusiness
 
         return parkingToTable;
     }
-    public int GetSpotFromPosition(int selectedPosition, int parkingId)
-    {
-
-        ParkingSpotData psd = new ParkingSpotData();
-        int spotId = psd.GetSpot(selectedPosition, parkingId);
-        return spotId;
-    }
-    public string GetSpotType(int spotId)
+    public ParkingSpot GetSpotData(ParkingSpot ps, int position)
     {
         ParkingSpotData psd = new ParkingSpotData();
-        return psd.GetSpotType(spotId);
+        ps = psd.GetSpot(ps, position);
+        return ps;
     }
 }

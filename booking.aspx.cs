@@ -61,7 +61,8 @@ public partial class Form_booking : System.Web.UI.Page
         User bookingUser = new User();
         ParkingSpot bookingSpot = new ParkingSpot();
         ParkingLot bookingParking = new ParkingLot();
-        int spotId = pb.GetSpotFromPosition((int)Session["Position"], Int32.Parse(DropDownListParking.SelectedValue));
+        bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
+        bookingSpot = pb.GetSpotData(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
         newBooking.IdUser = bookingUser;
         newBooking.IdParkingSpot = bookingSpot;
@@ -72,10 +73,10 @@ public partial class Form_booking : System.Web.UI.Page
         newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue.Trim();
         newBooking.IdUser.Id = currentUser.Id;
         newBooking.Date = DateTime.Today;
-        newBooking.IdParkingSpot.Id = spotId;
+        newBooking.IdParkingSpot.Id = bookingSpot.Id;
         newBooking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);
 
-        if (spotId == 0)
+        if (bookingSpot.Id == 0)
         {
             //Return error here
         }
@@ -90,10 +91,10 @@ public partial class Form_booking : System.Web.UI.Page
         TableDesignOfNewParking.Rows.Clear();
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot parkingTable = new ParkingLot();
+        ParkingSpot ps = new ParkingSpot();
         parkingTable.Id = parkingName;
+        ps.IdParking = parkingTable.Id;
         int counter = 0;
-        int spotId = 0;
-        string spotType = "";
         parkingTable = pb.GetDimensions(parkingTable);
         for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
         {
@@ -103,10 +104,9 @@ public partial class Form_booking : System.Web.UI.Page
                 TableCell tc = new TableCell();
                 tc.CssClass = "btn-error";
                 tc.Controls.Add(addButton(counter));
-                spotId = pb.GetSpotFromPosition(counter, parkingTable.Id);
-                spotType = pb.GetSpotType(spotId).Trim();
+                ps = pb.GetSpotData(ps, counter);
 
-                switch (spotType)
+                switch (ps.SpotType)
                 {
                     case "Normal Spot":
                         tc.BackColor = Color.Transparent;
