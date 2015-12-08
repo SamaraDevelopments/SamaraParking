@@ -128,6 +128,9 @@ public partial class Form_addparking : System.Web.UI.Page
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Blue;
                 break;
             case "Blue":
+                TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Yellow;
+                break;
+            case "Yellow":
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Transparent;
                 break;
             default:
@@ -180,6 +183,11 @@ public partial class Form_addparking : System.Web.UI.Page
                             break;
                         case "Blue":
                             ps.SpotType = "Handicap Spot";
+                            ps.Position = counter;
+                            pb.AddParkingSpot(ps);
+                            break;
+                        case "Yellow":
+                            ps.SpotType = "Motorcycle Spot";
                             ps.Position = counter;
                             pb.AddParkingSpot(ps);
                             break;

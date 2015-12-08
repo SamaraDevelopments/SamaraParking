@@ -12,7 +12,6 @@ public class ParkingSpotData : BaseData
 {
     public void Insert(ParkingSpot newSpot)
     {
-        int insertResult = 1;
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Insert_Parkingspot", ManageDatabaseConnection("Open")))
@@ -21,7 +20,6 @@ public class ParkingSpotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Spottype", newSpot.SpotType);
                 sqlCommand.Parameters.AddWithValue("@IdParking", newSpot.IdParking);
                 sqlCommand.Parameters.AddWithValue("@Position", newSpot.Position);
-                insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
             }
             ManageDatabaseConnection("Close");
         }
