@@ -23,7 +23,7 @@ public class ParkingLotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@DimensionX", newParkingLot.DimensionX);
                 sqlCommand.Parameters.AddWithValue("@DimensionY", newParkingLot.DimensionY);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
-                sqlCommand.Dispose();
+
             }
             ManageDatabaseConnection("Close");
         }
@@ -45,12 +45,37 @@ public class ParkingLotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 insertResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+
+            throw sqlException;
+        }
+
+        return insertResult;
+    }
+    public int Update(ParkingLot newParkingLot)
+    {
+        int insertResult = 0;
+        try
+        {
+            using (SqlCommand sqlCommand = new SqlCommand("Update_ParkingLot", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", newParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
+                sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
+                sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
+
             throw sqlException;
         }
 
@@ -68,8 +93,8 @@ public class ParkingLotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
-                ManageDatabaseConnection("Close");
             }
+            ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
@@ -89,7 +114,6 @@ public class ParkingLotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 da.Fill(ds);  // fill dataset
-                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }
@@ -117,11 +141,9 @@ public class ParkingLotData : BaseData
                         parkingToTable.DimensionX = (int)reader["DimensionX"];
                         parkingToTable.DimensionY = (int)reader["DimensionY"];
                     }
-
                 }
-                sqlCommand.Dispose();
+                ManageDatabaseConnection("Close");
             }
-            ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {
