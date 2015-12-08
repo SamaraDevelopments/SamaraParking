@@ -21,7 +21,6 @@ public class BookingData : BaseData
             {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Dispose();
 
             }
 
@@ -51,9 +50,6 @@ public class BookingData : BaseData
                 sqlCommand.Parameters.Add("@EntryTime", SqlDbType.DateTime).Value = newBooking.EntryTime;
                 sqlCommand.Parameters.Add("@ExitTime", SqlDbType.DateTime).Value = newBooking.ExitTime;
                 sqlCommand.Parameters.Add("@CurrentDate", SqlDbType.DateTime).Value = newBooking.Date;
-                sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
-
             }
 
             ManageDatabaseConnection("Close");
@@ -82,9 +78,6 @@ public class BookingData : BaseData
                 sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.EntryTime;
                 sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.ExitTime;
                 sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.Date;
-                sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
-
             }
 
             ManageDatabaseConnection("Close");
@@ -108,7 +101,6 @@ public class BookingData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add("@idBooking", SqlDbType.Int).Value = booking.IdBooking;
                 sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
 
             }
 
@@ -137,7 +129,6 @@ public class BookingData : BaseData
             {
                 sqlDataAdapter.SelectCommand = sqlCommand;
                 sqlDataAdapter.Fill(dt);
-                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }

@@ -69,7 +69,6 @@ public class ParkingLotData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 sqlCommand.Parameters.AddWithValue("@Location", newParkingLot.Location);
                 sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }
@@ -92,7 +91,6 @@ public class ParkingLotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Name", newParkingLot.Name);
                 sqlCommand.ExecuteNonQuery();
-                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }

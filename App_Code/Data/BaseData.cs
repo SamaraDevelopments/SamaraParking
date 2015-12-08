@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 
-
 /// <summary>
 /// Summary description for BaseData
 /// </summary>

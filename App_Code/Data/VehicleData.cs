@@ -149,7 +149,6 @@ public class VehicleData : BaseData
                 sqlCommand.Parameters.AddWithValue("@UserId", currentUser.Id);
                 sqlCommand.Parameters.AddWithValue("@VehicleId", deleteVehicle.Id);
                 deleteResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
-                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }
@@ -175,7 +174,6 @@ public class VehicleData : BaseData
                 sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
                 SqlDataAdapter sqlda = new SqlDataAdapter(sqlCommand);
                 sqlda.Fill(ds);  // fill dataset
-                sqlCommand.Dispose();
             }
 
             ManageDatabaseConnection("Close");
