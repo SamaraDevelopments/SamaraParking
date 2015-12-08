@@ -14,6 +14,19 @@ public partial class Form_index : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
+        GetRegistryOfUser();
+    }
+    public void GetRegistryOfUser()
+    {
+        User user = (User)Session["USER"];
+        if (user.Registry == false)
+        {
+            LabelRegistryOfCommingUser.Text = "Inactivo";
+        }
+        else
+        {
+            LabelRegistryOfCommingUser.Text = "Activo";
+        }
     }
 
     //public string GetCookie()
@@ -24,10 +37,4 @@ public partial class Form_index : System.Web.UI.Page
 
     //}
 
-
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-
-    }
 }
