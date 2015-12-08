@@ -73,9 +73,7 @@ public partial class Form_addparking : System.Web.UI.Page
             }
             else
             {
-                ButtonNext.CssClass = "btn btn-default";
                 ButtonNext.Enabled = false;
-                ButtonCancel.CssClass = "btn btn-default";
                 ButtonCancel.Enabled = false;
                 Session["AddParking"] = 1;
             }
@@ -154,42 +152,49 @@ public partial class Form_addparking : System.Web.UI.Page
         ParkingSpot ps = new ParkingSpot();
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot currentParking = (ParkingLot)Session["PARKINGLOT"];
-        ps.IdParking = pb.AddParking(currentParking);        
-        int counter = 0;
-        int freeSpots = 0;
-        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
+        ps.IdParking = pb.AddParking(currentParking);
+        if (ps.IdParking == -1)
         {
-            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
-            {
-                switch (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor.Name)
-                {
-                    case "Transparent":
-                        ps.SpotType = "Normal Spot";
-                        ps.Position = counter;
-                        pb.AddParkingSpot(ps);
-                        freeSpots++;
-                        break;
-                    case "DarkGray":
-                        ps.SpotType = "Road Spot";
-                        ps.Position = counter;
-                        pb.AddParkingSpot(ps);
-                        break;
-                    case "Blue":
-                        ps.SpotType = "Handicap Spot";
-                        ps.Position = counter;
-                        pb.AddParkingSpot(ps);
-                        break;
-                    default:
-                        ps.SpotType = "Normal Spot";
-                        ps.Position = counter;
-                        pb.AddParkingSpot(ps);
-                        freeSpots++;
-                        break;
-                }
-                counter++;
-            }
+            LabelError.Text = "El nombre del parqueo ya existe";
         }
-        TextBoxNormalSpot.Text = "" + freeSpots;
+        else
+        {
+            int counter = 0;
+            int freeSpots = 0;
+            for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
+            {
+                for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
+                {
+                    switch (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor.Name)
+                    {
+                        case "Transparent":
+                            ps.SpotType = "Normal Spot";
+                            ps.Position = counter;
+                            pb.AddParkingSpot(ps);
+                            freeSpots++;
+                            break;
+                        case "DarkGray":
+                            ps.SpotType = "Road Spot";
+                            ps.Position = counter;
+                            pb.AddParkingSpot(ps);
+                            break;
+                        case "Blue":
+                            ps.SpotType = "Handicap Spot";
+                            ps.Position = counter;
+                            pb.AddParkingSpot(ps);
+                            break;
+                        default:
+                            ps.SpotType = "Normal Spot";
+                            ps.Position = counter;
+                            pb.AddParkingSpot(ps);
+                            freeSpots++;
+                            break;
+                    }
+                    counter++;
+                }
+            }
+            TextBoxNormalSpot.Text = "" + freeSpots;
+        }
     }
 
     public void btnCancel_Click(object sender, EventArgs e)
@@ -201,7 +206,6 @@ public partial class Form_addparking : System.Web.UI.Page
         TextBoxDimensionsOfParkingX.Text = string.Empty;
         TextBoxDimensionsOfParkingY.Text = string.Empty;
         TextBoxMotocyclesForRegularSpot.Text = string.Empty;
-        TextBoxNormalSpot.Enabled = true;
         TextBoxNameOfNewParking.Enabled = true;
         TextBoxLocationOfNewParking.Enabled = true;
         TextBoxDimensionsOfParkingX.Enabled = true;
@@ -218,7 +222,6 @@ public partial class Form_addparking : System.Web.UI.Page
         TextBoxDimensionsOfParkingX.Text = string.Empty;
         TextBoxDimensionsOfParkingY.Text = string.Empty;
         TextBoxMotocyclesForRegularSpot.Text = string.Empty;
-        TextBoxNormalSpot.Enabled = true;
         TextBoxNameOfNewParking.Enabled = true;
         TextBoxLocationOfNewParking.Enabled = true;
         TextBoxDimensionsOfParkingX.Enabled = true;
