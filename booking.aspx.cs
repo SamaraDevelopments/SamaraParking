@@ -58,20 +58,18 @@ public partial class Form_booking : System.Web.UI.Page
         ParkingBusiness pb = new ParkingBusiness();
         User currentUser = (User)Session["USER"];
         Vehicle bookingVehicle = new Vehicle();
-        User bookingUser = new User();
         ParkingSpot bookingSpot = new ParkingSpot();
         ParkingLot bookingParking = new ParkingLot();
         bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
         bookingSpot = pb.GetSpotData(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
-        newBooking.IdUser = bookingUser;
+        newBooking.IdUser = currentUser;
         newBooking.IdParkingSpot = bookingSpot;
         newBooking.IdParkingLot = bookingParking;
         
         newBooking.EntryTime = DateTime.Parse(TextBoxInitialTime.Text);
         newBooking.ExitTime = DateTime.Parse(TextBoxFinalTime.Text);
         newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue.Trim();
-        newBooking.IdUser.Id = currentUser.Id;
         newBooking.Date = DateTime.Today;
         newBooking.IdParkingSpot.Id = bookingSpot.Id;
         newBooking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);

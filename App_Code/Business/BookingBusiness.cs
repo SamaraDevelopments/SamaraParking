@@ -68,7 +68,7 @@ using System.Web;
 
     public void InsertBooking(Booking booking)
     {
-        BookingData bb = new BookingData();
-        bb.Insert(booking);
+        BookingData bd = new BookingData();
+        bd.Insert(booking);
     }
     }
