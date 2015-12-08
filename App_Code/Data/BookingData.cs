@@ -137,6 +137,7 @@ public class BookingData : BaseData
             {
                 sqlDataAdapter.SelectCommand = sqlCommand;
                 sqlDataAdapter.Fill(dt);
+                sqlCommand.Dispose();
             }
             ManageDatabaseConnection("Close");
         }
