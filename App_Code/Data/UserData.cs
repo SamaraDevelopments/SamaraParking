@@ -131,8 +131,6 @@ public class UserData : BaseData
             sqlCommand.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = newUser.Lastname;
             sqlCommand.Parameters.Add("@roletype", SqlDbType.Int).Value = newUser.Roletype;
             sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registry;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
@@ -159,8 +157,6 @@ public class UserData : BaseData
             sqlCommand = new SqlCommand(databaseCommand, connection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newUser.Id;
-            sqlCommand.ExecuteNonQuery();
-            sqlCommand.Dispose();
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)

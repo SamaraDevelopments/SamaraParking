@@ -149,7 +149,6 @@ public partial class Form_booking : System.Web.UI.Page
         {
             Session["DropDownIndex"] = DropDownListParking.SelectedIndex;
             DropDownListParking.SelectedIndex = (int)Session["DropDownIndex"];
-            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
         }
     }
 }
