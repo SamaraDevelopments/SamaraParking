@@ -15,18 +15,14 @@
                     <fieldset>
                         <legend>Bienvenido <%=loggedUser.Name%></legend>
                         <div class="form-group">
-                        </div>
-                        <!--<div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Primary" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning" Text="Warning" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Success" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button3" runat="server" CssClass="btn btn-info" Text="Info" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button4" runat="server" CssClass="btn btn-default" Text="Default" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button5" runat="server" CssClass="btn btn-danger" Text="Danger" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="Button6" runat="server" CssClass="btn btn-link" Text="Link" OnClick="btnSubmit_Click" />
+                            <div class="col-lg-10">
+                                <asp:Label ID="LabelRegistry" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
+                               <div class="col-lg-10">
+                                <asp:Label ID="LabelRegistryOfCommingUser" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                 </div>
                                 </div>
-                            </div>-->
+                        </div>
+                        
                     </fieldset>
                 </div>
             </div>
