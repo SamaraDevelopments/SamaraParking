@@ -119,7 +119,6 @@ public partial class Form_booking : System.Web.UI.Page
                         break;
                     case "Motorcycle Spot":
                         tc.BackColor = Color.Blue;
-                        tc.Enabled = false;
                         break;
                 }
                 tr.Cells.Add(tc);

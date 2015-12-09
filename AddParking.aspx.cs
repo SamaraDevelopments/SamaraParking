@@ -21,7 +21,6 @@ public partial class Form_addparking : System.Web.UI.Page
         if (IsPostBack)
         {
             FillTableDesignOfNewParking();
-            TextBoxNormalSpot.Enabled = false;
             TextBoxNameOfNewParking.Enabled = false;
             TextBoxLocationOfNewParking.Enabled = false;
             TextBoxDimensionsOfParkingX.Enabled = false;
@@ -35,7 +34,6 @@ public partial class Form_addparking : System.Web.UI.Page
             TextBoxLocationOfNewParking.Enabled = true;
             TextBoxDimensionsOfParkingX.Enabled = true;
             TextBoxDimensionsOfParkingY.Enabled = true;
-            TextBoxMotocyclesForRegularSpot.Enabled = true;
             Session["AddParking"] = 0;
             ButtonNext.Enabled = true;
             ButtonCancel.Enabled = true;
@@ -69,7 +67,6 @@ public partial class Form_addparking : System.Web.UI.Page
                 TextBoxLocationOfNewParking.Enabled = true;
                 TextBoxDimensionsOfParkingX.Enabled = true;
                 TextBoxDimensionsOfParkingY.Enabled = true;
-                TextBoxMotocyclesForRegularSpot.Enabled = true;
             }
             else
             {
@@ -213,12 +210,10 @@ public partial class Form_addparking : System.Web.UI.Page
         TextBoxLocationOfNewParking.Text = string.Empty;
         TextBoxDimensionsOfParkingX.Text = string.Empty;
         TextBoxDimensionsOfParkingY.Text = string.Empty;
-        TextBoxMotocyclesForRegularSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Enabled = true;
         TextBoxLocationOfNewParking.Enabled = true;
         TextBoxDimensionsOfParkingX.Enabled = true;
         TextBoxDimensionsOfParkingY.Enabled = true;
-        TextBoxMotocyclesForRegularSpot.Enabled = true;
 
     }
     public void ButtonCancelAddParking_Click(object sender, EventArgs e)
@@ -229,12 +224,10 @@ public partial class Form_addparking : System.Web.UI.Page
         TextBoxLocationOfNewParking.Text = string.Empty;
         TextBoxDimensionsOfParkingX.Text = string.Empty;
         TextBoxDimensionsOfParkingY.Text = string.Empty;
-        TextBoxMotocyclesForRegularSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Enabled = true;
         TextBoxLocationOfNewParking.Enabled = true;
         TextBoxDimensionsOfParkingX.Enabled = true;
         TextBoxDimensionsOfParkingY.Enabled = true;
-        TextBoxMotocyclesForRegularSpot.Enabled = true;
         Session["AddParking"] = 0;
         ButtonNext.CssClass = "btn-primary";
         ButtonCancel.CssClass = "btn-danger";
