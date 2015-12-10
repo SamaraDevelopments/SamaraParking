@@ -30,18 +30,9 @@ public partial class Form_index : System.Web.UI.Page
     }
     public void btnActiveRegistry_Click(object sender, EventArgs e)
     {
-        User currentUser = (User)Session["USER"];
-        LoginBusiness lb = new LoginBusiness();
-        currentUser.Registry = true;
-        lb.ActiveRegistry(currentUser);
+        Response.Redirect("useractivation.aspx");
+
     }
 
-    //public string GetCookie()
-    //{
-    //    HttpCookie loginCookie = Request.Cookies["UserSettings"];
-    //    string msg = loginCookie["Email"].ToString();
-    //    return msg;
-
-    //}
-
+ 
 }

@@ -60,8 +60,6 @@
                         </li>
                         <%    }
                            }%>
-                        
-
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>

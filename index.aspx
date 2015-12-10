@@ -26,7 +26,7 @@
                             { %>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonActiveRegistry" runat="server" CssClass="btn btn-primary" Text="Activar Marchamo" OnClick="btnActiveRegistry_Click"/>
+                                <asp:Button ID="ButtonActiveRegistry" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnActiveRegistry_Click"/>
                             </div>
                         </div>
                         <%  } %>
