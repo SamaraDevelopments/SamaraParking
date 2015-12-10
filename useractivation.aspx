@@ -42,7 +42,7 @@
                                 <asp:Label ID="LabelSessionEmail" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
-                        <%if (loggedUser.ListOfVehicles.Count<=0)
+                        <%if (loggedUser.ListOfVehicles.Count <= 0)
                             { %>
 
 
@@ -78,7 +78,7 @@
                         <% }
                             else
                             {%>
-                        <div class="vehiclesOfUser">
+                        <div class="table-responsive">
                             <asp:Table ID="TableRegisteredVehicles" runat="server" class="table table-bordered">
                                 <asp:TableHeaderRow>
                                     <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
+                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click" />
                             </div>
                         </div>
                         <%}%>
@@ -112,14 +112,21 @@
                 <div class="form-horizontal">
                     <fieldset>
                         <div class="jumbotron">
-                            <h1>
-                                <asp:Image ImageUrl="~/img/ulatina.png" runat="server" /></h1>
+                                
+                            <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <h2>ID:<%=loggedUser.Id %></h2>
                             <p>Estudiante: <%=loggedUser.Name %> <%=loggedUser.Lastname %></p>
                             <p>Vehiculo(s): <%=vehicleFromUser.Brand%> <%=vehicleFromUser.Id %></p>
-                            <p></p>
+                            <div class="table-responsive">
+                                <asp:Table ID="TableRequestRegistry" runat="server" class="table table-bordered">
+                                    <asp:TableHeaderRow>
+                                        <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
+                                    </asp:TableHeaderRow>
+                                </asp:Table>
+                            </div>
                         </div>
-                        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                        <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
                     </fieldset>
                 </div>
             </div>

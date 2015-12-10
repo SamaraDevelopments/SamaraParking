@@ -61,7 +61,7 @@
                         <legend>Diseño del parqueo:</legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <div class="designOfParking">
+                                <div class="table-responsive">
                                     <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
                                     </asp:Table>
                                 </div>

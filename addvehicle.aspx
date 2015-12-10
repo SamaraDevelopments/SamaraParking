@@ -15,7 +15,7 @@
                         <legend>Sus vehiculos registrados son:</legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <div class="vehiclesOfUser">
+                                <div class="table-responsive">
                                     <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
                                         <asp:TableHeaderRow>
                                             <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>

@@ -81,10 +81,13 @@
                         <legend>Diseño del parqueo:</legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <div class="desingOfParking">
+                                <div class="table-responsive">
                                     <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
                                     </asp:Table>
                                 </div>
+                            </div>
+                            <div>
+
                             </div>
                             <div class="col-lg-10 col-lg-offset-2">
                                 <asp:Button ID="ButtonAddParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click" />

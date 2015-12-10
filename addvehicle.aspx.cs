@@ -48,13 +48,13 @@ public partial class Form_AddVehicle : System.Web.UI.Page
                     updateBtn.Click += new System.EventHandler(btnEditVehicle_Click);
                     updateBtn.Text = "Editar";
                     updateBtn.ID = idToButton + "e";
-                    updateBtn.CssClass = "btn btn-warning";
+                    updateBtn.CssClass = "btn-warning";
 
                     Button deleteBtn = new Button();
                     deleteBtn.Click += new System.EventHandler(btnDeleteVehicle_Click);
                     deleteBtn.Text = "Borrar";
                     deleteBtn.ID = idToButton + "d";
-                    deleteBtn.CssClass = "btn btn-danger";
+                    deleteBtn.CssClass = "btn-danger";
                     tc.Controls.Add(updateBtn);
                     tc.Controls.Add(deleteBtn);
                     tr.Cells.Add(tc);

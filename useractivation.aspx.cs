@@ -68,7 +68,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
             {
                 Session["Vehicle"] = vehicleToAdd;
                 currentUser.Registry = true;
-
+                FillTableRequestRegistry();
             }
         }
         else
@@ -82,11 +82,25 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
-   
-                Session["Vehicle"] = vehicleToAdd;
-                currentUser.Registry = true;
+        FillTableRequestRegistry();
 
-           
+        Session["Vehicle"] = vehicleToAdd;
+        currentUser.Registry = true;
+
+
+    }
+
+    protected void btnCreateRegistry_Click(object sender, EventArgs e)
+    {
+
+        User currentUser = (User)Session["USER"];
+        Vehicle vehicleToAdd = new Vehicle();
+        FillTableRequestRegistry();
+
+        Session["Vehicle"] = vehicleToAdd;
+        currentUser.Registry = true;
+
+
     }
 
 
@@ -106,7 +120,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
                 TableCell tc = new TableCell();
                 if (counterCells == 3)
                 {
-                   
+
                 }
                 else
                 {
@@ -132,6 +146,52 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
                 counterCells++;
                 TableRegisteredVehicles.Rows.Add(tr);
+
+            }
+        }
+    }
+    protected void FillTableRequestRegistry()
+    {
+        VehicleBusiness vb = new VehicleBusiness();
+        User currentUser = (User)Session["USER"];
+        DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
+
+        foreach (DataRow dr in userVehiclesTable.Rows)
+        {
+            TableRow tr = new TableRow();
+            int counterCells = 0;
+
+            foreach (DataColumn dc in userVehiclesTable.Columns)
+            {
+                TableCell tc = new TableCell();
+                if (counterCells >= 2)
+                {
+
+                }
+                else
+                {
+                    try
+                    {
+                        bool isMoto = (bool)dr[dc.ColumnName];
+                        if (isMoto)
+                        {
+                            tc.Text = string.Format("M");
+                        }
+                        else
+                        {
+                            tc.Text = string.Format("VL");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        tc.Text = string.Format(dr[dc.ColumnName].ToString());
+                    }
+
+                    tr.Cells.Add(tc);
+                }
+
+                counterCells++;
+                TableRequestRegistry.Rows.Add(tr);
 
             }
         }
