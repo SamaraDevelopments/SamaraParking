@@ -154,4 +154,11 @@ public class VehicleBusiness
 
         return vd.GetVehiclesForBoking(user);
     }
+
+    public List<Vehicle> LoadListOfVehicles(User user)
+    {
+        VehicleData vd = new VehicleData();
+
+        return vd.LoadListOfVehicles(user);
+    }
 }

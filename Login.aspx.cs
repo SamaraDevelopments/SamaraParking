@@ -42,6 +42,7 @@ public partial class Form_login : System.Web.UI.Page
 
         if (lb.ValidateUser(loginUser) == null)
         {
+
             Session["USER"] = lb.GetUser(loginUser);
             Response.Redirect("index.aspx");
 

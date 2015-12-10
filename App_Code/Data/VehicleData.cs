@@ -183,5 +183,39 @@ public class VehicleData : BaseData
         }
         return ds;
     }
+    public List<Vehicle> LoadListOfVehicles(User user)
+    {
+        Vehicle LoadedVehicle = new Vehicle();
+        List<Vehicle> list = new List<Vehicle>();
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
 
+
+            using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesFromUser", connection))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
+
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        LoadedVehicle.Id = reader["Id"].ToString();
+                        LoadedVehicle.Brand = reader["Brand"].ToString();
+                        LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
+                        list.Add(LoadedVehicle);
+                    }
+                }
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+
+        return list;
+    }
 }

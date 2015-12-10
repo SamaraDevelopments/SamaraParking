@@ -15,6 +15,7 @@ public partial class Form_index : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
         GetRegistryOfUser();
+       
     }
     public void GetRegistryOfUser()
     {
@@ -22,10 +23,12 @@ public partial class Form_index : System.Web.UI.Page
         if (user.Registry == false)
         {
             LabelRegistryOfCommingUser.Text = "Inactivo";
+            Session["ACTIVATION"] = "Inactivo";
         }
         else
         {
             LabelRegistryOfCommingUser.Text = "Activo";
+            Session["ACTIVATION"] = "Activo";
         }
     }
     public void btnActiveRegistry_Click(object sender, EventArgs e)

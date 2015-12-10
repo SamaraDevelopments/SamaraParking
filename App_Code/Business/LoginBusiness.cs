@@ -37,8 +37,10 @@ public class LoginBusiness
     public User GetUser(User fromUser)
     {
         UserData ud = new UserData();
-
-        return ud.GetUser(fromUser);
+        VehicleBusiness vb = new VehicleBusiness();
+        User userLoaded = ud.GetUser(fromUser);       
+        userLoaded.ListOfVehicles = vb.LoadListOfVehicles(userLoaded);
+        return userLoaded;
     }
     public void ActiveRegistry(User user)
     {

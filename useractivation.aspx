@@ -42,6 +42,9 @@
                                 <asp:Label ID="LabelSessionEmail" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
+                        <%if (loggedUser.ListOfVehicles.Count<=0)
+                            { %>
+
 
                         <div class="form-group">
                             <asp:Label ID="LabelBrandOfVehicle" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
@@ -61,6 +64,32 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnAddVehicle_Click" />
+                            </div>
+                        </div>
+
+                        <% }
+                            else
+                            {%>
+                        <div class="vehiclesOfUser">
+                            <asp:Table ID="TableRegisteredVehicles" runat="server" class="table table-bordered">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </div>
+                        <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+                        <div class="form-group">
                             <asp:Label ID="LabelTransparent" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
@@ -68,22 +97,24 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnAddVehicle_Click" />
+                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
                             </div>
                         </div>
+                        <%}%>
                     </fieldset>
                 </div>
             </div>
         </div>
         <%if (loggedUser.Registry)
-            { %>      
+            { %>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
                         <div class="jumbotron">
-                            <h1><asp:Image ImageUrl="~/img/ulatina.png" runat="server"/></h1>
-                             <h2>ID:<%=loggedUser.Id %></h2>
+                            <h1>
+                                <asp:Image ImageUrl="~/img/ulatina.png" runat="server" /></h1>
+                            <h2>ID:<%=loggedUser.Id %></h2>
                             <p>Estudiante: <%=loggedUser.Name %> <%=loggedUser.Lastname %></p>
                             <p>Vehiculo(s): <%=vehicleFromUser.Brand%> <%=vehicleFromUser.Id %></p>
                             <p></p>
@@ -94,7 +125,7 @@
             </div>
         </div>
 
-         <% } %>
+        <% } %>
     </div>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
