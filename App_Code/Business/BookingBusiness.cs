@@ -14,30 +14,6 @@ using System.Web;
         private Vehicle userSelectedVehicle;
         private ParkingSpot selectedParkingSpot;
 
-        public Booking CurrentBooking
-        {
-            get { return currentBooking; }
-            set { currentBooking = value; }
-        }
-
-        public User CurrentUser
-        {
-            get { return currentUser; }
-            set { currentUser = value; }
-        }
-
-        public Vehicle UserSelectedVehicle
-        {
-            get { return userSelectedVehicle; }
-            set { userSelectedVehicle = value; }
-        }
-
-        public ParkingSpot SelectedParkingSpot
-        {
-            get { return selectedParkingSpot; }
-            set { selectedParkingSpot = value; }
-        }
-
         public void BookSpot(ParkingSpot selectedSpot, DateTime entryTime, DateTime exitTime)
         {
             currentBooking.IdParkingSpot = selectedSpot;

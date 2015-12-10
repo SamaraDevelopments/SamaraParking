@@ -84,7 +84,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
 
 
                     tr.Cells.Add(tc);
-                    //tc.Text = string.Format("<button ID=\"Button8\" runat=\"server\" Class=\"btn btn-danger\">HOLA</button>");
+                  
 
                 }
                 counterCells++;

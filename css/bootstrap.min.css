@@ -5353,11 +5353,15 @@ a.badge:hover, a.badge:focus {
     padding-bottom: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #f9f9f9;
+    background-color: #0d4d16;
 }
 
     .jumbotron h1, .jumbotron .h1 {
-        color: #444444;
+        color: #000;
+    }
+
+    .jumbotron h2, .jumbotron .h2 {
+        color: #000;
     }
 
     .jumbotron p {

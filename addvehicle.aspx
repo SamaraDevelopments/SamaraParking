@@ -13,9 +13,7 @@
                 <div class="form-horizontal">
                     <fieldset>
                         <legend>Sus vehiculos registrados son:</legend>
-
                         <div class="form-group">
-
                             <div class="col-lg-10">
                                 <div class="vehiclesOfUser">
                                     <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
