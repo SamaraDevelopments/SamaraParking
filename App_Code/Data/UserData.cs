@@ -222,5 +222,24 @@ public class UserData : BaseData
         }
         return dt;
     }
+    public void ChangeRegistry(User user)
+    {
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            SqlCommand sqlCommand = new SqlCommand("Active_Registry", connection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+            sqlCommand.Parameters.AddWithValue("@Registry", user.Registry);
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+    }
 
 }

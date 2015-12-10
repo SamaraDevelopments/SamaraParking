@@ -22,11 +22,71 @@ public partial class Form_booking : System.Web.UI.Page
             Session["DropDownIndex"] = 0;
             FillDropDownListVehiclesFromUser();
             FillDropDownListParking();
+            FillDropDownListInitialHour();
+            FillDropDownListFinalHour();
             FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
+            
         }
         else
         {
             FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
+        }
+    }
+    public void FillDropDownListInitialHour()
+    {
+        int hours = 0;
+        int min = 0;
+        string time = "";
+
+        for (int i=7; i <= 23; i++)
+        {
+            hours = i;
+            for (int j = 0; j <= 30; j+=30)
+            {
+                min = j;
+                if (min == 0)
+                {
+                    time = hours + ":" + min + "0";
+                }
+                else
+                {
+                    time = hours + ":" + min;
+                }
+                    DropDownListInitialHour.Items.Add(time);
+            }
+        }
+    }
+    public void FillDropDownListFinalHour()
+    {
+        int hours = 0;
+        int min = 0;
+        string time = "";
+
+        for (int i = 8; i <= 24; i++)
+        {
+            hours = i;
+            if (hours == 24)
+            {
+                min = 0;
+                time = hours + ":" + min +"0";
+                DropDownListFinalHour.Items.Add(time);
+            }
+            else
+            {
+                for (int j = 0; j <= 30; j += 30)
+                {
+                    min = j;
+                    if (min == 0)
+                    {
+                        time = hours + ":" + min + "0";
+                    }
+                    else
+                    {
+                        time = hours + ":" + min;
+                    }
+                    DropDownListFinalHour.Items.Add(time);
+                }
+            }
         }
     }
     public void FillDropDownListParking()
@@ -60,15 +120,15 @@ public partial class Form_booking : System.Web.UI.Page
         Vehicle bookingVehicle = new Vehicle();
         ParkingSpot bookingSpot = new ParkingSpot();
         ParkingLot bookingParking = new ParkingLot();
+
         bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
         bookingSpot = pb.GetSpotData(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
         newBooking.IdUser = currentUser;
         newBooking.IdParkingSpot = bookingSpot;
         newBooking.IdParkingLot = bookingParking;
-        
-        newBooking.EntryTime = DateTime.Parse(TextBoxInitialTime.Text);
-        newBooking.ExitTime = DateTime.Parse(TextBoxFinalTime.Text);
+        newBooking.EntryTime = DateTime.Parse(DropDownListInitialHour.SelectedValue);
+        newBooking.ExitTime = DateTime.Parse(DropDownListFinalHour.SelectedValue);
         newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue.Trim();
         newBooking.Date = DateTime.Today;
         newBooking.IdParkingSpot.Id = bookingSpot.Id;

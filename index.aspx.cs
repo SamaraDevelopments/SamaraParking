@@ -28,6 +28,13 @@ public partial class Form_index : System.Web.UI.Page
             LabelRegistryOfCommingUser.Text = "Activo";
         }
     }
+    public void btnActiveRegistry_Click(object sender, EventArgs e)
+    {
+        User currentUser = (User)Session["USER"];
+        LoginBusiness lb = new LoginBusiness();
+        currentUser.Registry = true;
+        lb.ActiveRegistry(currentUser);
+    }
 
     //public string GetCookie()
     //{

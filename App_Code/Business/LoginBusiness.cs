@@ -27,10 +27,6 @@ public class LoginBusiness
                 failureText = "Contraseña incorrecta.";
                 break;
 
-            case -3:
-                failureText = "Tu cuenta no tiene marchamo.";
-                break;
-
             default:
                 failureText = null;
                 break;
@@ -44,5 +40,9 @@ public class LoginBusiness
 
         return ud.GetUser(fromUser);
     }
-
+    public void ActiveRegistry(User user)
+    {
+        UserData ud = new UserData();
+        ud.ChangeRegistry(user);
+    }
 }

@@ -24,12 +24,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelMotocyclesForRegularSpot" runat="server" Text="Motocicletas por espacio:" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxMotocyclesForRegularSpot" runat="server" placeholder="Cantidad de motocicletas" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <asp:Label ID="LabelDimensionsOfParking" runat="server" Text="Dimensiones del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingX" runat="server" placeholder="Dimension X" CssClass="form-control"></asp:TextBox>

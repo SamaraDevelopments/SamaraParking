@@ -17,12 +17,19 @@
                         <div class="form-group">
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelRegistry" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
-                               <div class="col-lg-10">
-                                <asp:Label ID="LabelRegistryOfCommingUser" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
-                                 </div>
+                                <div class="col-lg-10">
+                                    <asp:Label ID="LabelRegistryOfCommingUser" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 </div>
+                            </div>
                         </div>
-                        
+                        <%if (loggedUser.Registry == false)
+                            { %>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <asp:Button ID="ButtonActiveRegistry" runat="server" CssClass="btn btn-primary" Text="Activar Marchamo" OnClick="btnActiveRegistry_Click"/>
+                            </div>
+                        </div>
+                        <%  } %>
                     </fieldset>
                 </div>
             </div>

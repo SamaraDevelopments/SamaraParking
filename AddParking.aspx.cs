@@ -24,8 +24,7 @@ public partial class Form_addparking : System.Web.UI.Page
             TextBoxNameOfNewParking.Enabled = false;
             TextBoxLocationOfNewParking.Enabled = false;
             TextBoxDimensionsOfParkingX.Enabled = false;
-            TextBoxDimensionsOfParkingY.Enabled = false;
-            TextBoxMotocyclesForRegularSpot.Enabled = false;          
+            TextBoxDimensionsOfParkingY.Enabled = false;          
         }
         else
         {
@@ -47,7 +46,7 @@ public partial class Form_addparking : System.Web.UI.Page
         ParkingSpot ps = new ParkingSpot();
         int validNameResult = 0;
 
-        if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals("") || TextBoxMotocyclesForRegularSpot.Text.Equals(""))
+        if (TextBoxNameOfNewParking.Text.Equals("") || TextBoxLocationOfNewParking.Text.Equals("") || TextBoxDimensionsOfParkingX.Text.Equals("") || TextBoxDimensionsOfParkingY.Text.Equals(""))
         {
             LabelError.Text = "Espacios vacíos";
         }

@@ -18,28 +18,21 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelInitialTime" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelInitialHour" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxInitialTime" runat="server" placeholder="Hora inicial" CssClass="form-control"></asp:TextBox>
+                                <asp:DropDownList ID="DropDownListInitialHour" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelFinalTime" runat="server" Text="Hora final:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelFinalHour" runat="server" Text="Hora Final:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxFinalTime" runat="server" placeholder="Hora final" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <asp:Label ID="LabelISpotNumber" runat="server" Text="Numero de espacio:" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxSpotNumber" runat="server" placeholder="Numero de espacio" CssClass="form-control"></asp:TextBox>
+                                <asp:DropDownList ID="DropDownListFinalHour" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelIdVehicle" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListVehicleFormUser" runat="server" CssClass="form-control ddl">
-                                </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListVehicleFormUser" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
 

@@ -42,11 +42,13 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
+                        <%if (loggedUser.Registry == true)
+                            {%>
                         <li><a href="addVehicle.aspx">Sus vehiculos</a> </li>
                         <li><a href="booking.aspx">Reserva tu espacio</a> </li>
 
                         <%if (loggedUser.Roletype == 0)
-                            {%>
+                               {%>
                         <li><a href="UserRegistry.aspx">Agregar usuario</a> </li>
                         <li><a href="AddParking.aspx">Agregar parqueo</a></li>
                         <li class="dropdown">
@@ -56,7 +58,9 @@
                                 <li><a href="activeUser.aspx">Profesores activos</a></li>
                             </ul>
                         </li>
-                        <% } %>
+                        <%    }
+                           }%>
+                        
 
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
