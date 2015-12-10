@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Drawing;
 
 /// <summary>
 /// Summary description for PakingBusiness
@@ -43,10 +46,10 @@ public class ParkingBusiness
         }
         return failuretext;
     }
-    public void AddParkingSpot(ParkingSpot parkingSpotToAdd)
+    public void AddParkingSpot(Table parkingTable, ParkingLot currentParking)
     {
         ParkingSpotData psd = new ParkingSpotData();
-        psd.Insert(parkingSpotToAdd);
+        psd.Insert(parkingTable, currentParking);
 
     }
     public DataSet GetParkingForBooking()

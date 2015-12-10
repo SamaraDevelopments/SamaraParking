@@ -71,6 +71,7 @@ public partial class Form_addparking : System.Web.UI.Page
             {
                 ButtonNext.Enabled = false;
                 ButtonCancel.Enabled = false;
+                TextBoxNormalSpot.Text = "" + pl.DimensionX * pl.DimensionY; 
                 Session["AddParking"] = 1;
             }
         }
@@ -119,18 +120,21 @@ public partial class Form_addparking : System.Web.UI.Page
         {
             case "Transparent":
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.DarkGray;
+                TextBoxNormalSpot.Text = "" + (Int32.Parse(TextBoxNormalSpot.Text) - 1);
                 break;
             case "DarkGray":
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Blue;
                 break;
             case "Blue":
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Yellow;
+                TextBoxNormalSpot.Text = "" + (Int32.Parse(TextBoxNormalSpot.Text) + 1);
                 break;
             case "Yellow":
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.Transparent;
                 break;
             default:
                 TableDesignOfNewParking.Rows[Int32.Parse(row)].Cells[Int32.Parse(column)].BackColor = Color.DarkGray;
+                TextBoxNormalSpot.Text = "" + (Int32.Parse(TextBoxNormalSpot.Text) - 1);
                 break;
         }
     }
@@ -152,52 +156,14 @@ public partial class Form_addparking : System.Web.UI.Page
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot currentParking = (ParkingLot)Session["PARKINGLOT"];
         ps.IdParking = pb.AddParking(currentParking);
+        currentParking.Id = ps.IdParking;
         if (ps.IdParking == -1)
         {
             LabelError.Text = "El nombre del parqueo ya existe";
         }
         else
         {
-            int counter = 0;
-            int freeSpots = 0;
-            for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterRow++)
-            {
-                for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterColumn++)
-                {
-                    switch (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor.Name)
-                    {
-                        case "Transparent":
-                            ps.SpotType = "Normal Spot";
-                            ps.Position = counter;
-                            pb.AddParkingSpot(ps);
-                            freeSpots++;
-                            break;
-                        case "DarkGray":
-                            ps.SpotType = "Road Spot";
-                            ps.Position = counter;
-                            pb.AddParkingSpot(ps);
-                            break;
-                        case "Blue":
-                            ps.SpotType = "Handicap Spot";
-                            ps.Position = counter;
-                            pb.AddParkingSpot(ps);
-                            break;
-                        case "Yellow":
-                            ps.SpotType = "Motorcycle Spot";
-                            ps.Position = counter;
-                            pb.AddParkingSpot(ps);
-                            break;
-                        default:
-                            ps.SpotType = "Normal Spot";
-                            ps.Position = counter;
-                            pb.AddParkingSpot(ps);
-                            freeSpots++;
-                            break;
-                    }
-                    counter++;
-                }
-            }
-            TextBoxNormalSpot.Text = "" + freeSpots;
+            pb.AddParkingSpot(TableDesignOfNewParking, currentParking);
         }
     }
 
