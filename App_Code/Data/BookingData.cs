@@ -138,5 +138,24 @@ public class BookingData : BaseData
         }
         return dt;
     }
+    public int[] GetUsersAndProfesors()
+    {
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            using (SqlCommand sqlCommand = new SqlCommand("Insert_Booking", connection))
+            {
+
+            }
+
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+    }
 
 }
