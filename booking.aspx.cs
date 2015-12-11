@@ -176,10 +176,27 @@ public partial class Form_booking : System.Web.UI.Page
     }
     protected void btnReserve_Click(object sender, EventArgs e)
     {
-
+        ParkingLot parkingTable = new ParkingLot();
         Button btn = (Button)sender;
+        int counter = 0;
         selectedPosition = Int32.Parse(btn.ID);
         Session["Position"] = selectedPosition;
+        parkingTable = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
+
+        for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+            {
+                if (selectedPosition == counter)
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Green;
+                }
+                counter++;
+            }
+           
+        }
+
+
     }
     protected void UpdateParking_SelectedIndexChange(object sender, EventArgs e)
     {
@@ -188,5 +205,23 @@ public partial class Form_booking : System.Web.UI.Page
             Session["DropDownIndex"] = DropDownListParking.SelectedIndex;
             DropDownListParking.SelectedIndex = (int)Session["DropDownIndex"];
         }
+    }
+    public ParkingLot removeSelected(int parkingName)
+    {
+        ParkingLot parkingTable = new ParkingLot();
+        ParkingBusiness pb = new ParkingBusiness();
+        parkingTable.Id = parkingName;
+        parkingTable = pb.GetDimensions(parkingTable);
+        for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+            {
+                if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Green)
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Transparent;
+                }
+            }
+        }
+        return parkingTable;
     }
 }
