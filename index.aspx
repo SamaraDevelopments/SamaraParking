@@ -34,6 +34,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="registrationform">
+                <div class="form-horizontal">
+                    <fieldset>
+                        
+                        <div class="form-group">
+                            <div class="col-lg-10">
+                                <a href="http://www.ulatina.ac.cr"><img alt="Universidad Latina" class="img-responsive" src="img/destacado_admision2016.jpg"/></a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>

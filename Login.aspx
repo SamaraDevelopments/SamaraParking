@@ -26,16 +26,17 @@
         <div id="custom-bootstrap-menu" class="navbar navbar-default ">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.aspx">Latina Parking</a>
+                    <a class="navbar-brand" href="index.aspx"></a>
                 </div>
             </div>
         </div>
         <div class="container">
             <!-- ACA EL FORM -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="registrationform">
+                <div class="registrationform center-block">
                     <div class="form-horizontal">
                         <fieldset>
+                            <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <legend>Ingreso<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
                                 <asp:Label ID="LabelEmailIncomingUser" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>

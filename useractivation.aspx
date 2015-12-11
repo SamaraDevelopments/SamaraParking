@@ -112,20 +112,19 @@
                 <div class="form-horizontal">
                     <fieldset>
                         <div class="jumbotron">
-                                
-                            <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
-                            <h2>ID:<%=loggedUser.Id %></h2>
-                            <p>Estudiante: <%=loggedUser.Name %> <%=loggedUser.Lastname %></p>
-                            <p>Vehiculo(s): <%=vehicleFromUser.Brand%> <%=vehicleFromUser.Id %></p>
-                            <div class="table-responsive">
-                                <asp:Table ID="TableRequestRegistry" runat="server" class="table table-bordered">
-                                    <asp:TableHeaderRow>
-                                        <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
-                                </asp:Table>
+                                <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
+                                <h2>ID:<%=loggedUser.Id %> </h2>
+                                <p>Estudiante: <%=loggedUser.Name %> <%=loggedUser.Lastname %> </p>
+                                <p>Vehiculo(s): <%=vehicleFromUser.Brand%> <%=vehicleFromUser.Id %> </p>
+                                <div class="table-responsive">
+                                    <asp:Table ID="TableRequestRegistry" runat="server" class="table table-bordered">
+                                        <asp:TableHeaderRow>
+                                            <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
+                                        </asp:TableHeaderRow>
+                                    </asp:Table>
+                                </div>
                             </div>
-                        </div>
                         <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
                     </fieldset>
                 </div>
