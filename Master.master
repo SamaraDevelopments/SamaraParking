@@ -55,11 +55,11 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="reportbooking.aspx" >Reservas</a></li>
-                                <li><a href="activeUser.aspx">Profesores activos</a></li>
+                                <li><a href="rerportactiveusers.aspx">Profesores activos</a></li>
                             </ul>
                         </li>
 
-                        <%    }
+                        <%}
                            }%>
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="userregistry.aspx.cs" Inherits="Form_userregistry" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="adduser.aspx.cs" Inherits="Form_AddUser" %>
 
 <asp:Content ID="ContentHeadUserRegistry" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
