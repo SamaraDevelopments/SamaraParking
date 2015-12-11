@@ -10,8 +10,6 @@ public class ReportBusiness
 {
     public ReportBusiness()
     {
-        //
-        // TODO: Add constructor logic here
-        //
+      
     }
 }
