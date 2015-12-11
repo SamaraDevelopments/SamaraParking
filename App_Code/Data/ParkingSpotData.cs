@@ -81,9 +81,71 @@ public class ParkingSpotData : BaseData
         }
     }
 
-    public ParkingSpot GetSpot(ParkingSpot spotToRecieve, int selectedPosition)
+    public Table GetSpot(ParkingLot parkingTable, Table bookingTable)
     {
-        
+        ParkingSpot ps = new ParkingSpot();
+        ps.IdParking = parkingTable.Id;
+        try
+        {
+            string statement = "SELECT Id, Spottype FROM ParkingLotSpots WHERE ParkingId = @ParkingId AND Position = @Position";
+            using (SqlCommand sqlCommand = new SqlCommand(statement, ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.Parameters.AddWithValue("@ParkingId", ps.IdParking);
+                sqlCommand.Parameters.Add("@Position", SqlDbType.Int);
+                int counter = 0;
+                for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+                 {
+                    TableRow tr = new TableRow();
+                    for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+                       {
+                       TableCell tc = new TableCell();
+                       tc.CssClass = "btn-error";
+                       ps.Position = counter;
+                       sqlCommand.Parameters["@Position"].Value = ps.Position;
+                       sqlCommand.ExecuteNonQuery();
+                       using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                       {
+                           if (reader.Read())
+                           {
+                               ps.Id = (int)reader["Id"];
+                               ps.SpotType = reader["Spottype"].ToString().Trim();
+                           }
+                       }
+                         switch (ps.SpotType)
+                         {
+                             case "Normal Spot":
+                                 tc.BackColor = Color.Transparent;
+                                 break;
+                             case "Road Spot":
+                                 tc.BackColor = Color.DarkGray;
+                                 tc.Enabled = false;
+                                  break;
+                             case "Handicap Spot":
+                                 tc.BackColor = Color.Blue;
+                                 tc.Enabled = false;
+                                 break;
+                             case "Motorcycle Spot":
+                                 tc.BackColor = Color.Yellow;
+                                 break;
+                                  }
+                          tr.Cells.Add(tc);
+                          counter++;
+                        }
+                     bookingTable.Rows.Add(tr);
+                  }
+                
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+        return bookingTable;
+    }
+    public ParkingSpot GetSpotForReserve(ParkingSpot spotToRecieve, int selectedPosition)
+    {
+
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_Spot", ManageDatabaseConnection("Open")))

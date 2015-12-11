@@ -10,7 +10,7 @@ using System.Data;
 public partial class Form_booking : System.Web.UI.Page
 {
     
-    int selectedPosition = 0;
+    int selectedPosition = -1;
     protected void Page_Load(object sender, EventArgs e)
     {
         
@@ -123,7 +123,7 @@ public partial class Form_booking : System.Web.UI.Page
         ParkingLot bookingParking = new ParkingLot();
 
         bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
-        bookingSpot = pb.GetSpotData(bookingSpot, (int)Session["Position"]);
+        bookingSpot = pb.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
         newBooking.IdUser = currentUser;
         newBooking.IdParkingSpot = bookingSpot;
@@ -151,43 +151,19 @@ public partial class Form_booking : System.Web.UI.Page
         ParkingBusiness pb = new ParkingBusiness();
         ParkingLot parkingTable = new ParkingLot();
         ParkingSpot ps = new ParkingSpot();
-        parkingTable.Id = parkingName;
-        ps.IdParking = parkingTable.Id;
         int counter = 0;
+        parkingTable.Id = parkingName;
         parkingTable = pb.GetDimensions(parkingTable);
+        TableDesignOfNewParking = pb.GetSpotData(parkingTable, TableDesignOfNewParking);
+
         for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
         {
-            TableRow tr = new TableRow();
             for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
             {
-                TableCell tc = new TableCell();
-                tc.CssClass = "btn-error";
-                tc.Controls.Add(addButton(counter));
-                ps = pb.GetSpotData(ps, counter);
-
-                switch (ps.SpotType)
-                {
-                    case "Normal Spot":
-                        tc.BackColor = Color.Transparent;
-                        break;
-                    case "Road Spot":
-                        tc.BackColor = Color.DarkGray;
-                        tc.Enabled = false;
-                        break;
-                    case "Handicap Spot":
-                        tc.BackColor = Color.Blue;
-                        tc.Enabled = false;
-                        break;
-                    case "Motorcycle Spot":
-                        tc.BackColor = Color.Blue;
-                        break;
-                }
-                tr.Cells.Add(tc);
+                TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Controls.Add(addButton(counter));
                 counter++;
             }
-            TableDesignOfNewParking.Rows.Add(tr);
         }
-
     }
     public Button addButton(int counter)
     {

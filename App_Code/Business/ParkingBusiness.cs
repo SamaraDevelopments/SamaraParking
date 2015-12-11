@@ -72,10 +72,16 @@ public class ParkingBusiness
 
         return parkingToTable;
     }
-    public ParkingSpot GetSpotData(ParkingSpot ps, int position)
+    public Table GetSpotData(ParkingLot pl, Table bookingTable)
     {
         ParkingSpotData psd = new ParkingSpotData();
-        ps = psd.GetSpot(ps, position);
+        bookingTable = psd.GetSpot(pl, bookingTable);
+        return bookingTable;
+    }
+    public ParkingSpot GetSpotForReserve(ParkingSpot ps, int position)
+    {
+        ParkingSpotData psd = new ParkingSpotData();
+        ps = psd.GetSpotForReserve(ps, position);
         return ps;
     }
 }
