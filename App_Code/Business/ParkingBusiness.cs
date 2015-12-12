@@ -18,22 +18,22 @@ public class ParkingBusiness
     }
     public int AddParking(ParkingLot parkingToAdd)
     {
-        ParkingLotData pld = new ParkingLotData();
-        int insertResult = pld.Insert(parkingToAdd);
+        ParkingLotData parkingLotData = new ParkingLotData();
+        int insertResult = parkingLotData.Insert(parkingToAdd);
 
         return insertResult;
     }
     public int VerifyParking(ParkingLot parkingToAdd)
     {
-        ParkingLotData pld = new ParkingLotData();
-        int insertResult = pld.VerifyName(parkingToAdd);
+        ParkingLotData parkingLotData = new ParkingLotData();
+        int insertResult = parkingLotData.VerifyName(parkingToAdd);
 
         return insertResult;
     }
     public string UpdateParking(ParkingLot parkingToUpdate)
     {
-        ParkingLotData pld = new ParkingLotData();
-        int insertResult = pld.Update(parkingToUpdate);
+        ParkingLotData parkingLotData = new ParkingLotData();
+        int insertResult = parkingLotData.Update(parkingToUpdate);
 
         string failuretext = null;
         if (insertResult != 0)
@@ -48,40 +48,40 @@ public class ParkingBusiness
     }
     public void AddParkingSpot(Table parkingTable, ParkingLot currentParking)
     {
-        ParkingSpotData psd = new ParkingSpotData();
-        psd.Insert(parkingTable, currentParking);
+        ParkingSpotData parkingSpotData = new ParkingSpotData();
+        parkingSpotData.Insert(parkingTable, currentParking);
 
     }
     public DataSet GetParkingForBooking()
     {
-        ParkingLotData pld = new ParkingLotData();
+        ParkingLotData parkingLotData = new ParkingLotData();
 
-        return pld.GetParkingForBooking();
+        return parkingLotData.GetParkingForBooking();
     }
     public int DeleteParking(ParkingLot parkingToDelete)
     {
-        ParkingLotData pld = new ParkingLotData();
-        int insertResult = pld.Delete(parkingToDelete);
+        ParkingLotData parkingLotData = new ParkingLotData();
+        int insertResult = parkingLotData.Delete(parkingToDelete);
 
         return insertResult;
     }
     public ParkingLot GetDimensions(ParkingLot parkingToTable)
     {
-        ParkingLotData pld = new ParkingLotData();
-        parkingToTable = pld.GetParkingTable(parkingToTable);
+        ParkingLotData parkingLotData = new ParkingLotData();
+        parkingToTable = parkingLotData.GetParkingTable(parkingToTable);
 
         return parkingToTable;
     }
-    public Table GetSpotData(ParkingLot pl, Table bookingTable)
+    public Table GetSpotData(ParkingLot parkingLot, Table bookingTable)
     {
-        ParkingSpotData psd = new ParkingSpotData();
-        bookingTable = psd.GetSpot(pl, bookingTable);
+        ParkingSpotData parkingSpotData = new ParkingSpotData();
+        bookingTable = parkingSpotData.GetSpot(parkingLot, bookingTable);
         return bookingTable;
     }
-    public ParkingSpot GetSpotForReserve(ParkingSpot ps, int position)
+    public ParkingSpot GetSpotForReserve(ParkingSpot parkingSpot, int position)
     {
-        ParkingSpotData psd = new ParkingSpotData();
-        ps = psd.GetSpotForReserve(ps, position);
-        return ps;
+        ParkingSpotData parkingSpotData = new ParkingSpotData();
+        parkingSpot = parkingSpotData.GetSpotForReserve(parkingSpot, position);
+        return parkingSpot;
     }
 }

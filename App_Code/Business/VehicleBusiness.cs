@@ -17,10 +17,10 @@ public class VehicleBusiness
 
     public Vehicle LoadVehicles(string idVehicle) {
 
-        VehicleData vd = new VehicleData();
+        VehicleData vehicleData = new VehicleData();
         Vehicle vehicle = new Vehicle();
         vehicle.Id = idVehicle;
-        vehicle = vd.LoadVehicles(vehicle);
+        vehicle = vehicleData.LoadVehicles(vehicle);
 
         return vehicle;
     }
@@ -95,15 +95,15 @@ public class VehicleBusiness
 
       public DataTable GetVehiclesFromUser(User user)
     {
-        VehicleData vd = new VehicleData();
+        VehicleData vehicleData = new VehicleData();
 
-        return vd.GetVehiclesFromUser(user);
+        return vehicleData.GetVehiclesFromUser(user);
     }
 
     public string AddVehicle(Vehicle vehicleToAdd, User currentUser)
     {
-        VehicleData vd = new VehicleData();
-        int insertResult = vd.Insert(vehicleToAdd, currentUser);
+        VehicleData vehicleData = new VehicleData();
+        int insertResult = vehicleData.Insert(vehicleToAdd, currentUser);
 
         string failuretext = null;
         if (insertResult == 0)
@@ -118,8 +118,8 @@ public class VehicleBusiness
     }
     public string DeleteVehicle(Vehicle vehicleToDelete, User currentUser)
     {
-        VehicleData vd = new VehicleData();
-        int deleteResult = vd.Delete(vehicleToDelete, currentUser);
+        VehicleData vehicleData = new VehicleData();
+        int deleteResult = vehicleData.Delete(vehicleToDelete, currentUser);
 
         string failuretext = null;
         if (deleteResult == 0)
@@ -134,8 +134,8 @@ public class VehicleBusiness
     }
     public string EditVehicle(Vehicle vehicleToAdd)
     {
-        VehicleData vd = new VehicleData();
-        int EditResult = vd.Edit(vehicleToAdd);
+        VehicleData vehicleData = new VehicleData();
+        int EditResult = vehicleData.Edit(vehicleToAdd);
 
         string failuretext = null;
         if (EditResult == 0)
@@ -150,15 +150,15 @@ public class VehicleBusiness
     }
     public DataSet GetVehiclesForBooking(User user)
     {
-        VehicleData vd = new VehicleData();
+        VehicleData vehicleData = new VehicleData();
 
-        return vd.GetVehiclesForBoking(user);
+        return vehicleData.GetVehiclesForBoking(user);
     }
 
     public List<Vehicle> LoadListOfVehicles(User user)
     {
-        VehicleData vd = new VehicleData();
+        VehicleData vehicleData = new VehicleData();
 
-        return vd.LoadListOfVehicles(user);
+        return vehicleData.LoadListOfVehicles(user);
     }
 }

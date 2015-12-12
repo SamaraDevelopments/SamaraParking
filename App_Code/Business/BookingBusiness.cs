@@ -37,14 +37,14 @@ using System.Web;
         }
         public DataTable GetReportBooking()
         {
-            BookingData bd = new BookingData();
+            BookingData bookingData = new BookingData();
 
-            return bd.GetReportBooking();
+            return bookingData.GetReportBooking();
         }
 
-    public void InsertBooking(Booking booking)
+    public void InsertBooking(Booking bookingToAdd)
     {
-        BookingData bd = new BookingData();
-        bd.Insert(booking);
+        BookingData bookingData = new BookingData();
+        bookingData.Insert(bookingToAdd);
     }
    }

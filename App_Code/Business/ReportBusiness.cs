@@ -15,16 +15,16 @@ public class ReportBusiness
     //public int[] getUsersAndProfesors()
     //{
     //    int[] results;
-    //    BookingData bd = new BookingData();
-    //    results = bd.GetUsersAndProfesors();
+    //    BookingData bookingData = new BookingData();
+    //    results = bookingData.GetUsersAndProfesors();
     //    return results;
     //}
 
     //public int[] getParkingUses()
     //{
     //     int[] results;
-    //    BookingData bd = new BookingData();
-    //    results = bd.GetParkingUses();
+    //    BookingData bookingData = new BookingData();
+    //    results = bookingData.GetParkingUses();
     //    return results;
     //}
 }
