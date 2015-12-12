@@ -40,9 +40,9 @@
         function drawMultSeries() {
             var data = google.visualization.arrayToDataTable([
               ['Cuatrimestre', 'Profesor', 'Estudiantes'],
-              ['Primero', <%=reportList[0]%>, <%=reportList[1]%>],
-              ['Segundo', <%=reportList[2]%>, <%=reportList[3]%>],
-              ['Tercer', <%=reportList[4]%>, <%=reportList[5]%>],
+              ['Primero', <%=reportList[1]%>, <%=reportList[0]%>],
+              ['Segundo', <%=reportList[3]%>, <%=reportList[2]%>],
+              ['Tercer', <%=reportList[5]%>, <%=reportList[4]%>],
             ]);
 
             var options = {
