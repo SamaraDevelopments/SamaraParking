@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="rerportactiveusers.aspx.cs" Inherits="Form_RerportActiveUsers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeFile="reportactiveusers.aspx.cs" Inherits="Form_RerportActiveUsers" %>
 
 
 
@@ -12,7 +12,7 @@
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        <legend>Profesores activos:</legend>
+                        <legend>Usuarios con marchamo activo:</legend>
                         <div class="img-responsive">
 
                           <div id="chart_div"></div>
