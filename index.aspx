@@ -16,9 +16,9 @@
                         <legend>Bienvenido <%=loggedUser.Name%></legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelRegistry" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelRegistry" Font-Size= "15.9px" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:Label ID="LabelRegistryOfCommingUser" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                    <asp:Label ID="LabelRegistryOfCommingUser" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 </div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             { %>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonActiveRegistry" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnActiveRegistry_Click"/>
+                                <asp:Button ID="ButtonActiveRegistry" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnActiveRegistry_Click"/>
                             </div>
                         </div>
                         <%  } %>

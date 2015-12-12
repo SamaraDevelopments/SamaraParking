@@ -12,19 +12,19 @@ public class ReportBusiness
     {
       
     }
-    public int[] getUsersAndProfesors()
-    {
-        int[] results;
-        BookingData bd = new BookingData();
-        results = bd.GetUsersAndProfesors();
-        return results;
-    }
+    //public int[] getUsersAndProfesors()
+    //{
+    //    int[] results;
+    //    BookingData bd = new BookingData();
+    //    results = bd.GetUsersAndProfesors();
+    //    return results;
+    //}
 
-    public int[] getParkingUses()
-    {
-         int[] results;
-        BookingData bd = new BookingData();
-        results = bd.GetParkingUses();
-        return results;
-    }
+    //public int[] getParkingUses()
+    //{
+    //     int[] results;
+    //    BookingData bd = new BookingData();
+    //    results = bd.GetParkingUses();
+    //    return results;
+    //}
 }
