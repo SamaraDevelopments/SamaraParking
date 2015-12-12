@@ -253,4 +253,71 @@ public class UserData : BaseData
 
         return mail;
         }
+
+    public int[] GetUsersAndProfesors()
+    {
+        int[] users; 
+        users = new int[6];  // users sends {Students1, teachers1, students2, teachers2, students3, teachers3} 
+        int valueStudentsToAdd = 0;
+        int valueTeachersToAdd = 0;
+        DateTime currentTime = DateTime.Now;
+        DateTime upperBoundsFirst = new DateTime(currentTime.Year, 1, 1);
+        DateTime lowerBoundsFirst = new DateTime(currentTime.Year, 4, 30);
+        DateTime upperBoundsSecond = new DateTime(currentTime.Year, 5, 1);
+        DateTime lowerBoundsSecond = new DateTime(currentTime.Year, 8, 30);
+        DateTime upperBoundsThird = new DateTime(currentTime.Year, 8, 31);
+        DateTime lowerBoundsThird = new DateTime(currentTime.Year, 12, 31);
+      try
+       {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+            string statement = "SELECT Count(*) FROM Users WHERE Roletype = @Roletype AND Registry = @Registry";
+            using (SqlCommand sqlCommand = new SqlCommand(statement, connection))
+            {
+                sqlCommand.Parameters.AddWithValue("@Roletype", 1);
+                sqlCommand.Parameters.AddWithValue("@Registry", true);
+                valueStudentsToAdd = (int)sqlCommand.ExecuteScalar();
+            }
+
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+      try
+      {
+          //open database connection
+          SqlConnection connection = ManageDatabaseConnection("Open");
+          string statement = "SELECT Count(*) FROM Users WHERE Roletype = @Roletype";
+          using (SqlCommand sqlCommand = new SqlCommand(statement, connection))
+          {
+              sqlCommand.Parameters.AddWithValue("@Roletype", 2);
+              valueTeachersToAdd = (int)sqlCommand.ExecuteScalar();
+          }
+
+          ManageDatabaseConnection("Close");
+      }
+      catch (SqlException sqlException)
+      {
+          throw sqlException;
+      }
+      if (currentTime > upperBoundsFirst && currentTime < lowerBoundsFirst)
+      {
+          users[0] = valueStudentsToAdd;
+          users[1] = valueTeachersToAdd;
+      }
+      else if (currentTime > upperBoundsSecond && currentTime < lowerBoundsSecond)
+      {
+          users[2] = valueStudentsToAdd;
+          users[3] = valueTeachersToAdd;
+      }
+      else if (currentTime > upperBoundsThird && currentTime < lowerBoundsThird)
+      {
+          users[4] = valueStudentsToAdd;
+          users[5] = valueTeachersToAdd;
+      }
+
+      return users;
+    }
 }

@@ -71,7 +71,6 @@ public partial class Form_login : System.Web.UI.Page
     {
         TextBoxEmailIncomingUser.Text = string.Empty;
         TextBoxPasswordIncomingUser.Text = string.Empty;
-
     }
 
 
