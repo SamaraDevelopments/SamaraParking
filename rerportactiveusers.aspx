@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-     <% User loggedUser = (User)Session["USER"];  
-       
-         %>
+
+     <% User loggedUser = (User)Session["USER"]; %>
+
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
@@ -44,7 +44,7 @@
 
             var options = {
                 title: 'Usuarios Activos',
-                chartArea: { width: '60%' },
+                chartArea: { width: '50%' },
                 hAxis: {
                     title: 'Total Usuarios',
                     minValue: 0
