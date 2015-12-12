@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click" />
+                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click"/>
                             </div>
                         </div>
                         <%}%>

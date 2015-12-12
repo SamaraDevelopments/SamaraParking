@@ -114,24 +114,20 @@ public class UserData : BaseData
     }
     public void Update(User newUser)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "update_person";
-
-        SqlCommand sqlCommand;
 
         try
         {
 
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newUser.Id;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newUser.Name;
-            sqlCommand.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = newUser.Lastname;
-            sqlCommand.Parameters.Add("@roletype", SqlDbType.Int).Value = newUser.Roletype;
-            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registry;
-            ManageDatabaseConnection("Close");
+            using (SqlCommand sqlCommand = new SqlCommand("Update_User", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", newUser.Id);
+                sqlCommand.Parameters.AddWithValue("@Name", newUser.Name);
+                sqlCommand.Parameters.AddWithValue("@Lastname", newUser.Lastname);
+                sqlCommand.Parameters.AddWithValue("@Roletype", newUser.Roletype);
+                sqlCommand.Parameters.AddWithValue("@Registry", newUser.Registry);
+                ManageDatabaseConnection("Close");
+            }
         }
         catch (SqlException sqlException)
         {

@@ -23,4 +23,9 @@ public class RegistryBusiness
         UserData ud = new UserData();
         return ud.GetActiveStudent();
     }
+    public void ActiveRegistry(User user)
+    {
+        UserData ud = new UserData();
+        ud.Update(user);
+    }
 }

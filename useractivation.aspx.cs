@@ -95,11 +95,12 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
+        RegistryBusiness registrybusiness = new RegistryBusiness();
         FillTableRequestRegistry();
 
         Session["Vehicle"] = vehicleToAdd;
         currentUser.Registry = true;
-
+        registrybusiness.ActiveRegistry(currentUser);
 
     }
 
