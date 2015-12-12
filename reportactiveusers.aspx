@@ -24,7 +24,10 @@
         </div>
     </div>
 
-     <% User loggedUser = (User)Session["USER"]; %>
+     <% User loggedUser = (User)Session["USER"];
+         ReportBusiness rb = new ReportBusiness();
+         int[] reportList = rb.getUsersAndProfesors();     
+         %>
 
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -37,9 +40,9 @@
         function drawMultSeries() {
             var data = google.visualization.arrayToDataTable([
               ['Cuatrimestre', 'Profesor', 'Estudiantes'],
-              ['Primero', <%=5%>, 250],
-              ['Segundo', 41, 320],
-              ['Tercer', 10, 510],
+              ['Primero', <%=reportList[0]%>, <%=reportList[1]%>],
+              ['Segundo', <%=reportList[2]%>, <%=reportList[3]%>],
+              ['Tercer', <%=reportList[4]%>, <%=reportList[5]%>],
             ]);
 
             var options = {
