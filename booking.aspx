@@ -11,42 +11,42 @@
                     <fieldset>
                         <legend>Reservar espacio <i class="fa fa-pencil pull-right"></i></legend>
                         <div class="form-group">
-                            <asp:Label ID="LabelaParkingName" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelaParkingName" Font-Size= "15.9px" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListParking" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
+                                <asp:DropDownList ID="DropDownListParking" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
                                 </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelInitialHour" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelInitialHour" Font-Size= "15.9px" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListInitialHour" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListInitialHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelFinalHour" runat="server" Text="Hora Final:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelFinalHour" Font-Size= "15.9px" runat="server" Text="Hora Final:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListFinalHour" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListFinalHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelIdVehicle" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIdVehicle" Font-Size= "15.9px" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListVehicleFormUser" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListVehicleFormUser" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="LabelNothing" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelNothing" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                <asp:Label ID="LabelError" Font-Size= "15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
                         </div>
 
 
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonBookingSpot" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
+                                <asp:Button ID="ButtonBookingSpot" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
                             </div>
                         </div>
                     </fieldset>

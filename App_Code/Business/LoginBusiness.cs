@@ -6,14 +6,14 @@ using System.Web;
 
 public class LoginBusiness
 {
-    UserData ud = new UserData();
+    UserData userData = new UserData();
 
     public LoginBusiness()
     { }
 
     public string ValidateUser(User loginUser)
     {
-        int validationType = ud.ValidateUser(loginUser);
+        int validationType = userData.ValidateUser(loginUser);
 
         string failureText = "";
 
@@ -36,15 +36,15 @@ public class LoginBusiness
 
     public User GetUser(User fromUser)
     {
-        UserData ud = new UserData();
-        VehicleBusiness vb = new VehicleBusiness();
-        User userLoaded = ud.GetUser(fromUser);       
-        userLoaded.ListOfVehicles = vb.LoadListOfVehicles(userLoaded);
+        UserData userData = new UserData();
+        VehicleBusiness vehicleBusiness = new VehicleBusiness();
+        User userLoaded = userData.GetUser(fromUser);       
+        userLoaded.ListOfVehicles = vehicleBusiness.LoadListOfVehicles(userLoaded);
         return userLoaded;
     }
     public void ActiveRegistry(User user)
     {
-        UserData ud = new UserData();
-        ud.ChangeRegistry(user);
+        UserData userData = new UserData();
+        userData.ChangeRegistry(user);
     }
 }

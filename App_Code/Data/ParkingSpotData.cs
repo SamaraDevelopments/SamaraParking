@@ -15,8 +15,8 @@ public class ParkingSpotData : BaseData
 {
     public void Insert(Table parkingToAddSpots, ParkingLot currentParking)
     {
-        ParkingSpot ps = new ParkingSpot();
-        ps.IdParking = currentParking.Id;
+        ParkingSpot parkingSpot = new ParkingSpot();
+        parkingSpot.IdParking = currentParking.Id;
         try
         {
             string statement = "INSERT INTO dbo.ParkingLotSpots(ParkingId, Spottype, Position) VALUES(@IdParking, @Spottype, @Position)";
@@ -33,39 +33,39 @@ public class ParkingSpotData : BaseData
                         switch (parkingToAddSpots.Rows[counterRow].Cells[counterColumn].BackColor.Name)
                         {
                             case "Transparent":
-                                ps.SpotType = "Normal Spot";
-                                ps.Position = counter;
-                                sqlCommand.Parameters["@Spottype"].Value= ps.SpotType;
-                                sqlCommand.Parameters["@IdParking"].Value =ps.IdParking;
-                                sqlCommand.Parameters["@Position"].Value =ps.Position;
+                                parkingSpot.SpotType = "Normal Spot";
+                                parkingSpot.Position = counter;
+                                sqlCommand.Parameters["@Spottype"].Value= parkingSpot.SpotType;
+                                sqlCommand.Parameters["@IdParking"].Value = parkingSpot.IdParking;
+                                sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                                 break;
                             case "DarkGray":
-                                ps.SpotType = "Road Spot";
-                                ps.Position = counter;
-                                sqlCommand.Parameters["@Spottype"].Value= ps.SpotType;
-                                sqlCommand.Parameters["@IdParking"].Value =ps.IdParking;
-                                sqlCommand.Parameters["@Position"].Value =ps.Position;
+                                parkingSpot.SpotType = "Road Spot";
+                                parkingSpot.Position = counter;
+                                sqlCommand.Parameters["@Spottype"].Value= parkingSpot.SpotType;
+                                sqlCommand.Parameters["@IdParking"].Value = parkingSpot.IdParking;
+                                sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                                 break;
                             case "Blue":
-                                ps.SpotType = "Handicap Spot";
-                                ps.Position = counter;
-                                sqlCommand.Parameters["@Spottype"].Value= ps.SpotType;
-                                sqlCommand.Parameters["@IdParking"].Value =ps.IdParking;
-                                sqlCommand.Parameters["@Position"].Value =ps.Position;
+                                parkingSpot.SpotType = "Handicap Spot";
+                                parkingSpot.Position = counter;
+                                sqlCommand.Parameters["@Spottype"].Value= parkingSpot.SpotType;
+                                sqlCommand.Parameters["@IdParking"].Value = parkingSpot.IdParking;
+                                sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                                 break;
                             case "Yellow":
-                                ps.SpotType = "Motorcycle Spot";
-                                ps.Position = counter;
-                                sqlCommand.Parameters["@Spottype"].Value= ps.SpotType;
-                                sqlCommand.Parameters["@IdParking"].Value =ps.IdParking;
-                                sqlCommand.Parameters["@Position"].Value =ps.Position;
+                                parkingSpot.SpotType = "Motorcycle Spot";
+                                parkingSpot.Position = counter;
+                                sqlCommand.Parameters["@Spottype"].Value= parkingSpot.SpotType;
+                                sqlCommand.Parameters["@IdParking"].Value = parkingSpot.IdParking;
+                                sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                                 break;
                             default:
-                                ps.SpotType = "Normal Spot";
-                                ps.Position = counter;
-                                sqlCommand.Parameters["@Spottype"].Value= ps.SpotType;
-                                sqlCommand.Parameters["@IdParking"].Value =ps.IdParking;
-                                sqlCommand.Parameters["@Position"].Value =ps.Position;
+                                parkingSpot.SpotType = "Normal Spot";
+                                parkingSpot.Position = counter;
+                                sqlCommand.Parameters["@Spottype"].Value= parkingSpot.SpotType;
+                                sqlCommand.Parameters["@IdParking"].Value = parkingSpot.IdParking;
+                                sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                                 break;
                         }
                         counter++;
@@ -83,55 +83,55 @@ public class ParkingSpotData : BaseData
 
     public Table GetSpot(ParkingLot parkingTable, Table bookingTable)
     {
-        ParkingSpot ps = new ParkingSpot();
-        ps.IdParking = parkingTable.Id;
+        ParkingSpot parkingSpot = new ParkingSpot();
+        parkingSpot.IdParking = parkingTable.Id;
         try
         {
             string statement = "SELECT Id, Spottype FROM ParkingLotSpots WHERE ParkingId = @ParkingId AND Position = @Position";
             using (SqlCommand sqlCommand = new SqlCommand(statement, ManageDatabaseConnection("Open")))
             {
-                sqlCommand.Parameters.AddWithValue("@ParkingId", ps.IdParking);
+                sqlCommand.Parameters.AddWithValue("@ParkingId", parkingSpot.IdParking);
                 sqlCommand.Parameters.Add("@Position", SqlDbType.Int);
                 int counter = 0;
                 for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
                  {
-                    TableRow tr = new TableRow();
+                    TableRow tableRow = new TableRow();
                     for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
                        {
-                       TableCell tc = new TableCell();
-                       tc.CssClass = "btn-error";
-                       ps.Position = counter;
-                       sqlCommand.Parameters["@Position"].Value = ps.Position;
+                       TableCell tableCell = new TableCell();
+                        tableCell.CssClass = "btn-error";
+                        parkingSpot.Position = counter;
+                       sqlCommand.Parameters["@Position"].Value = parkingSpot.Position;
                        sqlCommand.ExecuteNonQuery();
                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
                        {
                            if (reader.Read())
                            {
-                               ps.Id = (int)reader["Id"];
-                               ps.SpotType = reader["Spottype"].ToString().Trim();
+                                parkingSpot.Id = (int)reader["Id"];
+                                parkingSpot.SpotType = reader["Spottype"].ToString().Trim();
                            }
                        }
-                         switch (ps.SpotType)
+                         switch (parkingSpot.SpotType)
                          {
                              case "Normal Spot":
-                                 tc.BackColor = Color.Transparent;
+                                tableCell.BackColor = Color.Transparent;
                                  break;
                              case "Road Spot":
-                                 tc.BackColor = Color.DarkGray;
-                                 tc.Enabled = false;
+                                tableCell.BackColor = Color.DarkGray;
+                                tableCell.Enabled = false;
                                   break;
                              case "Handicap Spot":
-                                 tc.BackColor = Color.Blue;
-                                 tc.Enabled = false;
+                                tableCell.BackColor = Color.Blue;
+                                tableCell.Enabled = false;
                                  break;
                              case "Motorcycle Spot":
-                                 tc.BackColor = Color.Yellow;
+                                tableCell.BackColor = Color.Yellow;
                                  break;
                                   }
-                          tr.Cells.Add(tc);
+                        tableRow.Cells.Add(tableCell);
                           counter++;
                         }
-                     bookingTable.Rows.Add(tr);
+                     bookingTable.Rows.Add(tableRow);
                   }
                 
             }
@@ -153,12 +153,12 @@ public class ParkingSpotData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@ParkingId", spotToRecieve.IdParking);
                 sqlCommand.Parameters.AddWithValue("@Position", selectedPosition);
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataReader sqlReader = sqlCommand.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (sqlReader.Read())
                     {
-                        spotToRecieve.Id = (int)reader["Id"];
-                        spotToRecieve.SpotType = reader["Spottype"].ToString().Trim();
+                        spotToRecieve.Id = (int)sqlReader["Id"];
+                        spotToRecieve.SpotType = sqlReader["Spottype"].ToString().Trim();
                     }
                 }
             }

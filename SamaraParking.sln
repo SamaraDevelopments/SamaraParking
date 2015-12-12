@@ -20,7 +20,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamaraParking(1)", ".", "{4
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "57489"
+		VWDPort = "57043"
+		SlnRelativePath = "..\SamaraParking\"
 	EndProjectSection
 EndProject
 Global

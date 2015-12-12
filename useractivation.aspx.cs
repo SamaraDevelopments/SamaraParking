@@ -79,14 +79,14 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
     protected void btnRequestRegistry_Click(object sender, EventArgs e)
     {
-
         User currentUser = (User)Session["USER"];
-        Vehicle vehicleToAdd = new Vehicle();
-        FillTableRequestRegistry();
-
-        Session["Vehicle"] = vehicleToAdd;
-        currentUser.Registry = true;
-
+        RegistryBusiness registrybusiness = new RegistryBusiness();
+        registrybusiness.EmailForActivationRegistry(currentUser.Email).Subject = "Activación de Marchamo";
+        string bodyOfEmail = "Hola " + currentUser.Name + ",";
+        //Here we add the table in body
+        bodyOfEmail += "<br /><br />Thanks";
+        registrybusiness.EmailForActivationRegistry(currentUser.Email).Body = bodyOfEmail;
+        registrybusiness.EmailForActivationRegistry(currentUser.Email).IsBodyHtml = true;
 
     }
 
@@ -95,11 +95,12 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
+        RegistryBusiness registrybusiness = new RegistryBusiness();
         FillTableRequestRegistry();
 
         Session["Vehicle"] = vehicleToAdd;
         currentUser.Registry = true;
-
+        registrybusiness.ActiveRegistry(currentUser);
 
     }
 

@@ -19,27 +19,27 @@
                     <fieldset>
                         <legend>Agregar usuario<i class="fa fa-pencil pull-right"></i></legend>
                         <div class="form-group">
-                            <asp:Label ID="LabelIDNewUser" runat="server" Text="ID:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIDNewUser" Font-Size= "15.9px" runat="server" Text="ID:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelSessionId" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelSessionId" Font-Size= "15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelNameNewUser" runat="server" Text="Nombre:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelNameNewUser" Font-Size= "15.9px" runat="server" Text="Nombre:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelSessionName" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelSessionName" Font-Size= "15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelLastNameNewUser" runat="server" Text="Apellido:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelLastNameNewUser"  Font-Size= "15.9px"runat="server" Text="Apellido:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelSessionLastname" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelSessionLastname" Font-Size= "15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelEmailNewUser" runat="server" Text="Correo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelEmailNewUser" Font-Size= "15.9px" runat="server" Text="Correo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelSessionEmail" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelSessionEmail" Font-Size= "15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <%if (loggedUser.ListOfVehicles.Count <= 0)
@@ -47,31 +47,31 @@
 
 
                         <div class="form-group">
-                            <asp:Label ID="LabelBrandOfVehicle" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelBrandOfVehicle" Font-Size= "15.9px" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxBrandOfVehicle" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxBrandOfVehicle" Font-Size= "16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelIdVehicleOfVehicle" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIdVehicleOfVehicle" Font-Size= "15.9px" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxIdOfVehicle" runat="server" CssClass="form-control" OnTextChanged="TextBoxIdVehicle_TextChanged"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxIdOfVehicle" Font-Size= "16.5px" runat="server" CssClass="form-control" OnTextChanged="TextBoxIdVehicle_TextChanged"></asp:TextBox>
                                 <div class="checkbox">
                                     <label>
-                                        <asp:CheckBox ID="CheckBoxIsMotrocycle" runat="server" Text="Es Moto?" Checked="false" CssClass="checkbox" />
+                                        <asp:CheckBox ID="CheckBoxIsMotrocycle" Font-Size= "15.9px" runat="server" Text="Es Moto?" Checked="false" CssClass="checkbox" />
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelNothing" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="Label4" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                <asp:Label ID="LabelFirstError" Font-Size= "15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnAddVehicle_Click" />
+                                <asp:Button ID="ButtonRequestRegistryAndAddVehicle" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnAddVehicle_Click" />
                             </div>
                         </div>
 
@@ -90,14 +90,14 @@
                         <asp:Label ID="Label1" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
                         <asp:Label ID="Label2" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
                         <div class="form-group">
-                            <asp:Label ID="LabelTransparent" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelTransparent" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                <asp:Label ID="LabelError" Font-Size= "15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonRequestRegistry" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click" />
+                                <asp:Button ID="ButtonCreateRequestRegistry" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click"/>
                             </div>
                         </div>
                         <%}%>
@@ -125,7 +125,7 @@
                                     </asp:Table>
                                 </div>
                             </div>
-                        <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
+                        <asp:Button ID="ButtonRequestRegistry" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
                     </fieldset>
                 </div>
             </div>

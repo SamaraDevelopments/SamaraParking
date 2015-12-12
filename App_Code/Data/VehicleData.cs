@@ -41,7 +41,7 @@ public class VehicleData : BaseData
     public DataTable GetVehiclesFromUser(User user)
     {
 
-        DataTable dt = new DataTable();
+        DataTable dataTable = new DataTable();
 
         try
         {
@@ -57,7 +57,7 @@ public class VehicleData : BaseData
                 {
 
                     sqlDataAdapter.SelectCommand = sqlCommand;
-                    sqlDataAdapter.Fill(dt);
+                    sqlDataAdapter.Fill(dataTable);
                     
                 }
 
@@ -71,7 +71,7 @@ public class VehicleData : BaseData
             throw sqlException;
         }
 
-        return dt;
+        return dataTable;
     }
 
     public Vehicle LoadVehicles(Vehicle vehicleToAdd)
@@ -89,13 +89,13 @@ public class VehicleData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@VehicleId", vehicleToAdd.Id);
 
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataReader sqlReader = sqlCommand.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (sqlReader.Read())
                     {
-                        LoadedVehicle.Id = reader["Id"].ToString();
-                        LoadedVehicle.Brand = reader["Brand"].ToString();
-                        LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
+                        LoadedVehicle.Id = sqlReader["Id"].ToString();
+                        LoadedVehicle.Brand = sqlReader["Brand"].ToString();
+                        LoadedVehicle.VehicleType = (bool)sqlReader["Vehicletype"];
                         
                     }
 
@@ -163,16 +163,16 @@ public class VehicleData : BaseData
     public DataSet GetVehiclesForBoking(User user)
 
     {
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter();
+        DataSet dataSet = new DataSet();
+        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_VehiclesForBooking", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
-                da.SelectCommand = sqlCommand;
-                da.Fill(ds);  // fill dataset
+                sqlDataAdapter.SelectCommand = sqlCommand;
+                sqlDataAdapter.Fill(dataSet);  // fill dataset
             }
             ManageDatabaseConnection("Close");
         }
@@ -181,12 +181,12 @@ public class VehicleData : BaseData
 
             throw sqlException;
         }
-        return ds;
+        return dataSet;
     }
     public List<Vehicle> LoadListOfVehicles(User user)
     {
         Vehicle LoadedVehicle = new Vehicle();
-        List<Vehicle> list = new List<Vehicle>();
+        List<Vehicle> listOfVehicles = new List<Vehicle>();
         try
         {
             //open database connection
@@ -198,14 +198,14 @@ public class VehicleData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@UserId", user.Id);
 
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataReader sqlReader = sqlCommand.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (sqlReader.Read())
                     {
-                        LoadedVehicle.Id = reader["Id"].ToString();
-                        LoadedVehicle.Brand = reader["Brand"].ToString();
-                        LoadedVehicle.VehicleType = (bool)reader["Vehicletype"];
-                        list.Add(LoadedVehicle);
+                        LoadedVehicle.Id = sqlReader["Id"].ToString();
+                        LoadedVehicle.Brand = sqlReader["Brand"].ToString();
+                        LoadedVehicle.VehicleType = (bool)sqlReader["Vehicletype"];
+                        listOfVehicles.Add(LoadedVehicle);
                     }
                 }
             }
@@ -216,6 +216,6 @@ public class VehicleData : BaseData
             throw sqlException;
         }
 
-        return list;
+        return listOfVehicles;
     }
 }

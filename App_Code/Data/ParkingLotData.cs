@@ -104,15 +104,15 @@ public class ParkingLotData : BaseData
     }
     public DataSet GetParkingForBooking()
     {
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter();
+        DataSet dataSet = new DataSet();
+        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
         try
         {
             using (SqlCommand sqlCommand = new SqlCommand("Get_Parking", ManageDatabaseConnection("Open")))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                da.SelectCommand = sqlCommand;
-                da.Fill(ds);  // fill dataset
+                sqlDataAdapter.SelectCommand = sqlCommand;
+                sqlDataAdapter.Fill(dataSet);  // fill dataset
             }
             ManageDatabaseConnection("Close");
         }
@@ -121,7 +121,7 @@ public class ParkingLotData : BaseData
 
             throw sqlException;
         }
-        return ds;
+        return dataSet;
     }
     public ParkingLot GetParkingTable(ParkingLot parkingToTable)
     {
@@ -132,12 +132,12 @@ public class ParkingLotData : BaseData
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Id", parkingToTable.Id);
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataReader sqlReader = sqlCommand.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (sqlReader.Read())
                     {
-                        parkingToTable.DimensionX = (int)reader["DimensionX"];
-                        parkingToTable.DimensionY = (int)reader["DimensionY"];
+                        parkingToTable.DimensionX = (int)sqlReader["DimensionX"];
+                        parkingToTable.DimensionY = (int)sqlReader["DimensionY"];
                     }
                 } 
             }

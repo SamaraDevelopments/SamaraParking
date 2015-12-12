@@ -39,18 +39,18 @@
                             <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <legend>Ingreso<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="LabelEmailIncomingUser" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelEmailIncomingUser" Font-Size= "15.9px"  runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxEmailIncomingUser" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size= "16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="LabelPasswordIncomingUser" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelPasswordIncomingUser" Font-Size= "15.9px" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxPasswordIncomingUser" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxPasswordIncomingUser" Font-Size= "16.5px"  runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                     <div class="checkbox">
                                         <label>
-                                            <asp:CheckBox ID="CheckBoxRememberIncomingUser" runat="server" Text="Recordarme" Checked="false" CssClass="checkbox" />
+                                            <asp:CheckBox ID="CheckBoxRememberIncomingUser" Font-Size= "15.9px" runat="server" Text="Recordarme" Checked="false" CssClass="checkbox" />
                                         </label>
                                     </div>
                                 </div>
@@ -58,14 +58,14 @@
                             <div class="form-group">
                                 <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:Label ID="LabelError" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                    <asp:Label ID="LabelError" runat="server" Font-Size= "17px" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">                                  
-                                    <asp:Button ID="ButtonSubmit" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click"/>
-                                    <asp:Button ID="ButtonCancel" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click"/>
+                                    <asp:Button ID="ButtonSubmit" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click"/>
+                                    <asp:Button ID="ButtonCancel" Font-Size= "15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click"/>
                                 </div>
                             </div>
                         </fieldset>

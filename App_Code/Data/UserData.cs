@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Net.Mail;
+using System.Net;
 
 /// <summary>
 /// Summary description for UserData
@@ -55,19 +57,19 @@ public class UserData : BaseData
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@email", userToValidate.Email);
                 
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                using (SqlDataReader sqlReader = sqlCommand.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (sqlReader.Read())
                     {
-                        receivedUser.Id = (int)reader["Id"];
-                        receivedUser.Name = reader["Name"].ToString();
-                        receivedUser.Lastname = reader["Lastname"].ToString();
-                        receivedUser.Password = reader["Password"].ToString();
-                        receivedUser.Email = reader["Email"].ToString();
-                        receivedUser.Roletype = (int)reader["Roletype"];
-                        receivedUser.Registry = (bool)reader["Registry"];
+                        receivedUser.Id = (int)sqlReader["Id"];
+                        receivedUser.Name = sqlReader["Name"].ToString();
+                        receivedUser.Lastname = sqlReader["Lastname"].ToString();
+                        receivedUser.Password = sqlReader["Password"].ToString();
+                        receivedUser.Email = sqlReader["Email"].ToString();
+                        receivedUser.Roletype = (int)sqlReader["Roletype"];
+                        receivedUser.Registry = (bool)sqlReader["Registry"];
                     }
-                    reader.Close();
+                    sqlReader.Close();
                             
                 }
 
@@ -114,24 +116,20 @@ public class UserData : BaseData
     }
     public void Update(User newUser)
     {
-        //open database connection
-        SqlConnection connection = ManageDatabaseConnection("Open");
-
-        string databaseCommand = "update_person";
-
-        SqlCommand sqlCommand;
 
         try
         {
 
-            sqlCommand = new SqlCommand(databaseCommand, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = newUser.Id;
-            sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = newUser.Name;
-            sqlCommand.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = newUser.Lastname;
-            sqlCommand.Parameters.Add("@roletype", SqlDbType.Int).Value = newUser.Roletype;
-            sqlCommand.Parameters.Add("@registry", SqlDbType.Bit).Value = newUser.Registry;
-            ManageDatabaseConnection("Close");
+            using (SqlCommand sqlCommand = new SqlCommand("Update_User", ManageDatabaseConnection("Open")))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", newUser.Id);
+                sqlCommand.Parameters.AddWithValue("@Name", newUser.Name);
+                sqlCommand.Parameters.AddWithValue("@Lastname", newUser.Lastname);
+                sqlCommand.Parameters.AddWithValue("@Roletype", newUser.Roletype);
+                sqlCommand.Parameters.AddWithValue("@Registry", newUser.Registry);
+                ManageDatabaseConnection("Close");
+            }
         }
         catch (SqlException sqlException)
         {
@@ -169,7 +167,7 @@ public class UserData : BaseData
     public DataTable GetActiveProfessor()
     {
 
-        DataTable dt = new DataTable();
+        DataTable dataTable = new DataTable();
 
         try
         {
@@ -183,7 +181,7 @@ public class UserData : BaseData
             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
             {
                 sqlDataAdapter.SelectCommand = sqlCommand;
-                sqlDataAdapter.Fill(dt);
+                sqlDataAdapter.Fill(dataTable);
             }
             ManageDatabaseConnection("Close");
         }
@@ -191,14 +189,14 @@ public class UserData : BaseData
         {
             throw sqlException;
         }
-        return dt;
+        return dataTable;
     }
 
 
     public DataTable GetActiveStudent()
     {
 
-        DataTable dt = new DataTable();
+        DataTable dataTable = new DataTable();
 
         try
         {
@@ -212,7 +210,7 @@ public class UserData : BaseData
             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
             {
                 sqlDataAdapter.SelectCommand = sqlCommand;
-                sqlDataAdapter.Fill(dt);
+                sqlDataAdapter.Fill(dataTable);
             }
             ManageDatabaseConnection("Close");
         }
@@ -220,7 +218,7 @@ public class UserData : BaseData
         {
             throw sqlException;
         }
-        return dt;
+        return dataTable;
     }
     public void ChangeRegistry(User user)
     {
@@ -241,5 +239,18 @@ public class UserData : BaseData
             throw sqlException;
         }
     }
+    public MailMessage EmailForActivationRegistry(string emailOfUser) 
+        {
+        MailMessage mail = new MailMessage("maurisho01@gmail.com",emailOfUser);
+        SmtpClient smtpClient = new SmtpClient();
+        smtpClient.Host = "smtp.gmail.com";
+        smtpClient.EnableSsl = true;
+        NetworkCredential networkCred = new NetworkCredential("maurisho01@gmail.com", "misho506");
+        smtpClient.UseDefaultCredentials = true;
+        smtpClient.Credentials = networkCred;
+        smtpClient.Port = 587;
+        smtpClient.Send(mail);
 
+        return mail;
+        }
 }

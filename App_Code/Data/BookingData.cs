@@ -39,17 +39,17 @@ public class BookingData : BaseData
             //open database connection
             SqlConnection connection = ManageDatabaseConnection("Open");
 
-            using (SqlCommand sqlCommand = new SqlCommand("insert_booking", connection))
+            using (SqlCommand sqlCommand = new SqlCommand("Insert_Booking", connection))
             {
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add("@IdUser", SqlDbType.Int).Value = newBooking.IdUser.Id;
-                sqlCommand.Parameters.Add("@IdVehicle", SqlDbType.NVarChar).Value = newBooking.IdVehicle.Id;
-                sqlCommand.Parameters.Add("@IdParkingSpot", SqlDbType.Int).Value = newBooking.IdParkingSpot.Id;
-                sqlCommand.Parameters.Add("@IdParkingLot", SqlDbType.Int).Value = newBooking.IdParkingLot.Id;
-                sqlCommand.Parameters.Add("@EntryTime", SqlDbType.DateTime).Value = newBooking.EntryTime;
-                sqlCommand.Parameters.Add("@ExitTime", SqlDbType.DateTime).Value = newBooking.ExitTime;
-                sqlCommand.Parameters.Add("@CurrentDate", SqlDbType.DateTime).Value = newBooking.Date;
+                sqlCommand.Parameters.AddWithValue("@IdUser", newBooking.IdUser.Id);
+                sqlCommand.Parameters.AddWithValue("@IdVehicle", newBooking.IdVehicle.Id);
+                sqlCommand.Parameters.AddWithValue("@IdParkingSpot", newBooking.IdParkingSpot.Id);
+                sqlCommand.Parameters.AddWithValue("@IdParkingLot", newBooking.IdParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@EntryTime", newBooking.EntryTime);
+                sqlCommand.Parameters.AddWithValue("@ExitTime", newBooking.ExitTime);
+                sqlCommand.Parameters.AddWithValue("@CurrentDate", newBooking.Date);
             }
 
             ManageDatabaseConnection("Close");
@@ -138,5 +138,24 @@ public class BookingData : BaseData
         }
         return dt;
     }
+    //public int[] GetUsersAndProfesors()
+    //{
+    //    try
+    //    {
+    //        //open database connection
+    //        SqlConnection connection = ManageDatabaseConnection("Open");
+
+    //        using (SqlCommand sqlCommand = new SqlCommand("Insert_Booking", connection))
+    //        {
+
+    //        }
+
+    //        ManageDatabaseConnection("Close");
+    //    }
+    //    catch (SqlException sqlException)
+    //    {
+    //        throw sqlException;
+    //    }
+    //}
 
 }
