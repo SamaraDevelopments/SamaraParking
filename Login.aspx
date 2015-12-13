@@ -36,21 +36,22 @@
                 <div class="registrationform center-block">
                     <div class="form-horizontal">
                         <fieldset>
-                            <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
+                            <h1>
+                                <img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <legend>Ingreso<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="LabelEmailIncomingUser" Font-Size= "15.9px"  runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15.9px" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size= "16.5px" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="LabelPasswordIncomingUser" Font-Size= "15.9px" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelPasswordIncomingUser" Font-Size="15.9px" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:TextBox ID="TextBoxPasswordIncomingUser" Font-Size= "16.5px"  runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxPasswordIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                     <div class="checkbox">
                                         <label>
-                                            <asp:CheckBox ID="CheckBoxRememberIncomingUser" Font-Size= "15.9px" runat="server" Text="Recordarme" Checked="false" CssClass="checkbox" />
+                                            <asp:CheckBox ID="CheckBoxRememberIncomingUser" Font-Size="15.9px" runat="server" Text="Recordarme" Checked="false" CssClass="checkbox" />
                                         </label>
                                     </div>
                                 </div>
@@ -58,15 +59,23 @@
                             <div class="form-group">
                                 <asp:Label ID="Label3" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
-                                    <asp:Label ID="LabelError" runat="server" Font-Size= "17px" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                    <asp:Label ID="LabelError" runat="server" Font-Size="17px" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">                                  
-                                    <asp:Button ID="ButtonSubmit" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click"/>
-                                    <asp:Button ID="ButtonCancel" Font-Size= "15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click"/>
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <asp:Button ID="ButtonSubmit" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="ButtonCancel" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                                 </div>
+                            </div>
+                            <div class="product-options">
+                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">Add to Wishlist </a>
+                            </div>
+                            <div class="alert alert-success" id="warning-alert">
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>Success! </strong>
+                                TEST
                             </div>
                         </fieldset>
                     </div>
@@ -97,6 +106,17 @@
                 fade: 1500
             }
         );
+            $(document).ready(function () {
+                $("#warning-alert").hide();
+                $("#deleteButton").click(function showAlert() {
+                    $("#warning-alert").alert();
+                    $("#warning-alert").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#warning-alert").hide();
+                    });
+                });
+            });
+
+
         </script>
     </form>
 

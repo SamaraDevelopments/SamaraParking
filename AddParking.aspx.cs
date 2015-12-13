@@ -145,7 +145,7 @@ public partial class Form_addparking : System.Web.UI.Page
         btnStreet.Text = "";
         btnStreet.ID = "" + (((counterRow + 1) * 100) + counterColumn + 1);
         btnStreet.CommandArgument = counterColumn + " " + counterRow;
-        btnStreet.CssClass = "btn-success";
+        btnStreet.CssClass = "btn-link";
         return btnStreet;
     }
 
@@ -194,8 +194,6 @@ public partial class Form_addparking : System.Web.UI.Page
         TextBoxDimensionsOfParkingX.Enabled = true;
         TextBoxDimensionsOfParkingY.Enabled = true;
         Session["AddParking"] = 0;
-        ButtonNext.CssClass = "btn-primary";
-        ButtonCancel.CssClass = "btn-danger";
         ButtonNext.Enabled = true;
         ButtonCancel.Enabled = true;
     }

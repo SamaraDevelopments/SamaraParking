@@ -25,8 +25,8 @@
                                         </asp:TableHeaderRow>
                                     </asp:Table>
                                 </div>
-                                <asp:Label ID="LabelLegendMoto" Font-Size= "15.9px" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
-                                <asp:Label ID="LabelLegendCar" Font-Size= "15.9px" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelLegendMoto" Font-Size="15.9px" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelLegendCar" Font-Size="15.9px" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
 
                             </div>
                         </div>
@@ -42,34 +42,34 @@
                         <% }%>
 
                         <div class="form-group">
-                            <asp:Label ID="LabelBrandOfVehicle" Font-Size= "15.9px" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelBrandOfVehicle" Font-Size="15.9px" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxBrandOfVehicle" Font-Size= "16.5px" runat="server" placeholder="Marca" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxBrandOfVehicle" Font-Size="16.5px" runat="server" placeholder="Marca" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelIdVehicleOfVehicle" Font-Size= "15.9px" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIdVehicleOfVehicle" Font-Size="15.9px" runat="server" Text="Numero de placa:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:TextBox ID="TextBoxIdOfVehicle" Font-Size= "16.5px" runat="server" placeholder="Numero de placa" CssClass="form-control" OnTextChanged="TextBoxIdVehicle_TextChanged"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxIdOfVehicle" Font-Size="16.5px" runat="server" placeholder="Numero de placa" CssClass="form-control" OnTextChanged="TextBoxIdVehicle_TextChanged"></asp:TextBox>
                                 <div class="checkbox">
                                     <label>
-                                        <asp:CheckBox ID="CheckBoxIsMotrocycle" Font-Size= "15.9px" runat="server" Text="Es Moto?" Checked="false" CssClass="checkbox" />
+                                        <asp:CheckBox ID="CheckBoxIsMotrocycle" Font-Size="15.9px" runat="server" Text="Es Moto?" Checked="false" CssClass="checkbox" />
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelTransparent" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelTransparent" Font-Size="15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelError" Font-Size= "15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
+                                <asp:Label ID="LabelError" Font-Size="15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
                         </div>
                         <%if (vehicleFromUser != null)
                             { %>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonEditVehicle" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Editar Vehiculo" OnClick="btnExecuteEditVehicle_Click" />
-                                <asp:Button ID="ButtonCancelVehicle" Font-Size= "15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar Vehiculo" OnClick="btnCancelEditVehicle_Click" />
+                                <asp:Button ID="ButtonEditVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Editar Vehiculo" OnClick="btnExecuteEditVehicle_Click" />
+                                <asp:Button ID="ButtonCancelVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar Vehiculo" OnClick="btnCancelEditVehicle_Click" />
                             </div>
                         </div>
                         <% 
@@ -78,10 +78,11 @@
                             {%>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonAddVehicle" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Agregar Vehiculo" OnClick="btnAddVehicle_Click" />
+                                <asp:Button ID="ButtonAddVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Agregar Vehiculo" OnClick="btnAddVehicle_Click" />
                             </div>
                         </div>
                         <% }%>
+                      
                     </fieldset>
                 </div>
             </div>
@@ -105,6 +106,8 @@
             duration: 4500,
             fade: 1500
         }
+
+      
     );
     </script>
     <style>

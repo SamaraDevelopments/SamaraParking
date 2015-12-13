@@ -15,10 +15,8 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <!-- ============ Google fonts ============ -->
-    <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet'
-        type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800'
-        rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800' rel='stylesheet' type='text/css' />
     <!-- ============ Add custom CSS here ============ -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -42,6 +40,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-right">
+
                         <%if (loggedUser.Registry == true)
                             {%>
                         <li><a href="addVehicle.aspx">Sus vehiculos</a> </li>

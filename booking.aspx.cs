@@ -171,7 +171,7 @@ public partial class Form_booking : System.Web.UI.Page
         btnReserve.Click += new System.EventHandler(btnReserve_Click);
         btnReserve.Text = "";
         btnReserve.ID = "" + (counter);
-        btnReserve.CssClass = "btn-success";
+        btnReserve.CssClass = "btn-link";
         return btnReserve;
     }
     protected void btnReserve_Click(object sender, EventArgs e)

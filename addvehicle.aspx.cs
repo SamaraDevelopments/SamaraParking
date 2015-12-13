@@ -153,12 +153,16 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         btn.ID = btn.ID.Remove(btn.ID.Length - 1);
         vehicleToDelete.Id = btn.ID;
 
+
+
         if (vb.DeleteVehicle(vehicleToDelete, currentUser) != null)
         {
             LabelError.Text = vb.DeleteVehicle(vehicleToDelete, currentUser);
         }
         else
         {
+            Session["Alert"] = null;
+            FillTableUserVehicles();
             LabelError.Text = "El vehiculo fue eliminado exitosamente";
         }
     }

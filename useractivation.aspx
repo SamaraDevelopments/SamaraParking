@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelLastNameNewUser"  Font-Size= "15.9px"runat="server" Text="Apellido:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelLastNameNewUser"  Font-Size= "15.9px" runat="server" Text="Apellido:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelSessionLastname" Font-Size= "15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
