@@ -29,10 +29,30 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         User currentUser = (User)Session["USER"];
         DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
 
-        for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
+        TableRow firstRow = new TableRow();
+
+        for (int i = 0; i < 4; i++)
         {
-            TableRegistryVehicles.Rows.RemoveAt(i);
+            int counterCells = 0;
+            TableCell tc = new TableCell();
+            switch (counterCells)
+            {
+                case 0:
+                tc.Text = "Placa";
+                break;
+                case 1:
+                tc.Text = "Marca";
+                break;
+                case 2:
+                tc.Text = "Tipo";
+                break;
+                case 3:
+                tc.Text = "Acción";
+                break;
+            }
+            firstRow.Cells.Add(tc);
         }
+        TableRegistryVehicles.Rows.Add(firstRow);
 
         foreach (DataRow dr in userVehiclesTable.Rows)
         {
@@ -125,8 +145,8 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             else
             {
                 Session["ALERT"] = "Agregado";
+                TableRegistryVehicles.Rows.Clear();
                 FillTableUserVehicles();
-                TableRegistryVehicles.Rows.RemoveAt(1);
                 TextBoxIdOfVehicle.Text = null;
                 TextBoxBrandOfVehicle.Text = null;
             }
@@ -158,8 +178,8 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         else
         {
             Session["ALERT"] = "Borrado";
+            TableRegistryVehicles.Rows.Clear();
             FillTableUserVehicles();
-            TableRegistryVehicles.Rows.RemoveAt(1);
         }
     }
     protected void btnEditVehicle_Click(object sender, EventArgs e)
@@ -214,8 +234,8 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         }
         else
         {
+            TableRegistryVehicles.Rows.Clear();
             FillTableUserVehicles();
-            TableRegistryVehicles.Rows.RemoveAt(1);
             TextBoxIdOfVehicle.Text = null;
             TextBoxBrandOfVehicle.Text = null;
             TextBoxIdOfVehicle.Enabled = true;

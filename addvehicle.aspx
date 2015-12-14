@@ -18,12 +18,6 @@
                             <div class="col-lg-10">
                                 <div class="table-responsive">
                                     <asp:Table ID="TableRegistryVehicles" runat="server" class="table table-bordered">
-                                        <asp:TableHeaderRow>
-                                            <asp:TableHeaderCell>PLACA</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>MARCA</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>TIPO</asp:TableHeaderCell>
-                                            <asp:TableHeaderCell>ACCION</asp:TableHeaderCell>
-                                        </asp:TableHeaderRow>
                                     </asp:Table>
                                 </div>
                                 <asp:Label ID="LabelLegendMoto" Font-Size="15.9px" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
