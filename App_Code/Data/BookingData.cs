@@ -114,7 +114,7 @@ public class BookingData : BaseData
     public DataTable GetReportBooking()
     {
 
-        DataTable dt = new DataTable();
+        DataTable dataTable = new DataTable();
 
         try
         {
@@ -128,7 +128,7 @@ public class BookingData : BaseData
             using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
             {
                 sqlDataAdapter.SelectCommand = sqlCommand;
-                sqlDataAdapter.Fill(dt);
+                sqlDataAdapter.Fill(dataTable);
             }
             ManageDatabaseConnection("Close");
         }
@@ -136,7 +136,35 @@ public class BookingData : BaseData
         {
             throw sqlException;
         }
-        return dt;
+        return dataTable;
     }
+    public DataTable GetBookigsForSecurity(ParkingLot parkingLot,  DateTime initialHour)
+    {
 
+        DataTable dataTable = new DataTable();
+
+        try
+        {
+            //open database connection
+            SqlConnection connection = ManageDatabaseConnection("Open");
+
+            SqlCommand sqlCommand = new SqlCommand("Get_BookingsForSecurity", connection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter())
+            {
+                sqlDataAdapter.SelectCommand = sqlCommand;
+                sqlCommand.Parameters.AddWithValue("@IdParking", parkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@InitialHour", initialHour);
+                sqlDataAdapter.Fill(dataTable);
+            }
+            ManageDatabaseConnection("Close");
+        }
+        catch (SqlException sqlException)
+        {
+            throw sqlException;
+        }
+        return dataTable;
+    }
 }

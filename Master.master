@@ -60,6 +60,9 @@
 
                         <%}
                            }%>
+                        <%if ( loggedUser.Roletype == 3) { %>
+                            <li><a href="security.aspx">Reservas</a></li>
+                        <%} %>
                         <li><a href="login.aspx" onclick="">Salir</a></li>
                     </ul>
                 </div>

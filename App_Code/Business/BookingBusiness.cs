@@ -47,4 +47,9 @@ using System.Web;
         BookingData bookingData = new BookingData();
         bookingData.Insert(bookingToAdd);
     }
-   }
+    public DataTable GetReportForSecurity(ParkingLot parkingLot, DateTime initialHour)
+    {
+        BookingData bookingData = new BookingData();
+       return  bookingData.GetBookigsForSecurity(parkingLot, initialHour);
+    }
+}
