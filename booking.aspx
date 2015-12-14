@@ -5,6 +5,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
     <div class="container">
+
+        <% User loggedUser = (User)Session["USER"];  %>
+
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
                 <div class="form-horizontal">
@@ -29,13 +32,14 @@
                                 <asp:DropDownList ID="DropDownListFinalHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
+                        <% if (loggedUser.Roletype != 3 ) {%>
                         <div class="form-group">
                             <asp:Label ID="LabelIdVehicle" Font-Size= "15.9px" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:DropDownList ID="DropDownListVehicleFormUser" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
                             </div>
                         </div>
-
+                        <%} %>
                         <div class="form-group">
                             <asp:Label ID="LabelNothing" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
@@ -60,7 +64,7 @@
                     <fieldset>
                         <legend>Diseño del parqueo:</legend>
                         <div class="form-group">
-                            <div class="col-lg-10">
+                            <div class="col-lg-10"> 
                                 <div class="table-responsive">
                                     <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
                                     </asp:Table>
