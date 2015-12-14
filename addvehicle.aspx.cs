@@ -19,13 +19,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         }
         Session["VEHICLE"] = null;
         Session["ALERT"] = "null";
-      
-
-        if (!IsPostBack)
-        {
-            FillTableUserVehicles();
-        }
-
+        FillTableUserVehicles();
     }
 
     protected void FillTableUserVehicles()
@@ -34,6 +28,11 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         VehicleBusiness vb = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
         DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
+
+        for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
+        {
+            TableRegistryVehicles.Rows.RemoveAt(i);
+        }
 
         foreach (DataRow dr in userVehiclesTable.Rows)
         {
@@ -126,10 +125,6 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             else
             {
                 Session["ALERT"] = "Agregado";
-                for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
-                {
-                    TableRegistryVehicles.Rows.RemoveAt(i);
-                }
                 FillTableUserVehicles();
                 TextBoxIdOfVehicle.Text = null;
                 TextBoxBrandOfVehicle.Text = null;
@@ -162,10 +157,6 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         else
         {
             Session["ALERT"] = "Borrado";
-            for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
-            {
-                TableRegistryVehicles.Rows.RemoveAt(i);
-            }
             FillTableUserVehicles();
         }
     }
@@ -178,7 +169,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         vehicleToAdd.Id = btn.ID;
         vehicleToAdd = vb.LoadVehicles(vehicleToAdd.Id);
         Session["VEHICLE"] = vehicleToAdd;
-        TextBoxBrandOfVehicle.Text = vehicleToAdd.Brand;
+        TextBoxBrandOfVehicle.Text = vehicleToAdd.Brand.Trim();
         TextBoxIdOfVehicle.Text = vehicleToAdd.Id;
         TextBoxIdOfVehicle.Enabled = false;
 
@@ -190,7 +181,6 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         {
             CheckBoxIsMotrocycle.Checked = false;
         }
-        FillTableUserVehicles();
     }
 
     protected void btnExecuteEditVehicle_Click(object sender, EventArgs e)
@@ -222,11 +212,8 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         }
         else
         {
-            for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
-            {
-                TableRegistryVehicles.Rows.RemoveAt(i);
-            }
             FillTableUserVehicles();
+            TableRegistryVehicles.Rows.RemoveAt(1);
             TextBoxIdOfVehicle.Text = null;
             TextBoxBrandOfVehicle.Text = null;
             TextBoxIdOfVehicle.Enabled = true;

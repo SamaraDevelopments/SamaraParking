@@ -126,6 +126,7 @@ public class VehicleData : BaseData
                 sqlCommand.Parameters.AddWithValue("@Brand", editVehicle.Brand);
                 sqlCommand.Parameters.AddWithValue("@Vehicletype", editVehicle.VehicleType);
                 editResult = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                sqlCommand.ExecuteNonQuery();
             }
             ManageDatabaseConnection("Close");
         }

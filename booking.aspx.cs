@@ -152,13 +152,13 @@ public partial class Form_booking : System.Web.UI.Page
         ParkingLot parkingspotable = new ParkingLot();
         ParkingSpot parking = new ParkingSpot();
         int counter = 0;
-        parkingTable.Id = parkingName;
-        parkingTable = parkingBusiness.GetDimensions(parkingTable);
-        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingTable, TableDesignOfNewParking);
+        parkingspotable.Id = parkingName;
+        parkingspotable = parkingBusiness.GetDimensions(parkingspotable);
+        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingspotable, TableDesignOfNewParking);
 
-        for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+        for (int counterRow = 0; counterRow < parkingspotable.DimensionX; counterRow++)
         {
-            for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+            for (int counterColumn = 0; counterColumn < parkingspotable.DimensionY; counterColumn++)
             {
                 TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Controls.Add(addButton(counter));
                 counter++;
