@@ -5,13 +5,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
 
 public partial class security : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        FillDropDownListParking();
-        FillDropDownListInitialHour();
+
+        if (Session["USER"] == null)
+        {
+            Response.Redirect("login.aspx");
+        }
+        if (!IsPostBack)
+        {
+            FillDropDownListParking();
+            FillDropDownListInitialHour();
+        }
     }
     public void FillDropDownListParking()
     {
@@ -57,9 +66,11 @@ public partial class security : System.Web.UI.Page
         booking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);
         FillTableReportBookingForSecurity(booking.IdParkingLot, booking.EntryTime);
     }
+
     public void FillTableReportBookingForSecurity(ParkingLot selectedParkingLot, DateTime selectedDateTime)
     {
-        BookingBusiness bookingData = new BookingBusiness();
-        bookingData.GetReportForSecurity(selectedParkingLot,selectedDateTime);
+        BookingBusiness bookingBusiness = new BookingBusiness();
+
+        bookingBusiness.GetReportForSecurity(selectedParkingLot,selectedDateTime);
     }
 }

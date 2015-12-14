@@ -140,8 +140,7 @@ public class BookingData : BaseData
     }
     public DataTable GetBookigsForSecurity(ParkingLot parkingLot,  DateTime initialHour)
     {
-
-        DataTable dataTable = new DataTable();
+            DataTable dataTable = new DataTable();
 
         try
         {
