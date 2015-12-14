@@ -118,6 +118,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
                     catch (Exception)
                     {
                         tc.Text = string.Format(dr[dc.ColumnName].ToString());
+                        
                     }
 
                     tr.Cells.Add(tc);
@@ -206,6 +207,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
         foreach (DataRow dr in userVehiclesTable.Rows)
         {
             TableRow tr = new TableRow();
+            tr.ForeColor = System.Drawing.Color.Black;
             int counterCells = 0;
 
             foreach (DataColumn dc in userVehiclesTable.Columns)

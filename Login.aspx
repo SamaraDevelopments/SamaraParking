@@ -31,16 +31,14 @@
             </div>
         </div>
         <div class="container">
-            <!-- ACA EL FORM -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="registrationform center-block">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-lg-offset-3">
+                <div class="registrationform">
                     <div class="form-horizontal">
                         <fieldset>
-                            <h1>
-                                <img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
+                            <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <legend>Ingreso<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15.9px" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15.9px" runat="server" Text="Correo: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
@@ -62,7 +60,6 @@
                                     <asp:Label ID="LabelError" runat="server" Font-Size="17px" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <asp:Button ID="ButtonSubmit" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
@@ -74,7 +71,6 @@
                 </div>
             </div>
         </div>
-
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.backstretch.js" type="text/javascript"></script>

@@ -13,6 +13,13 @@
                 <div class="form-horizontal">
                     <fieldset>
                         <legend>Usuarios con marchamo activo:</legend>
+                         <div class="form-group">
+                            <asp:Label ID="LabelaParkingName" Font-Size= "15.9px" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:DropDownList ID="DropDownListParking" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
                         <div class="img-responsive">
 
                           <div id="chart_div"></div>
