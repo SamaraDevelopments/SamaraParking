@@ -82,10 +82,55 @@ public partial class Form_UserActivation : System.Web.UI.Page
     {
         User currentUser = (User)Session["USER"];
         RegistryBusiness registrybusiness = new RegistryBusiness();
+        VehicleBusiness vb = new VehicleBusiness();
+        DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
+
         registrybusiness.EmailForActivationRegistry(currentUser.Email).Subject = "Activación de Marchamo";
-        string bodyOfEmail = "Hola " + currentUser.Name + ",";
-        //Here we add the table in body
-        bodyOfEmail += "<br /><br />Thanks";
+        string bodyOfEmail = "ID: " + currentUser.Id;
+        bodyOfEmail += "Nombre: " + currentUser.Name;
+        bodyOfEmail += "Apellido(s): " + currentUser.Lastname;
+
+        foreach (DataRow dr in userVehiclesTable.Rows)
+        {
+            TableRow tr = new TableRow();
+            int counterCells = 0;
+            foreach (DataColumn dc in userVehiclesTable.Columns)
+            {
+                TableCell tc = new TableCell();
+                if (counterCells >= 2)
+                {
+
+                }
+                else
+                {
+                    try
+                    {
+                        bool isMoto = (bool)dr[dc.ColumnName];
+                        if (isMoto)
+                        {
+                            tc.Text = string.Format("M");
+                        }
+                        else
+                        {
+                            tc.Text = string.Format("VL");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        tc.Text = string.Format(dr[dc.ColumnName].ToString());
+                    }
+
+                    tr.Cells.Add(tc);
+                }
+
+                counterCells++;
+                TableRequestRegistry.Rows.Add(tr);
+                bodyOfEmail += TableRequestRegistry.Rows.Add(tr);
+
+            }
+        }
+
+        bodyOfEmail += "<br /><br /> Gracias";
         registrybusiness.EmailForActivationRegistry(currentUser.Email).Body = bodyOfEmail;
         registrybusiness.EmailForActivationRegistry(currentUser.Email).IsBodyHtml = true;
 

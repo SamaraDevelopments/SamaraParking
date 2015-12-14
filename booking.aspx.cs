@@ -92,38 +92,38 @@ public partial class Form_booking : System.Web.UI.Page
     }
     public void FillDropDownListParking()
     {
-        ParkingBusiness pb = new ParkingBusiness();
-        DataSet ds = pb.GetParkingForBooking();
+        ParkingBusiness parkingbusiness = new ParkingBusiness();
+        DataSet dataSet = parkingbusiness.GetParkingForBooking();
 
-        DropDownListParking.DataTextField = ds.Tables[0].Columns["Name"].ToString();
-        DropDownListParking.DataValueField = ds.Tables[0].Columns["Id"].ToString();
-        DropDownListParking.DataSource = ds.Tables[0];
+        DropDownListParking.DataTextField = dataSet.Tables[0].Columns["Name"].ToString();
+        DropDownListParking.DataValueField = dataSet.Tables[0].Columns["Id"].ToString();
+        DropDownListParking.DataSource = dataSet.Tables[0];
         DropDownListParking.DataBind();
     }
     public void FillDropDownListVehiclesFromUser()
     {
-        VehicleBusiness vb = new VehicleBusiness();
+        VehicleBusiness vehicleBusiness = new VehicleBusiness();
         User currentUser = (User)Session["USER"];
-        DataSet ds = vb.GetVehiclesForBooking(currentUser);
+        DataSet dataSet = vehicleBusiness.GetVehiclesForBooking(currentUser);
 
-        DropDownListVehicleFormUser.DataTextField = ds.Tables[0].Columns["Vehicleid"].ToString();//null
-        DropDownListVehicleFormUser.DataValueField = ds.Tables[0].Columns["Vehicleid"].ToString();
-        DropDownListVehicleFormUser.DataSource = ds.Tables[0];
+        DropDownListVehicleFormUser.DataTextField = dataSet.Tables[0].Columns["Vehicleid"].ToString();//null
+        DropDownListVehicleFormUser.DataValueField = dataSet.Tables[0].Columns["Vehicleid"].ToString();
+        DropDownListVehicleFormUser.DataSource = dataSet.Tables[0];
         DropDownListVehicleFormUser.DataBind();
     }
 
     protected void btnBookingSpot_Click(object sender, EventArgs e)
     {
         Booking newBooking = new Booking();
-        BookingBusiness bb = new BookingBusiness();
-        ParkingBusiness pb = new ParkingBusiness();
+        BookingBusiness bookingBusiness = new BookingBusiness();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
         User currentUser = (User)Session["USER"];
         Vehicle bookingVehicle = new Vehicle();
         ParkingSpot bookingSpot = new ParkingSpot();
         ParkingLot bookingParking = new ParkingLot();
 
         bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
-        bookingSpot = pb.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
+        bookingSpot = parkingBusiness.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
         newBooking.IdUser = currentUser;
         newBooking.IdParkingSpot = bookingSpot;
@@ -141,20 +141,20 @@ public partial class Form_booking : System.Web.UI.Page
         }
         else
         {
-            bb.InsertBooking(newBooking);
+            bookingBusiness.InsertBooking(newBooking);
         }
     }
 
     public void FillTableDesignOfNewParking(int parkingName)
     {
         TableDesignOfNewParking.Rows.Clear();
-        ParkingBusiness pb = new ParkingBusiness();
-        ParkingLot parkingTable = new ParkingLot();
-        ParkingSpot ps = new ParkingSpot();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
+        ParkingLot parkingspotable = new ParkingLot();
+        ParkingSpot parking = new ParkingSpot();
         int counter = 0;
         parkingTable.Id = parkingName;
-        parkingTable = pb.GetDimensions(parkingTable);
-        TableDesignOfNewParking = pb.GetSpotData(parkingTable, TableDesignOfNewParking);
+        parkingTable = parkingBusiness.GetDimensions(parkingTable);
+        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingTable, TableDesignOfNewParking);
 
         for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
         {
@@ -209,9 +209,9 @@ public partial class Form_booking : System.Web.UI.Page
     public ParkingLot removeSelected(int parkingName)
     {
         ParkingLot parkingTable = new ParkingLot();
-        ParkingBusiness pb = new ParkingBusiness();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
         parkingTable.Id = parkingName;
-        parkingTable = pb.GetDimensions(parkingTable);
+        parkingTable = parkingBusiness.GetDimensions(parkingTable);
         for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
         {
             for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
