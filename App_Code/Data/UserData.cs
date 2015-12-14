@@ -256,29 +256,48 @@ public class UserData : BaseData
         return mail;
         }
 
-    public int[] GetUsersAndProfesors()
+    public int[] GetUsersAndProfesors(int year)
     {
         int[] users; 
         users = new int[6];  // users sends {Students1, teachers1, students2, teachers2, students3, teachers3} 
-        int valueStudentsToAdd = 0;
+        int valueStudentsToAddFirstQuarter = 0;
+        int valueStudentsToAddSecondQuarter = 0;
+        int valueStudentsToAddThirdQuarter = 0;
         int valueTeachersToAdd = 0;
-        DateTime currentTime = DateTime.Now;
-        DateTime upperBoundsFirst = new DateTime(currentTime.Year, 1, 1);
-        DateTime lowerBoundsFirst = new DateTime(currentTime.Year, 4, 30);
-        DateTime upperBoundsSecond = new DateTime(currentTime.Year, 5, 1);
-        DateTime lowerBoundsSecond = new DateTime(currentTime.Year, 8, 30);
-        DateTime upperBoundsThird = new DateTime(currentTime.Year, 8, 31);
-        DateTime lowerBoundsThird = new DateTime(currentTime.Year, 12, 31);
+        DateTime currentTime = new DateTime();
+        DateTime upperBoundsFirst = new DateTime(year, 1, 1);
+        DateTime lowerBoundsFirst = new DateTime(year, 4, 30);
+        DateTime upperBoundsSecond = new DateTime(year, 5, 1);
+        DateTime lowerBoundsSecond = new DateTime(year, 8, 30);
+        DateTime upperBoundsThird = new DateTime(year, 8, 31);
+        DateTime lowerBoundsThird = new DateTime(year, 12, 31);
       try
        {
             //open database connection
             SqlConnection connection = ManageDatabaseConnection("Open");
-            string statement = "SELECT Count(*) FROM Users WHERE Roletype = @Roletype AND Registry = @Registry";
+            string statement = "SELECT * FROM CurrentUsers WHERE Registry = @Registry";
             using (SqlCommand sqlCommand = new SqlCommand(statement, connection))
             {
-                sqlCommand.Parameters.AddWithValue("@Roletype", 1);
                 sqlCommand.Parameters.AddWithValue("@Registry", true);
-                valueStudentsToAdd = (int)sqlCommand.ExecuteScalar();
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        currentTime = (DateTime)reader["UpdateDate"];
+                        if (currentTime > upperBoundsFirst && currentTime < lowerBoundsFirst)
+                        {
+                            valueStudentsToAddFirstQuarter++;
+                        }
+                        else if (currentTime > upperBoundsSecond && currentTime < lowerBoundsSecond)
+                        {
+                            valueStudentsToAddSecondQuarter++;
+                        }
+                        else if (currentTime > upperBoundsThird && currentTime < lowerBoundsThird)
+                        {
+                            valueStudentsToAddThirdQuarter++;
+                        }
+                    }
+                }
             }
 
             ManageDatabaseConnection("Close");
@@ -304,22 +323,12 @@ public class UserData : BaseData
       {
           throw sqlException;
       }
-      if (currentTime > upperBoundsFirst && currentTime < lowerBoundsFirst)
-      {
-          users[0] = valueStudentsToAdd;
-          users[1] = valueTeachersToAdd;
-      }
-      else if (currentTime > upperBoundsSecond && currentTime < lowerBoundsSecond)
-      {
-          users[2] = valueStudentsToAdd;
-          users[3] = valueTeachersToAdd;
-      }
-      else if (currentTime > upperBoundsThird && currentTime < lowerBoundsThird)
-      {
-          users[4] = valueStudentsToAdd;
-          users[5] = valueTeachersToAdd;
-      }
-
+      users[0] = valueStudentsToAddFirstQuarter;
+      users[1] = valueTeachersToAdd;
+      users[2] = valueStudentsToAddSecondQuarter;
+      users[3] = valueTeachersToAdd;
+      users[4] = valueStudentsToAddThirdQuarter;
+      users[5] = valueTeachersToAdd;
       return users;
     }
 }
