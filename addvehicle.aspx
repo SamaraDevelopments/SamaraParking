@@ -5,7 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyFront" runat="Server">
     <!-- ACA EL FORM -->
 
-    <% Vehicle vehicleFromUser = (Vehicle)Session["VEHICLE"];  %>
+    <% Vehicle vehicleFromUser = (Vehicle)Session["VEHICLE"];
+        string alert = (string)Session["ALERT"]; %>
 
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -27,10 +28,8 @@
                                 </div>
                                 <asp:Label ID="LabelLegendMoto" Font-Size="15.9px" runat="server" Text="M = Moto" CssClass="col-lg-2 control-label"></asp:Label>
                                 <asp:Label ID="LabelLegendCar" Font-Size="15.9px" runat="server" Text="VL = Vehiculo Liviano" CssClass="col-lg-2 control-label"></asp:Label>
-
                             </div>
                         </div>
-
                         <%if (vehicleFromUser != null)
                             { %>
                         <legend>Editando su vehiculo</legend>
@@ -82,16 +81,78 @@
                             </div>
                         </div>
                         <% }%>
-                      
                     </fieldset>
                 </div>
             </div>
         </div>
+        <%if (alert.Equals("Borrado"))
+            { %>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="registrationform">
+                <div class="form-horizontal">
+                    <fieldset>
+                        <%--  <div class="product-options">
+                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
+                            </div>--%>
+                        <div class="alert alert-success" id="warning-alert">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Eliminado! </strong>
+                            Su vehiculo a sido eliminado.
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <% }
+    else if (alert.Equals("Editado"))
+    { %>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="registrationform">
+                <div class="form-horizontal">
+                    <fieldset>
+                        <%--  <div class="product-options">
+                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
+                            </div>--%>
+                        <div class="alert alert-success" id="warning-alert">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Editado! </strong>
+                            Su vehiculo a sido editado con exito.
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <% }
+    else if (alert.Equals("Agregado"))
+    { %> 
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="registrationform">
+                <div class="form-horizontal">
+                    <fieldset>
+                        <%--  <div class="product-options">
+                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
+                            </div>--%>
+                        <div class="alert alert-success" id="warning-alert">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Agregado! </strong>
+                            Su vehiculo a sido agregado con exito.
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <%} %>
     </div>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+        $("#warning-alert").alert();
+        $("#warning-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#warning-alert").hide();
+        });
+
         'use strict';
         /* ========================== */
         /* ::::::: Backstrech ::::::: */
@@ -107,7 +168,7 @@
             fade: 1500
         }
 
-      
+
     );
     </script>
     <style>

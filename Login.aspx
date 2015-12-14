@@ -68,15 +68,7 @@
                                     <asp:Button ID="ButtonSubmit" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="ButtonCancel" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                                 </div>
-                            </div>
-                            <div class="product-options">
-                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">Add to Wishlist </a>
-                            </div>
-                            <div class="alert alert-success" id="warning-alert">
-                                <button type="button" class="close" data-dismiss="alert">x</button>
-                                <strong>Success! </strong>
-                                TEST
-                            </div>
+                            </div>                         
                         </fieldset>
                     </div>
                 </div>

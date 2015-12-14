@@ -18,7 +18,14 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
         Session["VEHICLE"] = null;
+        Session["ALERT"] = "null";
         FillTableUserVehicles();
+
+        if (IsPostBack)
+        {
+            FillTableUserVehicles();
+        }
+        else { FillTableUserVehicles(); }
     }
 
     protected void FillTableUserVehicles()
@@ -129,6 +136,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             }
             else
             {
+                Session["ALERT"] = "Agregado";
                 TextBoxIdOfVehicle.Text = null;
                 TextBoxBrandOfVehicle.Text = null;
             }
@@ -153,17 +161,15 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         btn.ID = btn.ID.Remove(btn.ID.Length - 1);
         vehicleToDelete.Id = btn.ID;
 
-
-
         if (vb.DeleteVehicle(vehicleToDelete, currentUser) != null)
         {
             LabelError.Text = vb.DeleteVehicle(vehicleToDelete, currentUser);
         }
         else
         {
-            Session["Alert"] = null;
-            FillTableUserVehicles();
-            LabelError.Text = "El vehiculo fue eliminado exitosamente";
+            Session["ALERT"] = "Borrado";
+            
+            //LabelError.Text = "El vehiculo fue eliminado exitosamente";
         }
     }
     protected void btnEditVehicle_Click(object sender, EventArgs e)
@@ -217,9 +223,9 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         }
         else
         {
-            LabelError.ForeColor = System.Drawing.Color.Green;
-            LabelError.Text = "El vehiculo fue editado";
-            Session["VEHICLE"] = null;
+            //LabelError.ForeColor = System.Drawing.Color.Green;
+            //LabelError.Text = "El vehiculo fue editado";
+            Session["ALERT"] = "Editado";
         }
     }
 

@@ -24,6 +24,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
         VehicleBusiness vb = new VehicleBusiness();
         FillTableUserVehicles();
         requestingUser.ListOfVehicles = vb.LoadListOfVehicles(requestingUser);
+        
     }
     protected void TextBoxIdVehicle_TextChanged(object sender, EventArgs e)
     {

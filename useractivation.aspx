@@ -126,6 +126,8 @@
                                 </div>
                             </div>
                         <asp:Button ID="ButtonRequestRegistry" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
+                        
+                        <input type='button' onclick='window.print();' value='Imprimir' class="btn btn-success"/>
                     </fieldset>
                 </div>
             </div>
