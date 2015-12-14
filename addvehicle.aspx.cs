@@ -19,13 +19,13 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         }
         Session["VEHICLE"] = null;
         Session["ALERT"] = "null";
-        FillTableUserVehicles();
+      
 
-        if (IsPostBack)
+        if (!IsPostBack)
         {
             FillTableUserVehicles();
         }
-        else { FillTableUserVehicles(); }
+
     }
 
     protected void FillTableUserVehicles()
@@ -47,10 +47,8 @@ public partial class Form_AddVehicle : System.Web.UI.Page
                 {
                     idToButton = dr[dc.ColumnName].ToString().Trim();
                 }
-
                 if (counterCells == 3)
                 {
-
                     Button updateBtn = new Button();
                     updateBtn.Click += new System.EventHandler(btnEditVehicle_Click);
                     updateBtn.Text = "Editar";
@@ -68,8 +66,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
                 }
                 else
                 {
-
-                    try
+              try
                     {
                         bool isMoto = (bool)dr[dc.ColumnName];
                         if (isMoto)
@@ -80,23 +77,15 @@ public partial class Form_AddVehicle : System.Web.UI.Page
                         {
                             tc.Text = string.Format("VL");
                         }
-
                     }
                     catch (Exception)
                     {
-
-
-                        tc.Text = string.Format(dr[dc.ColumnName].ToString());
+                        tc.Text = string.Format(dr[dc.ColumnName].ToString().Trim());
                     }
-
-
-                    tr.Cells.Add(tc);
-                  
-
+                    tr.Cells.Add(tc);                
                 }
                 counterCells++;
                 TableRegistryVehicles.Rows.Add(tr);
-
             }
         }
     }
@@ -137,6 +126,11 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             else
             {
                 Session["ALERT"] = "Agregado";
+                for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
+                {
+                    TableRegistryVehicles.Rows.RemoveAt(i);
+                }
+                FillTableUserVehicles();
                 TextBoxIdOfVehicle.Text = null;
                 TextBoxBrandOfVehicle.Text = null;
             }
@@ -168,8 +162,11 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         else
         {
             Session["ALERT"] = "Borrado";
-            
-            //LabelError.Text = "El vehiculo fue eliminado exitosamente";
+            for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
+            {
+                TableRegistryVehicles.Rows.RemoveAt(i);
+            }
+            FillTableUserVehicles();
         }
     }
     protected void btnEditVehicle_Click(object sender, EventArgs e)
@@ -193,7 +190,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         {
             CheckBoxIsMotrocycle.Checked = false;
         }
-
+        FillTableUserVehicles();
     }
 
     protected void btnExecuteEditVehicle_Click(object sender, EventArgs e)
@@ -203,7 +200,6 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         Vehicle vehicleToAdd = new Vehicle();
         vehicleToAdd.Id = TextBoxIdOfVehicle.Text;
         vehicleToAdd.Brand = TextBoxBrandOfVehicle.Text;
-
         if (CheckBoxIsMotrocycle.Checked)
         {
             vehicleToAdd.VehicleType = true;
@@ -212,19 +208,28 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         {
             vehicleToAdd.VehicleType = false;
         }
+
+        string value = vb.EditVehicle(vehicleToAdd);
+
         if (vehicleToAdd.Brand == "")
         {
             LabelError.Text = "Porfavor ingrese una marca";
         }
-        else if (vb.EditVehicle(vehicleToAdd) != null)
+        else if (value != null)
         {
-            LabelError.Text = vb.EditVehicle(vehicleToAdd);
+            LabelError.Text = value;
 
         }
         else
         {
-            //LabelError.ForeColor = System.Drawing.Color.Green;
-            //LabelError.Text = "El vehiculo fue editado";
+            for (int i = 1; i < TableRegistryVehicles.Rows.Count; i++)
+            {
+                TableRegistryVehicles.Rows.RemoveAt(i);
+            }
+            FillTableUserVehicles();
+            TextBoxIdOfVehicle.Text = null;
+            TextBoxBrandOfVehicle.Text = null;
+            TextBoxIdOfVehicle.Enabled = true;
             Session["ALERT"] = "Editado";
         }
     }

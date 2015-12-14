@@ -88,57 +88,31 @@
         <%if (alert.Equals("Borrado"))
             { %>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="registrationform">
-                <div class="form-horizontal">
-                    <fieldset>
-                        <%--  <div class="product-options">
-                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
-                            </div>--%>
-                        <div class="alert alert-success" id="warning-alert">
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                            <strong>Eliminado! </strong>
-                            Su vehiculo a sido eliminado.
-                        </div>
-                    </fieldset>
-                </div>
+            <div class="alert alert-success" id="warning-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Eliminado! </strong>
+                Su vehiculo a sido eliminado.
+            </div>
+
+        </div>
+        <% }
+            else if (alert.Equals("Editado"))
+            { %>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="alert alert-success" id="warning-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Editado! </strong>
+                Su vehiculo a sido editado con exito.
             </div>
         </div>
         <% }
-    else if (alert.Equals("Editado"))
-    { %>
+            else if (alert.Equals("Agregado"))
+            { %>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="registrationform">
-                <div class="form-horizontal">
-                    <fieldset>
-                        <%--  <div class="product-options">
-                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
-                            </div>--%>
-                        <div class="alert alert-success" id="warning-alert">
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                            <strong>Editado! </strong>
-                            Su vehiculo a sido editado con exito.
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-        <% }
-    else if (alert.Equals("Agregado"))
-    { %> 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="registrationform">
-                <div class="form-horizontal">
-                    <fieldset>
-                        <%--  <div class="product-options">
-                                <a id="deleteButton" href="javascript:;" class="btn btn-mini">TEST</a>
-                            </div>--%>
-                        <div class="alert alert-success" id="warning-alert">
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                            <strong>Agregado! </strong>
-                            Su vehiculo a sido agregado con exito.
-                        </div>
-                    </fieldset>
-                </div>
+            <div class="alert alert-success" id="warning-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Agregado! </strong>
+                Su vehiculo a sido agregado con exito.
             </div>
         </div>
         <%} %>
@@ -149,7 +123,7 @@
     <script type="text/javascript">
 
         $("#warning-alert").alert();
-        $("#warning-alert").fadeTo(2000, 500).slideUp(500, function () {
+        $("#warning-alert").fadeTo(3000, 500).slideUp(500, function () {
             $("#warning-alert").hide();
         });
 
