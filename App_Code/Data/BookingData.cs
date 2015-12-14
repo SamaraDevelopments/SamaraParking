@@ -224,7 +224,7 @@ public class BookingData : BaseData
                                                         break;
                                                     case "Motorcycle Spot":
                                                         bookingTable.Rows[counterRow].Cells[counterColumn].Enabled = true;
-                                                        bookingTable.Rows[counterRow].Cells[counterColumn].BackColor = Color.Transparent;
+                                                        bookingTable.Rows[counterRow].Cells[counterColumn].BackColor = Color.Yellow;
                                                         break;
                                                 }
 

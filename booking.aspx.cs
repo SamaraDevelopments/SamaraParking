@@ -141,9 +141,12 @@ public partial class Form_booking : System.Web.UI.Page
         }
         else
         {
+
             bookingBusiness.InsertBooking(newBooking);
+            bookingParking = parkingBusiness.GetDimensions(bookingParking);
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
+            TableDesignOfNewParking = bookingBusiness.VerifySpots(bookingParking, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue)); 
         }
     }
 
