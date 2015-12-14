@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for BookingBusiness
@@ -51,5 +53,10 @@ using System.Web;
     {
         BookingData bookingData = new BookingData();
        return  bookingData.GetBookigsForSecurity(parkingLot, initialHour);
+    }
+    public Table VerifySpots(ParkingLot parkingTable, Table bookingTable, DateTime lowerLimit, DateTime upperLimit)
+    {
+        BookingData bookingData = new BookingData();
+        return bookingData.VerifyReserve(parkingTable, bookingTable, lowerLimit, upperLimit);
     }
 }

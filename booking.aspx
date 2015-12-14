@@ -23,13 +23,13 @@
                         <div class="form-group">
                             <asp:Label ID="LabelInitialHour" Font-Size= "15.9px" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListInitialHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListInitialHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true"> </asp:DropDownList>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelFinalHour" Font-Size= "15.9px" runat="server" Text="Hora Final:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListFinalHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListFinalHour" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true"> </asp:DropDownList>
                             </div>
                         </div>
                         <% if (loggedUser.Roletype != 3 ) {%>

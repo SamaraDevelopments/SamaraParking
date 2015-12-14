@@ -122,7 +122,7 @@ public partial class Form_booking : System.Web.UI.Page
         ParkingSpot bookingSpot = new ParkingSpot();
         ParkingLot bookingParking = new ParkingLot();
 
-        bookingSpot.Id = Int32.Parse(DropDownListParking.SelectedValue);
+        bookingSpot.IdParking = Int32.Parse(DropDownListParking.SelectedValue);
         bookingSpot = parkingBusiness.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
         newBooking.IdUser = currentUser;
@@ -142,6 +142,8 @@ public partial class Form_booking : System.Web.UI.Page
         else
         {
             bookingBusiness.InsertBooking(newBooking);
+            selectedPosition = -1;
+            bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
         }
     }
 
@@ -149,21 +151,23 @@ public partial class Form_booking : System.Web.UI.Page
     {
         TableDesignOfNewParking.Rows.Clear();
         ParkingBusiness parkingBusiness = new ParkingBusiness();
-        ParkingLot parkingspotable = new ParkingLot();
+        BookingBusiness bookingBusiness = new BookingBusiness();
+        ParkingLot parkingspotTable = new ParkingLot();
         ParkingSpot parking = new ParkingSpot();
         int counter = 0;
-        parkingspotable.Id = parkingName;
-        parkingspotable = parkingBusiness.GetDimensions(parkingspotable);
-        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingspotable, TableDesignOfNewParking);
+        parkingspotTable.Id = parkingName;
+        parkingspotTable = parkingBusiness.GetDimensions(parkingspotTable);
+        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingspotTable, TableDesignOfNewParking);
 
-        for (int counterRow = 0; counterRow < parkingspotable.DimensionX; counterRow++)
+        for (int counterRow = 0; counterRow < parkingspotTable.DimensionX; counterRow++)
         {
-            for (int counterColumn = 0; counterColumn < parkingspotable.DimensionY; counterColumn++)
+            for (int counterColumn = 0; counterColumn < parkingspotTable.DimensionY; counterColumn++)
             {
                 TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Controls.Add(addButton(counter));
                 counter++;
             }
         }
+        TableDesignOfNewParking = bookingBusiness.VerifySpots(parkingspotTable, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue)); 
     }
     public Button addButton(int counter)
     {
@@ -172,6 +176,7 @@ public partial class Form_booking : System.Web.UI.Page
         btnReserve.Text = "";
         btnReserve.ID = "" + (counter);
         btnReserve.CssClass = "btn-link";
+        btnReserve.BackColor = Color.LightGreen;
         return btnReserve;
     }
     protected void btnReserve_Click(object sender, EventArgs e)
@@ -189,6 +194,8 @@ public partial class Form_booking : System.Web.UI.Page
             {
                 if (selectedPosition == counter)
                 {
+
+                    Session["BackColor"] = TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor;
                     TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Green;
                 }
                 counter++;
@@ -204,6 +211,7 @@ public partial class Form_booking : System.Web.UI.Page
         {
             Session["DropDownIndex"] = DropDownListParking.SelectedIndex;
             DropDownListParking.SelectedIndex = (int)Session["DropDownIndex"];
+            selectedPosition = -1;
         }
     }
     public ParkingLot removeSelected(int parkingName)
@@ -218,7 +226,7 @@ public partial class Form_booking : System.Web.UI.Page
             {
                 if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Green)
                 {
-                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Transparent;
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = (Color)Session["BackColor"];
                 }
             }
         }
