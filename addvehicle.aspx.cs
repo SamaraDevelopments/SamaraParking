@@ -126,6 +126,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
             {
                 Session["ALERT"] = "Agregado";
                 FillTableUserVehicles();
+                TableRegistryVehicles.Rows.RemoveAt(1);
                 TextBoxIdOfVehicle.Text = null;
                 TextBoxBrandOfVehicle.Text = null;
             }
@@ -158,6 +159,7 @@ public partial class Form_AddVehicle : System.Web.UI.Page
         {
             Session["ALERT"] = "Borrado";
             FillTableUserVehicles();
+            TableRegistryVehicles.Rows.RemoveAt(1);
         }
     }
     protected void btnEditVehicle_Click(object sender, EventArgs e)
