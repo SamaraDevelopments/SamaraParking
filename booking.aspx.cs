@@ -179,7 +179,6 @@ public partial class Form_booking : System.Web.UI.Page
         btnReserve.Text = "";
         btnReserve.ID = "" + (counter);
         btnReserve.CssClass = "btn-link";
-        btnReserve.BackColor = Color.LightGreen;
         return btnReserve;
     }
     protected void btnReserve_Click(object sender, EventArgs e)

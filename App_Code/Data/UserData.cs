@@ -256,10 +256,10 @@ public class UserData : BaseData
         return mail;
         }
 
-    public int[] GetUsersAndProfesors(int year)
+    public List<int> GetUsersAndProfesors(int year)
     {
-        int[] users; 
-        users = new int[6];  // users sends {Students1, teachers1, students2, teachers2, students3, teachers3} 
+        List<int> users; 
+        users = new List<int>();  // users sends {Students1, teachers1, students2, teachers2, students3, teachers3} 
         int valueStudentsToAddFirstQuarter = 0;
         int valueStudentsToAddSecondQuarter = 0;
         int valueStudentsToAddThirdQuarter = 0;

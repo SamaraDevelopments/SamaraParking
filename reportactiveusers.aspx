@@ -16,7 +16,7 @@
                          <div class="form-group">
                             <asp:Label ID="LabelaParkingName" Font-Size= "15.9px" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:DropDownList ID="DropDownListParking" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
+                                <asp:DropDownList ID="DropDownListYearReport" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -32,9 +32,7 @@
     </div>
 
      <% User loggedUser = (User)Session["USER"];
-         ReportBusiness rb = new ReportBusiness();
-         int[] reportList = rb.getUsersAndProfesors();     
-         %>
+        List<int> reportList = (List<int>)Session["REPORTLIST"]; %>
 
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>

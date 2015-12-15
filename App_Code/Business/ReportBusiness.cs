@@ -12,9 +12,9 @@ public class ReportBusiness
     {
       
     }
-    public int[] getUsersAndProfesors(int year)
+    public List<int> getUsersAndProfesors(int year)
     {
-        int[] results;
+        List<int> results;
         UserData userData = new UserData();
         results = userData.GetUsersAndProfesors(year);
         return results;

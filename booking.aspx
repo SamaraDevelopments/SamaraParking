@@ -46,13 +46,6 @@
                                 <asp:Label ID="LabelError" Font-Size= "15.9px" runat="server" EnableViewState="False" ForeColor="Red" CssClass="control-label"></asp:Label>
                             </div>
                         </div>
-
-
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonBookingSpot" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
-                            </div>
-                        </div>
                     </fieldset>
                 </div>
             </div>
@@ -69,6 +62,11 @@
                                     <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
                                     </asp:Table>
                                 </div>
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-3">
+                                <asp:Button ID="Button1" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
                             </div>
                         </div>
                     </fieldset>
