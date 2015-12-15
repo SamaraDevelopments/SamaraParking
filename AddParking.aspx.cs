@@ -79,19 +79,25 @@ public partial class Form_addparking : System.Web.UI.Page
 
     public void FillTableDesignOfNewParking()
     {
-        for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
+        if (TextBoxDimensionsOfParkingX.Text == string.Empty || TextBoxDimensionsOfParkingY.Text == string.Empty)
         {
-            TableRow tr = new TableRow();
-            for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
-            {
-                TableCell tc = new TableCell();
-                tc.CssClass = "btn-error";
-                tc.Controls.Add(addButton(counterColumn, counterRow));
-                tr.Cells.Add(tc);
-            }
-            TableDesignOfNewParking.Rows.Add(tr);
-        }
 
+        }
+        else
+        {
+            for (int counterRow = 0; counterRow < Int32.Parse(TextBoxDimensionsOfParkingX.Text); counterRow++)
+            {
+                TableRow tr = new TableRow();
+                for (int counterColumn = 0; counterColumn < Int32.Parse(TextBoxDimensionsOfParkingY.Text); counterColumn++)
+                {
+                    TableCell tc = new TableCell();
+                    tc.CssClass = "btn-error";
+                    tc.Controls.Add(addButton(counterColumn, counterRow));
+                    tr.Cells.Add(tc);
+                }
+                TableDesignOfNewParking.Rows.Add(tr);
+            }
+        }
     }
 
     protected void btnStreet_Click(object sender, EventArgs e)
@@ -169,7 +175,7 @@ public partial class Form_addparking : System.Web.UI.Page
 
     public void btnCancel_Click(object sender, EventArgs e)
     {
-        TableDesignOfNewParking.Rows.Clear();
+        
         TextBoxNormalSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Text = string.Empty;
         TextBoxLocationOfNewParking.Text = string.Empty;

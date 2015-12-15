@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 
 public partial class security : System.Web.UI.Page
 {
@@ -111,7 +112,7 @@ public partial class security : System.Web.UI.Page
         DropDownListVehicleFormUser.DataBind();
     }
 
-    protected void btnBookingSpot_Click(object sender, EventArgs e)
+    protected void btnDeleteReserve_Click(object sender, EventArgs e)
     {
         Booking newBooking = new Booking();
         BookingBusiness bookingBusiness = new BookingBusiness();
@@ -141,7 +142,7 @@ public partial class security : System.Web.UI.Page
         else
         {
 
-            bookingBusiness.InsertBooking(newBooking);
+            bookingBusiness.DenyBooking(newBooking, newBooking.EntryTime, newBooking.ExitTime);
             bookingParking = parkingBusiness.GetDimensions(bookingParking);
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
@@ -170,17 +171,32 @@ public partial class security : System.Web.UI.Page
             }
         }
         TableDesignOfNewParking = bookingBusiness.VerifySpots(parkingspotTable, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));
+        for (int counterRow = 0; counterRow < parkingspotTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingspotTable.DimensionY; counterColumn++)
+            {
+                if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Red)
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Enabled = true;
+                }
+                else
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Enabled = false;
+                }
+                counter++;
+            }
+        }
     }
     public Button addButton(int counter)
     {
-        Button btnReserve = new Button();
-        btnReserve.Click += new System.EventHandler(btnReserve_Click);
-        btnReserve.Text = "";
-        btnReserve.ID = "" + (counter);
-        btnReserve.CssClass = "btn-link";
-        return btnReserve;
+        Button btnDelete = new Button();
+        btnDelete.Click += new System.EventHandler(btnDelete_Click);
+        btnDelete.Text = "";
+        btnDelete.ID = "" + (counter);
+        btnDelete.CssClass = "btn-link";
+        return btnDelete;
     }
-    protected void btnReserve_Click(object sender, EventArgs e)
+    protected void btnDelete_Click(object sender, EventArgs e)
     {
         ParkingLot parkingTable = new ParkingLot();
         Button btn = (Button)sender;
@@ -197,7 +213,7 @@ public partial class security : System.Web.UI.Page
                 {
 
                     Session["BackColor"] = TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor;
-                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Green;
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Black;
                 }
                 counter++;
             }

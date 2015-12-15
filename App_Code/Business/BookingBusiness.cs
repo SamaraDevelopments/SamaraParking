@@ -59,4 +59,9 @@ using System.Web.UI.WebControls;
         BookingData bookingData = new BookingData();
         return bookingData.VerifyReserve(parkingTable, bookingTable, lowerLimit, upperLimit);
     }
+    public void DenyBooking(Booking bookingToDeny, DateTime lowerLimit, DateTime upperLimit)
+    {
+        BookingData bookingData = new BookingData();
+        bookingData.Update(bookingToDeny, lowerLimit, upperLimit);
+    }
 }
