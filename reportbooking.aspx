@@ -45,7 +45,7 @@
             "img/34.jpg",
         ],
         {
-            duration: 4500,
+            duration: 5500,
             fade: 1500
         }
     );

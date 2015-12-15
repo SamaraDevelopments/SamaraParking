@@ -193,7 +193,7 @@
         ],
 
         {
-            duration: 4500,
+            duration: 5500,
             fade: 1500
         }
     );
