@@ -26,9 +26,9 @@ public partial class Form_RerportActiveUsers : System.Web.UI.Page
     {
         string year = "";
 
-        for (int i = 1; i <= 50; i++)
+        for (int i = 15; i <= 50; i++)
         {
-            if (i.ToString().Length <= 2)
+            if (i.ToString().Length >= 2)
             {
                 year = "20" + i.ToString();
             }
