@@ -130,23 +130,27 @@
                         <asp:Button ID="ButtonRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
 
                         <input id="buttonPrint" type='button' value='Imprimir' class="btn btn-success" />
+
+                        <div class="col-lg-10">
+                          
+                        </div>
                         <%if (emailAlert.Equals("Enviado"))
                             { %>
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-10">
                             <div class="alert alert-success" id="warning-alert">
                                 <button type="button" class="close" data-dismiss="alert">x</button>
                                 <strong>Enviado! </strong>
-                                Se ha enviado el marchamo a su correo electronico <%=loggedUser.Email %>
+                                <p>Se ha enviado el marchamo a su correo electronico <%=loggedUser.Email %></p>
                             </div>
                         </div>
                         <% }
                             else if (emailAlert.Equals("No Enviado"))
                             {%>
-                                <div class="col-lg-10 col-lg-offset-2">
+                                <div class="col-lg-10">
                             <div class="alert alert-danger" id="warning-alert">
                                 <button type="button" class="close" data-dismiss="alert">x</button>
-                                <strong>No enviado! </strong>
-                                No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %>
+                                <strong>No enviado!</strong>
+                                <p>No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %></p>
                             </div>
                         </div>
                            <% } %>
