@@ -66,7 +66,7 @@
                         </div>                       
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="Button1" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
+                                <asp:Button ID="ButtonDeleteReserve" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Eliminar Reserva" OnClick="btnDeleteReserve_Click" />
                             </div>
                         </div>
                     </fieldset>

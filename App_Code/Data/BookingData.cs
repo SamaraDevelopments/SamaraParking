@@ -62,27 +62,39 @@ public class BookingData : BaseData
             throw sqlException;
         }
     }
-
-    public void Update(Booking booking)
+    public void Update(Booking newBooking, DateTime lowerLimit, DateTime upperLimit)
     {
         try
         {
-            //open database connection
-            SqlConnection connection = ManageDatabaseConnection("Open");
 
-            using (SqlCommand sqlCommand = new SqlCommand("update_booking", connection))
+            string statement = "SELECT * FROM Booking WHERE IdParking = @ParkingId AND IdParkingSpot = @IdSpot AND Validated = @Validated";
+            using (SqlCommand sqlCommand = new SqlCommand(statement, ManageDatabaseConnection("Open")))
             {
+                sqlCommand.Parameters.AddWithValue("@ParkingId", newBooking.IdParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@IdSpot", newBooking.IdParkingSpot.Id);
+                sqlCommand.Parameters.AddWithValue("@Validated", true);
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        newBooking.EntryTime = (DateTime)reader["EntryTime"];
+                        newBooking.ExitTime = (DateTime)reader["ExitTime"];
+                        if (newBooking.EntryTime >= lowerLimit && newBooking.EntryTime < upperLimit || newBooking.ExitTime > lowerLimit && newBooking.ExitTime <= upperLimit || newBooking.EntryTime <= lowerLimit && newBooking.ExitTime >= upperLimit)
+                        {
+                            using (SqlCommand sqlCommandSecond = new SqlCommand("Update_Booking", ManageDatabaseConnection("Open")))
+                            {
+                                sqlCommandSecond.CommandType = CommandType.StoredProcedure;
+                                sqlCommand.Parameters.AddWithValue("@IdParkingLot", newBooking.IdParkingLot.Id);
+                                sqlCommand.Parameters.AddWithValue("@IdParkingSpot", newBooking.IdParkingSpot.Id);
+                                sqlCommand.Parameters.AddWithValue("@EntryTime", newBooking.EntryTime);
+                                sqlCommand.Parameters.AddWithValue("@ExitTime", newBooking.ExitTime);
+                                sqlCommand.Parameters.AddWithValue("@Validated", false);
+                            }
+                        }
+                    }
 
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add("@idBooking", SqlDbType.Int).Value = booking.IdBooking;
-                sqlCommand.Parameters.Add("@idPerson", SqlDbType.Int).Value = booking.IdUser.Id;
-                sqlCommand.Parameters.Add("@idVehicle", SqlDbType.NVarChar).Value = booking.IdVehicle.Id;
-                sqlCommand.Parameters.Add("@idParkingSpot", SqlDbType.Int).Value = booking.IdParkingSpot.Id;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.EntryTime;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.ExitTime;
-                sqlCommand.Parameters.Add("@entryTime", SqlDbType.DateTime).Value = booking.Date;
+                }
             }
-
             ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
