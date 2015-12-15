@@ -169,7 +169,7 @@ public partial class Form_addparking : System.Web.UI.Page
 
     public void btnCancel_Click(object sender, EventArgs e)
     {
-        TableDesignOfNewParking.Rows.Clear();
+        
         TextBoxNormalSpot.Text = string.Empty;
         TextBoxNameOfNewParking.Text = string.Empty;
         TextBoxLocationOfNewParking.Text = string.Empty;
