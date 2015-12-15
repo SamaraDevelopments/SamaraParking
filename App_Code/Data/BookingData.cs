@@ -51,6 +51,7 @@ public class BookingData : BaseData
                 sqlCommand.Parameters.AddWithValue("@EntryTime", newBooking.EntryTime);
                 sqlCommand.Parameters.AddWithValue("@ExitTime", newBooking.ExitTime);
                 sqlCommand.Parameters.AddWithValue("@CurrentDate", newBooking.Date);
+                sqlCommand.Parameters.AddWithValue("@Validated", true);
                 sqlCommand.ExecuteNonQuery();
             }
 
@@ -154,10 +155,11 @@ public class BookingData : BaseData
 
         try
         {
-            string statement = "SELECT * FROM Booking WHERE IdParking = @ParkingId";
+            string statement = "SELECT * FROM Booking WHERE IdParking = @ParkingId AND Validated = @Validated";
             using (SqlCommand sqlCommand = new SqlCommand(statement, ManageDatabaseConnection("Open")))
             {
                 sqlCommand.Parameters.AddWithValue("@ParkingId", bookingToVerify.IdParkingLot.Id);
+                sqlCommand.Parameters.AddWithValue("@Validated", true);
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {
                     while (reader.Read())
