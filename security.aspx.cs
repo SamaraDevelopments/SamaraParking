@@ -146,6 +146,7 @@ public partial class security : System.Web.UI.Page
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
             FillTableDesignOfNewParking(newBooking.IdParkingLot.Id);
+            
         }
     }
 

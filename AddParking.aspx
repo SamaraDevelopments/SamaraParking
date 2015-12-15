@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label ID="LabelDimensionsOfParking" Font-Size="15.9px" runat="server" Text="Dimensiones del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelDimensionsOfParking" Font-Size="15px" runat="server" Text="Dimensión del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingX" Font-Size="16.5px" runat="server" placeholder="Dimension X" CssClass="form-control"></asp:TextBox>
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingY" Font-Size="16.5px" runat="server" placeholder="Dimension Y" CssClass="form-control"></asp:TextBox>
