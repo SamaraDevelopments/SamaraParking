@@ -208,6 +208,7 @@ public partial class Form_booking : System.Web.UI.Page
                 if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Red)
                 {
                     TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Transparent;
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Enabled = true;
                 }
 
             }
