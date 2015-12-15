@@ -157,6 +157,17 @@
                                 </div>
                             </div>
                         </div>
+                        <% }else if (emailAlert.Equals("Error"))
+                            {%>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <div class="alert alert-danger" id="warning-alert">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    <strong>Error!</strong>
+                                    <p>No se pudo solicitar su marchamo, contacte a soporte. <%=loggedUser.Email %></p>
+                                </div>
+                            </div>
+                        </div>
                         <% } %>
                     </fieldset>
                 </div>

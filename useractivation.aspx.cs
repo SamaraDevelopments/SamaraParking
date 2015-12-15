@@ -86,12 +86,11 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
         User currentUser = (User)Session["USER"];
         Vehicle vehicleToAdd = new Vehicle();
-        RegistryBusiness registrybusiness = new RegistryBusiness();
         FillTableRequestRegistry();
 
         Session["Vehicle"] = vehicleToAdd;
         currentUser.Registry = true;
-        registrybusiness.ActiveRegistry(currentUser);
+
 
     }
 
@@ -192,7 +191,11 @@ public partial class Form_UserActivation : System.Web.UI.Page
 
     protected void btnRequestRegistry_Click(object sender, EventArgs e)
     {
-        Session["EMAILALERT"] = SendMail();
+       
+            User currentUser = (User)Session["USER"];
+            RegistryBusiness registrybusiness = new RegistryBusiness();
+            registrybusiness.ActiveRegistry(currentUser);
+            Session["EMAILALERT"] = SendMail();
 
     }
 
