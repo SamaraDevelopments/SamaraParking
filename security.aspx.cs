@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 
 public partial class security : System.Web.UI.Page
 {
+    int selectedPosition = -1;
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -18,19 +19,18 @@ public partial class security : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            Session["DropDownIndex"] = 0;
+            FillDropDownListVehiclesFromUser();
             FillDropDownListParking();
             FillDropDownListInitialHour();
-        }
-    }
-    public void FillDropDownListParking()
-    {
-        ParkingBusiness parkingBusiness = new ParkingBusiness();
-        DataSet dataSet = parkingBusiness.GetParkingForBooking();
+            FillDropDownListFinalHour();
+            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
 
-        DropDownListParking.DataTextField = dataSet.Tables[0].Columns["Name"].ToString();
-        DropDownListParking.DataValueField = dataSet.Tables[0].Columns["Id"].ToString();
-        DropDownListParking.DataSource = dataSet.Tables[0];
-        DropDownListParking.DataBind();
+        }
+        else
+        {
+            FillTableDesignOfNewParking(Int32.Parse(DropDownListParking.SelectedValue));
+        }
     }
     public void FillDropDownListInitialHour()
     {
@@ -56,21 +56,181 @@ public partial class security : System.Web.UI.Page
             }
         }
     }
-    protected void btnVerifySpot_Click(object sender, EventArgs e)
+    public void FillDropDownListFinalHour()
     {
-        Booking booking = new Booking();
-        ParkingLot parkingLot = new ParkingLot();
+        int hours = 0;
+        int min = 0;
+        string time = "";
 
-        booking.EntryTime = DateTime.Parse(DropDownListInitialHour.SelectedValue);
-        booking.IdParkingLot = parkingLot;
-        booking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);
-        FillTableReportBookingForSecurity(booking.IdParkingLot, booking.EntryTime);
+        for (int i = 8; i <= 24; i++)
+        {
+            hours = i;
+            if (hours == 24)
+            {
+                min = 0;
+                time = hours + ":" + min + "0";
+                DropDownListFinalHour.Items.Add(time);
+            }
+            else
+            {
+                for (int j = 0; j <= 30; j += 30)
+                {
+                    min = j;
+                    if (min == 0)
+                    {
+                        time = hours + ":" + min + "0";
+                    }
+                    else
+                    {
+                        time = hours + ":" + min;
+                    }
+                    DropDownListFinalHour.Items.Add(time);
+                }
+            }
+        }
+    }
+    public void FillDropDownListParking()
+    {
+        ParkingBusiness parkingbusiness = new ParkingBusiness();
+        DataSet dataSet = parkingbusiness.GetParkingForBooking();
+
+        DropDownListParking.DataTextField = dataSet.Tables[0].Columns["Name"].ToString();
+        DropDownListParking.DataValueField = dataSet.Tables[0].Columns["Id"].ToString();
+        DropDownListParking.DataSource = dataSet.Tables[0];
+        DropDownListParking.DataBind();
+    }
+    public void FillDropDownListVehiclesFromUser()
+    {
+        VehicleBusiness vehicleBusiness = new VehicleBusiness();
+        User currentUser = (User)Session["USER"];
+        DataSet dataSet = vehicleBusiness.GetVehiclesForBooking(currentUser);
+
+        DropDownListVehicleFormUser.DataTextField = dataSet.Tables[0].Columns["Vehicleid"].ToString();//null
+        DropDownListVehicleFormUser.DataValueField = dataSet.Tables[0].Columns["Vehicleid"].ToString();
+        DropDownListVehicleFormUser.DataSource = dataSet.Tables[0];
+        DropDownListVehicleFormUser.DataBind();
     }
 
-    public void FillTableReportBookingForSecurity(ParkingLot selectedParkingLot, DateTime selectedDateTime)
+    protected void btnBookingSpot_Click(object sender, EventArgs e)
     {
+        Booking newBooking = new Booking();
         BookingBusiness bookingBusiness = new BookingBusiness();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
+        User currentUser = (User)Session["USER"];
+        Vehicle bookingVehicle = new Vehicle();
+        ParkingSpot bookingSpot = new ParkingSpot();
+        ParkingLot bookingParking = new ParkingLot();
 
-        bookingBusiness.GetReportForSecurity(selectedParkingLot,selectedDateTime);
+        bookingSpot.IdParking = Int32.Parse(DropDownListParking.SelectedValue);
+        bookingSpot = parkingBusiness.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
+        newBooking.IdVehicle = bookingVehicle;
+        newBooking.IdUser = currentUser;
+        newBooking.IdParkingSpot = bookingSpot;
+        newBooking.IdParkingLot = bookingParking;
+        newBooking.EntryTime = DateTime.Parse(DropDownListInitialHour.SelectedValue);
+        newBooking.ExitTime = DateTime.Parse(DropDownListFinalHour.SelectedValue);
+        newBooking.IdVehicle.Id = DropDownListVehicleFormUser.SelectedValue.Trim();
+        newBooking.Date = DateTime.Today;
+        newBooking.IdParkingSpot.Id = bookingSpot.Id;
+        newBooking.IdParkingLot.Id = Int32.Parse(DropDownListParking.SelectedValue);
+
+        if (bookingSpot.Id == 0)
+        {
+            //Return error here
+        }
+        else
+        {
+
+            bookingBusiness.InsertBooking(newBooking);
+            bookingParking = parkingBusiness.GetDimensions(bookingParking);
+            selectedPosition = -1;
+            bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
+            TableDesignOfNewParking = bookingBusiness.VerifySpots(bookingParking, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));
+        }
+    }
+
+    public void FillTableDesignOfNewParking(int parkingName)
+    {
+        TableDesignOfNewParking.Rows.Clear();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
+        BookingBusiness bookingBusiness = new BookingBusiness();
+        ParkingLot parkingspotTable = new ParkingLot();
+        ParkingSpot parking = new ParkingSpot();
+        int counter = 0;
+        parkingspotTable.Id = parkingName;
+        parkingspotTable = parkingBusiness.GetDimensions(parkingspotTable);
+        TableDesignOfNewParking = parkingBusiness.GetSpotData(parkingspotTable, TableDesignOfNewParking);
+
+        for (int counterRow = 0; counterRow < parkingspotTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingspotTable.DimensionY; counterColumn++)
+            {
+                TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Controls.Add(addButton(counter));
+                counter++;
+            }
+        }
+        TableDesignOfNewParking = bookingBusiness.VerifySpots(parkingspotTable, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));
+    }
+    public Button addButton(int counter)
+    {
+        Button btnReserve = new Button();
+        btnReserve.Click += new System.EventHandler(btnReserve_Click);
+        btnReserve.Text = "";
+        btnReserve.ID = "" + (counter);
+        btnReserve.CssClass = "btn-link";
+        return btnReserve;
+    }
+    protected void btnReserve_Click(object sender, EventArgs e)
+    {
+        ParkingLot parkingTable = new ParkingLot();
+        Button btn = (Button)sender;
+        int counter = 0;
+        selectedPosition = Int32.Parse(btn.ID);
+        Session["Position"] = selectedPosition;
+        parkingTable = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
+
+        for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+            {
+                if (selectedPosition == counter)
+                {
+
+                    Session["BackColor"] = TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor;
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Green;
+                }
+                counter++;
+            }
+
+        }
+
+
+    }
+    protected void UpdateParking_SelectedIndexChange(object sender, EventArgs e)
+    {
+        if (Int32.Parse(DropDownListParking.SelectedValue) > 0)
+        {
+            Session["DropDownIndex"] = DropDownListParking.SelectedIndex;
+            DropDownListParking.SelectedIndex = (int)Session["DropDownIndex"];
+            selectedPosition = -1;
+        }
+    }
+    public ParkingLot removeSelected(int parkingName)
+    {
+        ParkingLot parkingTable = new ParkingLot();
+        ParkingBusiness parkingBusiness = new ParkingBusiness();
+        parkingTable.Id = parkingName;
+        parkingTable = parkingBusiness.GetDimensions(parkingTable);
+        for (int counterRow = 0; counterRow < parkingTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingTable.DimensionY; counterColumn++)
+            {
+                if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Green)
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = (Color)Session["BackColor"];
+                }
+            }
+        }
+        return parkingTable;
     }
 }
