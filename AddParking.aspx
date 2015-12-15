@@ -80,6 +80,7 @@
                         </div>
                         <div class="col-lg-10 col-lg-offset-3">
                             <asp:Button ID="ButtonAddParking" runat="server" CssClass="btn btn-primary" Text="Agregar parqueo" OnClick="btnAddNewParking_Click" />
+                             <asp:Button ID="ButtonCancelAddParking" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="ButtonCancelAddParking_Click" />
                        </div>
                     </fieldset>
                 </div>

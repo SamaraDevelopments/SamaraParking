@@ -139,7 +139,7 @@
                         <%if (emailAlert.Equals("Enviado"))
                             { %>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-3">
+                            <div class="col-lg-10 col-lg-offset-1">
                                 <div class="alert alert-success" id="warning-alert">
                                     <button type="button" class="close" data-dismiss="alert">x</button>
                                     <strong>Enviado! </strong>
@@ -151,7 +151,7 @@
                             else if (emailAlert.Equals("No Enviado"))
                             {%>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-3">
+                            <div class="col-lg-10 col-lg-offset-1">
                                 <div class="alert alert-danger"
                                     id="warning-alert">
                                     <button type="button" class="close" data-dismiss="alert">x</button>
