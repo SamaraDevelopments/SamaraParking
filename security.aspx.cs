@@ -141,12 +141,11 @@ public partial class security : System.Web.UI.Page
         }
         else
         {
-
             bookingBusiness.DenyBooking(newBooking, newBooking.EntryTime, newBooking.ExitTime);
             bookingParking = parkingBusiness.GetDimensions(bookingParking);
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
-            TableDesignOfNewParking = bookingBusiness.VerifySpots(bookingParking, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));
+            FillTableDesignOfNewParking(newBooking.IdParkingLot.Id);
         }
     }
 
@@ -183,7 +182,6 @@ public partial class security : System.Web.UI.Page
                 {
                     TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].Enabled = false;
                 }
-                counter++;
             }
         }
     }

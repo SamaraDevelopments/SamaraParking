@@ -84,11 +84,12 @@ public class BookingData : BaseData
                             using (SqlCommand sqlCommandSecond = new SqlCommand("Update_Booking", ManageDatabaseConnection("Open")))
                             {
                                 sqlCommandSecond.CommandType = CommandType.StoredProcedure;
-                                sqlCommand.Parameters.AddWithValue("@IdParkingLot", newBooking.IdParkingLot.Id);
-                                sqlCommand.Parameters.AddWithValue("@IdParkingSpot", newBooking.IdParkingSpot.Id);
-                                sqlCommand.Parameters.AddWithValue("@EntryTime", newBooking.EntryTime);
-                                sqlCommand.Parameters.AddWithValue("@ExitTime", newBooking.ExitTime);
-                                sqlCommand.Parameters.AddWithValue("@Validated", false);
+                                sqlCommandSecond.Parameters.AddWithValue("@IdParkingSpot", newBooking.IdParkingSpot.Id);
+                                sqlCommandSecond.Parameters.AddWithValue("@IdParkingLot", newBooking.IdParkingLot.Id);
+                                sqlCommandSecond.Parameters.AddWithValue("@EntryTime", newBooking.EntryTime);
+                                sqlCommandSecond.Parameters.AddWithValue("@ExitTime", newBooking.ExitTime);
+                                sqlCommandSecond.Parameters.AddWithValue("@Validated", false);
+                                sqlCommandSecond.ExecuteNonQuery();
                             }
                         }
                     }
