@@ -15,7 +15,7 @@
                     <fieldset>
                         <legend>Agregar usuario<i class="fa fa-pencil pull-right"></i></legend>
                         <div class="form-group">
-                            <asp:Label ID="LabelIDVehicle" Font-Size="15.9px" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIDVehicle" Font-Size="15.9px" runat="server" Text="Vehículo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:Label ID="LabelIdVehicle" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
                             </div>
@@ -45,12 +45,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-10 col-lg-offset-3">
                                 <asp:Button ID="ButtonGoToBooking" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Campo" OnClick="btnAddVehicle_Click" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-10 col-lg-offset-3">
                                 <asp:Button ID="ButtonGoToindex" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Inicio" OnClick="btnAddVehicle_Click" />
                             </div>
                             </div>

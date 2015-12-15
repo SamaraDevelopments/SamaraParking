@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15px" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15px" runat="server" Text="Correo Electrónico: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>

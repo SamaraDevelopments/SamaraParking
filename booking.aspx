@@ -35,7 +35,7 @@
                         <% if (loggedUser.Roletype != 3)
                             {%>
                         <div class="form-group">
-                            <asp:Label ID="LabelIdVehicle" Font-Size="15.9px" runat="server" Text="Vehiculo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelIdVehicle" Font-Size="15.9px" runat="server" Text="Vehículo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:DropDownList ID="DropDownListVehicleFormUser" Font-Size="15.9px" runat="server" CssClass="form-control ddl"></asp:DropDownList>
                             </div>

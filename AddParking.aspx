@@ -57,7 +57,7 @@
                             <asp:Label ID="LabelRegularSpot" Font-Size= "15.9px" runat="server" Text="Transparente = Regular" EnableViewState="False" ForeColor="White" CssClass="control-label"></asp:Label>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-10 col-lg-offset-3">
                                 <asp:Button ID="ButtonNext" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Siguiente" OnClick="btnNext_Click" />
                                 <asp:Button ID="ButtonCancel" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                             </div>
