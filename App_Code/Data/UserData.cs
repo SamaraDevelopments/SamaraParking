@@ -240,21 +240,6 @@ public class UserData : BaseData
             throw sqlException;
         }
     }
-    public MailMessage EmailForActivationRegistry(string emailOfUser) 
-        {
-        MailMessage mail = new MailMessage("LatinaTest@gmail.com", emailOfUser);
-        SmtpClient smtpClient = new SmtpClient();
-        smtpClient.Host = "smtp.gmail.com";
-        smtpClient.EnableSsl = true;
-        smtpClient.Port = 587;
-        mail.IsBodyHtml = true;
-        smtpClient.UseDefaultCredentials = true;
-        NetworkCredential networkCred = new NetworkCredential("LatinaTest@gmail.com", "ULtina506");
-        smtpClient.Credentials = networkCred;
-        smtpClient.Send(mail);
-
-        return mail;
-        }
 
     public List<int> GetUsersAndProfesors(int year)
     {

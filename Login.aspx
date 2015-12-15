@@ -38,13 +38,19 @@
                             <h1><img alt="Universidad Latina" class="img-responsive" src="img/ulatina.png" /></h1>
                             <legend>Ingreso<i class="fa fa-pencil pull-right"></i></legend>
                             <div class="form-group">
-                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15.9px" runat="server" Text="Correo: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="Label1" Font-Size="15px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="LabelEmailIncomingUser" Font-Size="15px" runat="server" Text="Correo Electronico: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:TextBox ID="TextBoxEmailIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <asp:Label ID="LabelPasswordIncomingUser" Font-Size="15.9px" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <asp:Label ID="LabelPasswordIncomingUser" Font-Size="15px" runat="server" Text="Contraseña: " CssClass="col-lg-2 control-label"></asp:Label>
                                 <div class="col-lg-10">
                                     <asp:TextBox ID="TextBoxPasswordIncomingUser" Font-Size="16.5px" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                     <div class="checkbox">
@@ -61,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
+                                <div class="col-lg-10 col-lg-offset-3">
                                     <asp:Button ID="ButtonSubmit" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ingresar" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="ButtonCancel" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancel_Click" />
                                 </div>
@@ -90,20 +96,10 @@
             ],
 
             {
-                duration: 4500,
+                duration: 5500,
                 fade: 1500
             }
         );
-            $(document).ready(function () {
-                $("#warning-alert").hide();
-                $("#deleteButton").click(function showAlert() {
-                    $("#warning-alert").alert();
-                    $("#warning-alert").fadeTo(2000, 500).slideUp(500, function () {
-                        $("#warning-alert").hide();
-                    });
-                });
-            });
-
 
         </script>
     </form>
