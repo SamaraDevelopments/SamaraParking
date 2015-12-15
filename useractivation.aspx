@@ -45,8 +45,6 @@
                         </div>
                         <%if (loggedUser.ListOfVehicles.Count <= 0)
                             { %>
-
-
                         <div class="form-group">
                             <asp:Label ID="LabelBrandOfVehicle" Font-Size="15.9px" runat="server" Text="Marca:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
@@ -152,8 +150,7 @@
                             {%>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-1">
-                                <div class="alert alert-danger"
-                                    id="warning-alert">
+                                <div class="alert alert-danger" id="warning-alert">
                                     <button type="button" class="close" data-dismiss="alert">x</button>
                                     <strong>No enviado!</strong>
                                     <p>No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %></p>

@@ -143,6 +143,7 @@ public partial class Form_booking : System.Web.UI.Page
         {
 
             bookingBusiness.InsertBooking(newBooking);
+            Session["BOOKING"] = newBooking;
             bookingParking = parkingBusiness.GetDimensions(bookingParking);
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
