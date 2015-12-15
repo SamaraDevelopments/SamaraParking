@@ -100,6 +100,7 @@ public partial class Form_booking : System.Web.UI.Page
         DropDownListParking.DataSource = dataSet.Tables[0];
         DropDownListParking.DataBind();
     }
+
     public void FillDropDownListVehiclesFromUser()
     {
         VehicleBusiness vehicleBusiness = new VehicleBusiness();
@@ -125,6 +126,7 @@ public partial class Form_booking : System.Web.UI.Page
         bookingSpot.IdParking = Int32.Parse(DropDownListParking.SelectedValue);
         bookingSpot = parkingBusiness.GetSpotForReserve(bookingSpot, (int)Session["Position"]);
         newBooking.IdVehicle = bookingVehicle;
+        bookingParking.Name = DropDownListParking.SelectedItem.Text;
         newBooking.IdUser = currentUser;
         newBooking.IdParkingSpot = bookingSpot;
         newBooking.IdParkingLot = bookingParking;

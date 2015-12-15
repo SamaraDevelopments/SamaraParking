@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
                                 <asp:Button ID="ButtonGoToBooking" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Volver a seleccionar espacio" OnClick="btnBack_Click" />
-                                <asp:Button ID="ButtonGoToindex" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ok!" OnClick="btnOk_Click" />
+                                <asp:Button ID="ButtonGoToindex" Font-Size="15.9px" runat="server" CssClass="btn btn-success" Text="Ok!" OnClick="btnOk_Click" />
                             </div>
                         </div>
                         <div class="form-group">
