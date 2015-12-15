@@ -82,11 +82,6 @@
             fade: 1500
         }
     );
-
-        $("#warning-alert").alert();
-        $("#warning-alert").fadeTo(3000, 500).slideUp(500, function () {
-            $("#warning-alert").hide();
-        });
     </script>
     <style>
 

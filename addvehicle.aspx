@@ -60,7 +60,7 @@
                         <%if (vehicleFromUser != null)
                             { %>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-10 col-lg-offset-3">
                                 <asp:Button ID="ButtonEditVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Editar Vehiculo" OnClick="btnExecuteEditVehicle_Click" />
                                 <asp:Button ID="ButtonCancelVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-danger" Text="Cancelar Vehiculo" OnClick="btnCancelEditVehicle_Click" />
                             </div>

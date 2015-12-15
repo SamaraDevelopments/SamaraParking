@@ -61,12 +61,16 @@
                                 <div class="table-responsive">
                                     <asp:Table ID="TableDesignOfNewParking" runat="server" class="table table-bordered">
                                     </asp:Table>
+                                    <a class="btn" style="background-color:blue ">Espacio Preferencial</a><br />
+                                    <a class="btn btn-warning">Espacio Motocicletas</a><br />
+                                    <a class="btn btn-link">Espacio Vehiculo Liviano</a><br />
+                                    <a class="btn btn-success">Espacio Seleccionado</a>
                                 </div>
                             </div>
                         </div>                       
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="Button1" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
+                                <asp:Button ID="ButtonBooking" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
                             </div>
                         </div>
                     </fieldset>

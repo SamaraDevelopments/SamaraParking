@@ -204,20 +204,62 @@ public partial class Form_UserActivation : System.Web.UI.Page
         VehicleBusiness vb = new VehicleBusiness();
         DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
 
-        MailMessage mail = new MailMessage();
+        MailMessage mail = new MailMessage("latinatest@gmail.com", currentUser.Email);
         mail.Subject = "Activación de Marchamo";
-        string bodyOfEmail = "ID: " + currentUser.Id;
-        bodyOfEmail += "Nombre: " + currentUser.Name;
-        bodyOfEmail += "Apellido(s): " + currentUser.Lastname;
-        FillTableRequestRegistry();
-        bodyOfEmail += TableRequestRegistry;
-        bodyOfEmail += "<br /><br /> Gracias";
-        mail.Body = bodyOfEmail;
+
+        string htmlimg = "<img src=\"http://latinatest.azurewebsites.net/img/ulatinalogoverde.png\"/><br><br>";
+        string messageBody = htmlimg;
+
+        string htmlIntro = "ID: " + currentUser.Id + "<br>" + "Nombre: " + currentUser.Name + "<br>" +
+        "Apellido(s): " + currentUser.Lastname + "<br>" + "<br><font>Vehiculos Registrados:</font><br><br>";  
+        string htmlTableStart = "<table style=\"border-collapse:collapse; text-align:center;\" >";
+        string htmlTableEnd = "</table>";
+        string htmlHeaderRowStart = "<tr style =\"background-color:#6FA1D2; color:#ffffff;\">";
+        string htmlHeaderRowEnd = "</tr>";
+        string htmlTrStart = "<tr style =\"color:#555555;\">";
+        string htmlTrEnd = "</tr>";
+        string htmlTdStart = "<td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">";
+        string htmlTdEnd = "</td>";
+
+        messageBody += htmlIntro;
+        messageBody += htmlTableStart;
+        messageBody += htmlHeaderRowStart;
+        messageBody += htmlTdStart + "Placa" + htmlTdEnd;
+        messageBody += htmlTdStart + "Marca" + htmlTdEnd;
+        messageBody += htmlHeaderRowEnd;
+
+        foreach (DataRow Row in userVehiclesTable.Rows)
+        {
+            int counterCells = 0;
+            messageBody = messageBody + htmlTrStart;
+
+            foreach (DataColumn dc in userVehiclesTable.Columns)
+            {
+                if (counterCells >= 2)
+                {
+
+                }
+                else
+                {
+                    messageBody = messageBody + htmlTdStart + Row[dc.ColumnName].ToString().Trim() + htmlTdEnd;
+                }
+                counterCells++;
+
+            }
+
+            messageBody = messageBody + htmlTrEnd;
+        }
+        messageBody = messageBody + htmlTableEnd;
+
+        mail.Body = messageBody;
         mail.IsBodyHtml = true;
         status = registrybusiness.EmailForActivationRegistry(currentUser.Email, mail);
 
         return status;
     }
+
+
+
 }
 
 

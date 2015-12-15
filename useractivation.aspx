@@ -127,33 +127,40 @@
                                 </asp:Table>
                             </div>
                         </div>
-                        <asp:Button ID="ButtonRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-3">
+                                <asp:Button ID="ButtonRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
 
-                        <input id="buttonPrint" type='button' value='Imprimir' class="btn btn-success" />
-
+                                <input id="buttonPrint" type='button' value='Imprimir' class="btn btn-success" />
+                            </div>
+                        </div>
                         <div class="col-lg-10">
-                          
                         </div>
                         <%if (emailAlert.Equals("Enviado"))
                             { %>
-                        <div class="col-lg-10">
-                            <div class="alert alert-success" id="warning-alert">
-                                <button type="button" class="close" data-dismiss="alert">x</button>
-                                <strong>Enviado! </strong>
-                                <p>Se ha enviado el marchamo a su correo electronico <%=loggedUser.Email %></p>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-3">
+                                <div class="alert alert-success" id="warning-alert">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    <strong>Enviado! </strong>
+                                    <p>Se ha enviado el marchamo a su correo electronico <%=loggedUser.Email %></p>
+                                </div>
                             </div>
                         </div>
                         <% }
                             else if (emailAlert.Equals("No Enviado"))
                             {%>
-                                <div class="col-lg-10">
-                            <div class="alert alert-danger" id="warning-alert">
-                                <button type="button" class="close" data-dismiss="alert">x</button>
-                                <strong>No enviado!</strong>
-                                <p>No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %></p>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-3">
+                                <div class="alert alert-danger"
+                                    id="warning-alert">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    <strong>No enviado!</strong>
+                                    <p>No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %></p>
+                                </div>
                             </div>
                         </div>
-                           <% } %>
+                        <% } %>
                     </fieldset>
                 </div>
             </div>
@@ -166,6 +173,10 @@
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
     <script type="text/javascript">
 
+        $("#warning-alert").alert();
+        $("#warning-alert").fadeTo(3000, 500).slideUp(500, function () {
+            $("#warning-alert").hide();
+        });
 
         'use strict';
 
