@@ -13,45 +13,46 @@
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        <legend>Agregar usuario<i class="fa fa-pencil pull-right"></i></legend>
+                        <legend>Su espacio fue reservada con exito!</legend>
                         <div class="form-group">
                             <asp:Label ID="LabelIDVehicle" Font-Size="15.9px" runat="server" Text="Vehículo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelIdVehicle" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelVehicle" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelinitialHour" Font-Size="15.9px" runat="server" Text="Hora inicial:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelinitialTime" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelinitialTime" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelFinalHour" Font-Size="15.9px" runat="server" Text="Hora final:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelFinalTime" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelFinalTime" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabelIdParking" Font-Size="15.9px" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelNameParking" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelNameParking" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="LabeIdSpot" Font-Size="15.9px" runat="server" Text="Espacio del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelIdSpotOfPaking" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"><></asp:Label>
+                                <asp:Label ID="LabelIdSpotOfPaking" Font-Size="15.9px" runat="server" Text="" CssClass="col-lg-2 control-label"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="ButtonGoToBooking" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Campo" OnClick="btnAddVehicle_Click" />
+                                <asp:Button ID="ButtonGoToBooking" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Volver a seleccionar espacio" OnClick="btnBack_Click" />
+                                <asp:Button ID="ButtonGoToindex" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Ok!" OnClick="btnOk_Click" />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="ButtonGoToindex" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Inicio" OnClick="btnAddVehicle_Click" />
+                                
                             </div>
                             </div>
                     </fieldset>

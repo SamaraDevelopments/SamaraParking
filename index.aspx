@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="BodyFront" runat="Server">
 
     <%
-            User loggedUser = (User)Session["USER"];
-        
+        User loggedUser = (User)Session["USER"];
+
     %>
 
     <!-- ACA EL FORM -->
@@ -16,9 +16,11 @@
                         <legend>Bienvenido <%=loggedUser.Name%></legend>
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <asp:Label ID="LabelRegistry" Font-Size= "15.9px" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
-                                <div class="col-lg-10">
-                                    <asp:Label ID="LabelRegistryOfCommingUser" Font-Size= "15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
+                                 <%if (loggedUser.Roletype != 3)
+                                    { %>
+                                <asp:Label ID="LabelRegistry" Font-Size="15.9px" runat="server" Text="Marchamo: " CssClass="col-lg-2 control-label"></asp:Label>
+                                <div class="col-lg-10">                                  
+                                    <asp:Label ID="LabelRegistryOfCommingUser" Font-Size="15.9px" runat="server" CssClass="col-lg-2 control-label"></asp:Label>
                                 </div>
                             </div>
                         </div>
@@ -26,10 +28,11 @@
                             { %>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="ButtonActiveRegistry" Font-Size= "15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnActiveRegistry_Click"/>
+                                <asp:Button ID="ButtonActiveRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnActiveRegistry_Click" />
                             </div>
                         </div>
                         <%  } %>
+                        <%} %>
                     </fieldset>
                 </div>
             </div>
@@ -38,10 +41,11 @@
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        
+
                         <div class="form-group">
                             <div class="col-lg-10">
-                                <a href="http://www.ulatina.ac.cr"><img alt="Universidad Latina" class="img-responsive" src="img/destacado_admision2016.jpg"/></a>
+                                <a href="http://www.ulatina.ac.cr">
+                                    <img alt="Universidad Latina" class="img-responsive" src="img/destacado_admision2016.jpg" /></a>
                             </div>
                         </div>
                     </fieldset>

@@ -15,7 +15,6 @@
                                 <asp:TextBox ID="TextBoxNameOfNewParking" Font-Size="16.5px" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <asp:Label ID="LabelLocationOfNewParking" Font-Size="15.9px" runat="server" Text="Locación:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
@@ -26,8 +25,6 @@
                             <asp:Label ID="LabelDimensionsOfParking" Font-Size="15.9px" runat="server" Text="Dimensiones del parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingX" Font-Size="16.5px" runat="server" placeholder="Dimension X" CssClass="form-control"></asp:TextBox>
-                                <//div>
-                                <div class="col-lg-10">
                                 <asp:TextBox ID="TextBoxDimensionsOfParkingY" Font-Size="16.5px" runat="server" placeholder="Dimension Y" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
