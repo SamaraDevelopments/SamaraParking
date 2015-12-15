@@ -30,9 +30,32 @@ public class RegistryBusiness
         UserData userData = new UserData();
         userData.Update(user);
     }
-    public MailMessage EmailForActivationRegistry(string emailOfUSer)
+
+    public string EmailForActivationRegistry(string emailOfUser, MailMessage mail)
     {
-        UserData userData = new UserData();
-        return userData.EmailForActivationRegistry(emailOfUSer);
+
+        string status = "";
+        
+        SmtpClient smtpClient = new SmtpClient();
+        smtpClient.Host = "smtp.gmail.com";
+        smtpClient.EnableSsl = true;
+        smtpClient.Port = 587;
+        smtpClient.UseDefaultCredentials = true;
+        NetworkCredential networkCred = new NetworkCredential("latinatest@gmail.com", "ULatina506");
+        smtpClient.Credentials = networkCred;
+
+        try
+        {
+            smtpClient.Send(mail);
+            status = "Enviado";
+        }
+        catch
+        {
+            status = "No Enviado";
+
+        }
+
+        return status;
     }
+
 }

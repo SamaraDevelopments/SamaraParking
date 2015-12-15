@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,6 +17,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
+        Session["EMAILALERT"] = "";
         User requestingUser = (User)Session["USER"];
 
         LabelSessionId.Text = requestingUser.Id.ToString();
@@ -24,7 +27,7 @@ public partial class Form_UserActivation : System.Web.UI.Page
         VehicleBusiness vb = new VehicleBusiness();
         FillTableUserVehicles();
         requestingUser.ListOfVehicles = vb.LoadListOfVehicles(requestingUser);
-        
+
     }
     protected void TextBoxIdVehicle_TextChanged(object sender, EventArgs e)
     {
@@ -76,65 +79,6 @@ public partial class Form_UserActivation : System.Web.UI.Page
         {
             LabelError.Text = "El formato de placa esta equivocado";
         }
-    }
-
-    protected void btnRequestRegistry_Click(object sender, EventArgs e)
-    {
-        User currentUser = (User)Session["USER"];
-        RegistryBusiness registrybusiness = new RegistryBusiness();
-        VehicleBusiness vb = new VehicleBusiness();
-        DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
-
-        registrybusiness.EmailForActivationRegistry(currentUser.Email).Subject = "Activación de Marchamo";
-        string bodyOfEmail = "ID: " + currentUser.Id;
-        bodyOfEmail += "Nombre: " + currentUser.Name;
-        bodyOfEmail += "Apellido(s): " + currentUser.Lastname;
-
-        foreach (DataRow dr in userVehiclesTable.Rows)
-        {
-            TableRow tr = new TableRow();
-            int counterCells = 0;
-            foreach (DataColumn dc in userVehiclesTable.Columns)
-            {
-                TableCell tc = new TableCell();
-                if (counterCells >= 2)
-                {
-
-                }
-                else
-                {
-                    try
-                    {
-                        bool isMoto = (bool)dr[dc.ColumnName];
-                        if (isMoto)
-                        {
-                            tc.Text = string.Format("M");
-                        }
-                        else
-                        {
-                            tc.Text = string.Format("VL");
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        tc.Text = string.Format(dr[dc.ColumnName].ToString());
-                        
-                    }
-
-                    tr.Cells.Add(tc);
-                }
-
-                counterCells++;
-                TableRequestRegistry.Rows.Add(tr);
-                bodyOfEmail += TableRequestRegistry.Rows.Add(tr);
-
-            }
-        }
-
-        bodyOfEmail += "<br /><br /> Gracias";
-        registrybusiness.EmailForActivationRegistry(currentUser.Email).Body = bodyOfEmail;
-        registrybusiness.EmailForActivationRegistry(currentUser.Email).IsBodyHtml = true;
-
     }
 
     protected void btnCreateRegistry_Click(object sender, EventArgs e)
@@ -245,4 +189,35 @@ public partial class Form_UserActivation : System.Web.UI.Page
             }
         }
     }
+
+    protected void btnRequestRegistry_Click(object sender, EventArgs e)
+    {
+        Session["EMAILALERT"] = SendMail();
+
+    }
+
+    protected string SendMail()
+    {
+        string status = "";
+        User currentUser = (User)Session["USER"];
+        RegistryBusiness registrybusiness = new RegistryBusiness();
+        VehicleBusiness vb = new VehicleBusiness();
+        DataTable userVehiclesTable = vb.GetVehiclesFromUser(currentUser);
+
+        MailMessage mail = new MailMessage();
+        mail.Subject = "Activación de Marchamo";
+        string bodyOfEmail = "ID: " + currentUser.Id;
+        bodyOfEmail += "Nombre: " + currentUser.Name;
+        bodyOfEmail += "Apellido(s): " + currentUser.Lastname;
+        FillTableRequestRegistry();
+        bodyOfEmail += TableRequestRegistry;
+        bodyOfEmail += "<br /><br /> Gracias";
+        mail.Body = bodyOfEmail;
+        mail.IsBodyHtml = true;
+        status = registrybusiness.EmailForActivationRegistry(currentUser.Email, mail);
+
+        return status;
+    }
 }
+
+

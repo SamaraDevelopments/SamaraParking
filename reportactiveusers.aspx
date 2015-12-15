@@ -14,7 +14,7 @@
                     <fieldset>
                         <legend>Usuarios con marchamo activo:</legend>
                          <div class="form-group">
-                            <asp:Label ID="LabelaParkingName" Font-Size= "15.9px" runat="server" Text="Parqueo:" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="LabelYear" Font-Size= "15.9px" runat="server" Text="Año:" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:DropDownList ID="DropDownListYearReport" Font-Size= "15.9px" runat="server" CssClass="form-control ddl" AutoPostBack="true" OnSelectedIndexChanged="UpdateParking_SelectedIndexChange">
                                 </asp:DropDownList>
@@ -82,8 +82,14 @@
             fade: 1500
         }
     );
+
+        $("#warning-alert").alert();
+        $("#warning-alert").fadeTo(3000, 500).slideUp(500, function () {
+            $("#warning-alert").hide();
+        });
     </script>
     <style>
+
         .tableProfessor {
             height: 250px;
             width: auto;
