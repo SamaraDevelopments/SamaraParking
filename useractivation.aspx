@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonRequestRegistryAndAddVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnAddVehicle_Click" />
+                                <asp:Button ID="ButtonRequestRegistryAndAddVehicle" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Confirmar Marchamo" OnClick="btnAddVehicle_Click" />
                             </div>
                         </div>
 
@@ -95,8 +95,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <asp:Button ID="ButtonCreateRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Crear Marchamo" OnClick="btnCreateRegistry_Click" />
+                            <div class="col-lg-10 col-lg-offset-3">
+                                <asp:Button ID="ButtonCreateRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Confirmar Marchamo" OnClick="btnCreateRegistry_Click" />
                             </div>
                         </div>
                         <%}%>
@@ -127,7 +127,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-3">
-                                <asp:Button ID="ButtonRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Solicitar Marchamo" OnClick="btnRequestRegistry_Click" />
+                                <asp:Button ID="ButtonRequestRegistry" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Activar Marchamo" OnClick="btnRequestRegistry_Click" />
 
                                 <input id="buttonPrint" type='button' value='Imprimir' class="btn btn-success" />
                             </div>
@@ -157,17 +157,6 @@
                                 </div>
                             </div>
                         </div>
-                        <% }else if (emailAlert.Equals("Error"))
-                            {%>
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-1">
-                                <div class="alert alert-danger" id="warning-alert">
-                                    <button type="button" class="close" data-dismiss="alert">x</button>
-                                    <strong>Error!</strong>
-                                    <p>No se pudo solicitar su marchamo, contacte a soporte. <%=loggedUser.Email %></p>
-                                </div>
-                            </div>
-                        </div>
                         <% } %>
                     </fieldset>
                 </div>
@@ -182,7 +171,7 @@
     <script type="text/javascript">
 
         $("#warning-alert").alert();
-        $("#warning-alert").fadeTo(3000, 500).slideUp(500, function () {
+        $("#warning-alert").fadeTo(4000, 500).slideUp(500, function () {
             $("#warning-alert").hide();
         });
 

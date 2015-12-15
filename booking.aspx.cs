@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 using System.Data;
+using System.Net.Mail;
 
 public partial class Form_booking : System.Web.UI.Page
 {
@@ -13,7 +14,8 @@ public partial class Form_booking : System.Web.UI.Page
     int selectedPosition = -1;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        Session["BOOKINGALERT"] = "";
+
         if (Session["USER"] == null)
         {
             Response.Redirect("login.aspx");
@@ -139,19 +141,44 @@ public partial class Form_booking : System.Web.UI.Page
 
         if (bookingSpot.Id == 0)
         {
-            //Return error here
+           
         }
         else
         {
-
             bookingBusiness.InsertBooking(newBooking);
             Session["BOOKING"] = newBooking;
             bookingParking = parkingBusiness.GetDimensions(bookingParking);
             selectedPosition = -1;
             bookingParking = removeSelected(Int32.Parse(DropDownListParking.SelectedValue));
-            TableDesignOfNewParking = bookingBusiness.VerifySpots(bookingParking, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));
+            Session["BOOKINGALERT"] = SendMail(newBooking);
+            TableDesignOfNewParking = bookingBusiness.VerifySpots(bookingParking, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue));            
             Response.Redirect("bookingdone.aspx");
+            
         }
+    }
+
+    protected string SendMail(Booking newBooking)
+    {
+        string status = "";
+        User currentUser = (User)Session["USER"];
+        RegistryBusiness registrybusiness = new RegistryBusiness();
+
+        MailMessage mail = new MailMessage("latinatest@gmail.com", currentUser.Email);
+        mail.Subject = "Reserva de espacio en Latina Parking";
+
+        string htmlimg = "<img src=\"http://latinatest.azurewebsites.net/img/ulatinalogoverde.png\"/><br><br>";
+        string messageBody = htmlimg;
+
+        string htmlIntro = "Placa Vehículo: " + newBooking.IdVehicle.Id + "<br>" + "Parqueo: " + newBooking.IdParkingLot.Name + "<br>" +
+        "Numero de espacio: " + newBooking.IdParkingSpot.Id + "<br>" + "Hora Inicial: " + newBooking.EntryTime.ToString() + "<br>"+ "Hora Final: " + newBooking.ExitTime.ToString() + "< br><br>";
+       
+        messageBody += htmlIntro;
+        
+        mail.Body = messageBody;
+        mail.IsBodyHtml = true;
+        status = registrybusiness.EmailForActivationRegistry(currentUser.Email, mail);
+
+        return status;
     }
 
     public void FillTableDesignOfNewParking(int parkingName)

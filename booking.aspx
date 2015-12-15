@@ -52,6 +52,7 @@
             </div>
         </div>
         <!-- Diseño del parqueo -->
+         <% string emailAlert = (string)Session["BOOKINGALERT"]; %>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div class="registrationform">
                 <div class="form-horizontal">
@@ -77,6 +78,18 @@
                                 <asp:Button ID="ButtonBooking" Font-Size="15.9px" runat="server" CssClass="btn btn-primary" Text="Reservar espacio" OnClick="btnBookingSpot_Click" />
                             </div>
                         </div>
+                         <%if (emailAlert.Equals("No Enviado"))
+                            { %>
+                       <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <div class="alert alert-danger" id="warning-alert">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    <strong>No enviado!</strong>
+                                    <p>No se envio el correo, verifique su direccion de correo. <%=loggedUser.Email %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }%>
                     </fieldset>
                 </div>
             </div>
@@ -86,6 +99,12 @@
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.backstretch.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+        $("#warning-alert").alert();
+        $("#warning-alert").fadeTo(4000, 500).slideUp(500, function () {
+            $("#warning-alert").hide();
+        });
+
         'use strict';
 
         /* ========================== */
