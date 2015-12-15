@@ -20,8 +20,7 @@ public partial class Form_login : System.Web.UI.Page
         {
             TextBoxEmailIncomingUser.Text = loginCookie["Email"];
             TextBoxPasswordIncomingUser.Text = loginCookie["Password"];
-        }
-       
+        }       
 
     }
 

@@ -226,14 +226,17 @@ public class UserData : BaseData
         try
         {
             //open database connection
-            SqlConnection connection = ManageDatabaseConnection("Open");
 
-            SqlCommand sqlCommand = new SqlCommand("Active_Registry", connection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-            sqlCommand.Parameters.AddWithValue("@Registry", user.Registry);
-            ManageDatabaseConnection("Close");
+            using (SqlCommand sqlCommand = new SqlCommand("Active_Registry", ManageDatabaseConnection("Open")))
+            {
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Id", user.Id);
+                sqlCommand.Parameters.AddWithValue("@Registry", user.Registry);
+                sqlCommand.ExecuteNonQuery();
+            }
+                ManageDatabaseConnection("Close");
         }
         catch (SqlException sqlException)
         {

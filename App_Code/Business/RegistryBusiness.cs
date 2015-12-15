@@ -28,7 +28,7 @@ public class RegistryBusiness
     public void ActiveRegistry(User user)
     {
         UserData userData = new UserData();
-        userData.Update(user);
+        userData.ChangeRegistry(user);
     }
 
     public string EmailForActivationRegistry(string emailOfUser, MailMessage mail)
