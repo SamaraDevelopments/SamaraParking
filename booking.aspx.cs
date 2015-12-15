@@ -201,6 +201,18 @@ public partial class Form_booking : System.Web.UI.Page
                 counter++;
             }
         }
+        for (int counterRow = 0; counterRow < parkingspotTable.DimensionX; counterRow++)
+        {
+            for (int counterColumn = 0; counterColumn < parkingspotTable.DimensionY; counterColumn++)
+            {
+                if (TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor == Color.Red)
+                {
+                    TableDesignOfNewParking.Rows[counterRow].Cells[counterColumn].BackColor = Color.Transparent;
+                }
+
+            }
+        }
+
         TableDesignOfNewParking = bookingBusiness.VerifySpots(parkingspotTable, TableDesignOfNewParking, DateTime.Parse(DropDownListInitialHour.SelectedValue), DateTime.Parse(DropDownListFinalHour.SelectedValue)); 
     }
     public Button addButton(int counter)
