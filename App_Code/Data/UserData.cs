@@ -308,12 +308,12 @@ public class UserData : BaseData
       {
           throw sqlException;
       }
-      users[0] = valueStudentsToAddFirstQuarter;
-      users[1] = valueTeachersToAdd;
-      users[2] = valueStudentsToAddSecondQuarter;
-      users[3] = valueTeachersToAdd;
-      users[4] = valueStudentsToAddThirdQuarter;
-      users[5] = valueTeachersToAdd;
+      users.Add(valueStudentsToAddFirstQuarter);
+      users.Add(valueTeachersToAdd);
+      users.Add(valueStudentsToAddSecondQuarter);
+      users.Add(valueTeachersToAdd);
+      users.Add(valueStudentsToAddThirdQuarter);
+      users.Add(valueTeachersToAdd);
       return users;
     }
 }
